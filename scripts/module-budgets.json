@@ -1,0 +1,20 @@
+{
+  "src/game/interiors.ts": 828,
+  "src/game/map.ts": 1060,
+  "src/game/sim.ts": 1038,
+  "src/game/systems/enemies.ts": 648,
+  "src/ui/minigames/band.ts": 2797,
+  "src/ui/minigames/beat.ts": 1298,
+  "src/ui/minigames/observe.ts": 1111,
+  "src/ui/minigames/order.ts": 1590,
+  "src/ui/minigames/path.ts": 2347,
+  "src/ui/minigames/ratio.ts": 1708,
+  "src/ui/minigames/sizes.ts": 1527,
+  "src/ui/minigames/steady.ts": 1861,
+  "src/ui/minigames/sweet.ts": 1824,
+  "src/ui/windows.ts": 725,
+  "src/view/audio.ts": 1474,
+  "src/view/characters.ts": 742,
+  "src/view/scenery.ts": 906,
+  "src/view/spaceview.ts": 1178
+}

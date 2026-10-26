@@ -1,0 +1,456 @@
+/* The faces (self-hosted Google Fonts) and their stacks: --serif, --title, --face-*. */
+@import './ui/fonts.css';
+
+:root {
+  --gold: #e9c46a;
+  --gold-hi: #fff1c1;
+  --gold-dark: #8a6a24;
+  --ink: #f4ead6;
+  --ink-dim: #bfb39a;
+  --panel: rgba(22, 18, 14, 0.88);
+  --panel-hi: rgba(48, 38, 28, 0.92);
+  --red: #e25b4a;
+  --green: #7bd36a;
+  --blue: #6aa8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0b09;
+  color: var(--ink);
+  font-family: var(--serif);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+}
+
+#app canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Over the canvas: the vignette, the hit/heal flash, and the dark of a doorway you run through. */
+.screen-vignette,
+.screen-flash,
+.screen-door {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.screen-door {
+  background: #07050c;
+  opacity: 0;
+}
+
+/* ---- World labels ---------------------------------------------------------------------------- */
+.label-layer,
+.fx-text-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wlabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.loot-label {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(8, 6, 4, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 2px #000;
+  cursor: pointer;
+}
+
+.loot-label:hover {
+  background: rgba(40, 30, 16, 0.92);
+  border-color: var(--gold);
+}
+
+.site-label {
+  text-align: center;
+  cursor: pointer;
+}
+
+.site-label .chip-title {
+  font-size: 12px;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  color: #bfe7ff;
+  text-shadow:
+    0 1px 3px #000,
+    0 0 8px rgba(80, 180, 255, 0.6);
+  margin-bottom: 3px;
+}
+
+.site-label .chip-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 2px 6px 2px 4px;
+  border-radius: 10px;
+  background: rgba(10, 8, 6, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1e6cf;
+}
+
+.chip i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 4px var(--c);
+}
+
+.chip.ok {
+  border-color: rgba(123, 211, 106, 0.7);
+  color: #c9f5bd;
+}
+
+.chip.work {
+  border-color: rgba(255, 211, 106, 0.7);
+  color: #ffe3a1;
+}
+
+/* ---- Floating text --------------------------------------------------------------------------- */
+.fx-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+  font-size: 15px;
+  color: #fff;
+  text-shadow:
+    0 0 3px #000,
+    0 2px 2px #000;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+.fx-text.dmg-pierce {
+  color: #f3ead2;
+}
+.fx-text.dmg-impact {
+  color: #ffcf8a;
+}
+.fx-text.dmg-slash {
+  color: #ffffff;
+}
+.fx-text.dmg-fire {
+  color: #ff9a4a;
+  font-size: 13px;
+}
+.fx-text.dmg-frost {
+  color: #9fe8ff;
+}
+.fx-text.heal {
+  color: #8dff9e;
+  font-size: 15px;
+}
+.fx-text.dmg-lightning {
+  color: #fff27a;
+}
+.fx-text.dmg-arcane {
+  color: #d4a8ff;
+}
+.fx-text.weak {
+  font-size: 18px;
+}
+.fx-text.weak::after {
+  content: ' ▲';
+  font-size: 10px;
+  color: #ffe066;
+}
+.fx-text.resist {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.fx-text.resist::after {
+  content: ' ▼';
+  font-size: 9px;
+  color: #9a9a9a;
+}
+.fx-text.crit {
+  font-size: 22px;
+  color: #ffe066;
+}
+.fx-text.shatter {
+  font-size: 22px;
+  color: #dff8ff;
+  text-shadow:
+    0 0 8px #59c9ff,
+    0 2px 2px #000;
+}
+.fx-text.hero-hurt {
+  color: #ff6a5a;
+  font-size: 14px;
+}
+.fx-text.gold-gain {
+  color: #ffd35a;
+  font-size: 16px;
+}
+.fx-text.gain {
+  color: #c9f5bd;
+  font-size: 15px;
+}
+.fx-text.gain.perfect {
+  color: #ffe066;
+}
+.fx-text.status {
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  font-variant: small-caps;
+}
+.fx-text.status.frost {
+  color: #bff3ff;
+}
+.fx-text.status.enrage {
+  color: #ff5a4a;
+  font-size: 22px;
+}
+.fx-text.status.level {
+  color: #ffd35a;
+  font-size: 26px;
+}
+.fx-text.status.dead {
+  color: #ff8a7a;
+  font-size: 20px;
+}
+.fx-text.status.perfect {
+  color: #ffe066;
+  font-size: 18px;
+  text-shadow:
+    0 0 10px #ffb000,
+    0 2px 2px #000;
+}
+.fx-text.loot.r1 {
+  color: #6aa8ff;
+}
+.fx-text.loot.r2 {
+  color: #ffd35a;
+}
+.fx-text.loot.r3 {
+  color: #ff8a2a;
+  font-size: 18px;
+}
+
+/* ---- Interact prompt ------------------------------------------------------------------------- */
+.prompt-label {
+  font-size: 13px;
+  padding: 3px 10px 3px 4px;
+  border-radius: 14px;
+  background: rgba(10, 8, 6, 0.82);
+  border: 1px solid rgba(233, 196, 106, 0.6);
+  color: #fff1c1;
+  text-shadow: 0 1px 2px #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: prompt-in 0.15s ease-out;
+}
+
+.prompt-label .pkey {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #5a4524, #33260f);
+  border: 1px solid #e9c46a;
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffe9b8;
+}
+
+@keyframes prompt-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -80%) scale(0.85);
+  }
+}
+
+/* ---- LAN ----------------------------------------------------------------------------------- */
+/* These live beside the HUD (not inside it), so they opt in to clicks and the HUD's type. */
+.lan-join,
+.lan-bar,
+.lan-update,
+.lan-paused,
+.lan-saves {
+  pointer-events: auto;
+  font-family: var(--serif);
+  color: var(--ink);
+}
+.lan-join {
+  position: fixed;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 70;
+}
+
+.lan-classes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.lan-class {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  opacity: 0.7;
+}
+
+.lan-class span {
+  font-size: 11px;
+}
+
+.lan-class.picked {
+  opacity: 1;
+  outline: 2px solid #ffd36a;
+}
+
+.lan-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e9dcc0;
+}
+
+.lan-name input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(233, 196, 106, 0.5);
+  border-radius: 6px;
+  color: #fff1c1;
+  padding: 6px 8px;
+  font: inherit;
+}
+
+.lan-bar {
+  position: fixed;
+  left: 10px;
+  top: 172px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  z-index: 40;
+}
+
+.lan-who {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lan-p::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background: var(--c);
+  box-shadow: 0 0 6px var(--c);
+}
+
+.lan-p.off {
+  opacity: 0.45;
+}
+
+.lan-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lan-update {
+  position: fixed;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 14, 8, 0.9);
+  border: 1px solid rgba(233, 196, 106, 0.7);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #fff1c1;
+  z-index: 80;
+}
+
+.lan-paused {
+  position: fixed;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  padding: 16px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 75;
+}
+
+.lan-saves {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 85;
+}
+
+.lan-join.hidden,
+.lan-bar.hidden,
+.lan-update.hidden,
+.lan-paused.hidden {
+  display: none;
+}

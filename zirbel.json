@@ -1,0 +1,37 @@
+{
+  "id": "td01",
+  "version": "0.2.0",
+  "title": "TD01",
+  "tagline": "Gather, build, ship and defend a mountain village.",
+  "players": {
+    "min": 1,
+    "max": 1
+  },
+  "runsOn": "Desktop browser",
+  "madeBy": {
+    "name": "bestrand",
+    "url": "https://github.com/bestrand"
+  },
+  "credits": [
+    {
+      "slot": "Models",
+      "artist": "Kay Lousberg",
+      "work": "KayKit",
+      "url": "https://kaylousberg.com",
+      "license": "CC0-1.0"
+    },
+    {
+      "slot": "Credits and licences",
+      "work": "Engine, icons, fonts and sound · all creators",
+      "url": "https://zirbel.app/media/td01/credits.html"
+    }
+  ],
+  "stage": "alpha",
+  "back": [
+    "A small mountain village needs your help to survive.",
+    "Explore the surrounding land and gather what your people need.",
+    "Turn your discoveries into defenses that protect the village.",
+    "Prepare together as danger approaches along the roads.",
+    "Build a place worth coming home to, then stand together to defend it."
+  ]
+}

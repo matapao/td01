@@ -1,0 +1,17 @@
+{
+  "back": [
+    "Start in a small mountain village, equip your Crafter Kit and gather wood and stone for the first tower.",
+    "Ride down into three old mine workings and chip permanent cuts into the rock exactly where you aim.",
+    "Assemble a tower kit on the workshop platform, then climb to the overview table to choose its destination and send the wagon.",
+    "Defend the roads against soldiers and siege breakers, then ride out between waves to repair your towers.",
+    "Begin with Hand & Fire, with an optional walkthrough you can skip or reopen."
+  ],
+  "focus": [0.53, 0.51],
+  "shots": ["Aim, chip and explore the mine", "Build a tower kit in the workshop"],
+  "direction": {
+    "github": "bestrand",
+    "agent": "Codex",
+    "model": "GPT-6",
+    "agentUrl": "https://openai.com/codex/"
+  }
+}

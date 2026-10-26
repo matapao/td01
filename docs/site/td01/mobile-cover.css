@@ -1,0 +1,37 @@
+/* td01's narrow reverse links to its full attribution page instead of clipping its credits. */
+@media (max-width: 640px) {
+  .slot[data-game='td01'] > .back .bk-head {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .slot[data-game='td01'] > .back .bk-tag {
+    font-size: 6px;
+    max-width: 100%;
+    white-space: normal;
+  }
+  .slot[data-game='td01'] > .back .bk-facts,
+  .slot[data-game='td01'] > .back .bk-credits h3,
+  .slot[data-game='td01'] > .back .bk-credits li:first-child {
+    display: none;
+  }
+  .slot[data-game='td01'] > .back .bk-credits li:last-child a {
+    font-size: 0;
+  }
+  .slot[data-game='td01'] > .back .bk-credits li:last-child a::before {
+    content: 'Full credits ↗';
+    font: 600 9px/1.4 var(--text);
+  }
+  .slot[data-game='td01'] > .back .book-nav button {
+    font-size: 0;
+    min-width: 20px;
+    min-height: 24px;
+  }
+  .slot[data-game='td01'] > .back .book-nav button:first-child::before {
+    content: '←';
+    font-size: 12px;
+  }
+  .slot[data-game='td01'] > .back .book-nav button:last-child::before {
+    content: '→';
+    font-size: 12px;
+  }
+}

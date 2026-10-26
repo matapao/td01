@@ -1,0 +1,61 @@
+import type { Sim } from '../sim.ts';
+import { ENEMIES, SIGIL, type EnemyKind } from '../content.ts';
+import type { Enemy } from '../types.ts';
+
+export function baseEnemy(sim: Sim, kind: EnemyKind, hpMul: number): Enemy {
+  const def = ENEMIES[kind];
+  const hp =
+    def.hp * hpMul * Math.pow(SIGIL.hpPerLevel, sim.state.sigil) * (1 + 0.35 * (sim.state.heroes.length - 1));
+  return {
+    id: sim.newId(),
+    kind,
+    wave: -1,
+    lane: -1,
+    d: 0,
+    lat: 0,
+    latTarget: 0,
+    x: 0,
+    z: 0,
+    px: 0,
+    pz: 0,
+    hp,
+    maxHp: hp,
+    shield: 0,
+    slowMul: 1,
+    slowT: 0,
+    stunT: 0,
+    chill: 0,
+    chillT: 0,
+    frozenT: 0,
+    brittleT: 0,
+    burnT: 0,
+    burnDps: 0,
+    spawnT: def.flying ? 0.9 : 1.7,
+    blocker: 0,
+    threat: 0,
+    tauntT: 0,
+    attackCd: 0.5,
+    dashT: 0,
+    dashed: false,
+    abilityCd: 3 + sim.rng.range(0, 2),
+    enraged: false,
+    knockT: 0,
+    knockV: 0,
+    flying: !!def.flying,
+    anim: 'spawn',
+    animT: 0,
+    lastHitBy: 0,
+    camp: 0,
+    homeX: 0,
+    homeZ: 0,
+    aggro: 0,
+    facing: 0,
+    maxShield: 0,
+    burrowed: false,
+    siege: 0,
+    speedMul: 1,
+    dmgMul: 1,
+    hurtT: 0,
+    affixes: [],
+  };
+}

@@ -1,0 +1,67 @@
+{
+  "name": "browserdefense",
+  "version": "0.2.0",
+  "description": "BrowserDefense \u2014 stylized 3D tower defense (three.js)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p . && tsc -p tsconfig.server.json && tsc -p tsconfig.scripts.json && tsc -p tsconfig.core.json && tsc -p tsconfig.tools.json",
+    "test:first-loop": "node scripts/first-loop-test.ts",
+    "test:mine-loop": "node scripts/mine-loop-test.ts",
+    "test:transit": "node scripts/transit-test.ts",
+    "test:siege": "node scripts/siege-maintenance-test.ts",
+    "test:utilities": "node scripts/dev-utilities-test.ts",
+    "test:excavation": "node scripts/excavation-test.ts",
+    "test:rock": "node scripts/rock-contact-test.ts",
+    "test:starter": "node scripts/starter-test.ts",
+    "test:sim": "node scripts/sim-test.ts",
+    "test:browser": "node scripts/browser-test.mjs",
+    "balance": "node scripts/balance.ts",
+    "assets:fetch": "node scripts/assets/fetch-kaykit.mjs",
+    "assets:build": "node scripts/assets/build-assets.mjs",
+    "test:lan": "node scripts/lan-test.ts",
+    "lan": "vite build --outDir .lan/dist --emptyOutDir && node server/run.ts",
+    "lan:server": "node server/index.ts",
+    "check": "node scripts/check.mjs",
+    "check:architecture": "node scripts/architecture-check.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "test:security": "node scripts/security-test.ts",
+    "test:storage": "node scripts/storage-test.ts",
+    "format": "node docs/engineering/style.mjs --write",
+    "format:check": "node docs/engineering/style.mjs",
+    "test:lan:browser": "node scripts/e2e/lan-smoke.mjs",
+    "check:standards": "node docs/engineering/check.mjs",
+    "verify": "npm run check && npm run test:lan"
+  },
+  "dependencies": {
+    "@zirbel/core": "file:vendor/zirbel-core-2.0.0.tgz",
+    "@zirbel/statistics": "file:vendor/zirbel-statistics-2.0.0.tgz",
+    "pg": "8.23.1",
+    "three": "0.186.1",
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "@types/three": "0.186.0",
+    "@types/ws": "8.18.2",
+    "@zirbel/engineering": "file:vendor/zirbel-engineering-1.0.0.tgz",
+    "prettier": "3.9.10",
+    "puppeteer-core": "25.14.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.4"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matapao/td01.git"
+  }
+}

@@ -1,0 +1,177 @@
+/*
+ * Self-hosted Google Fonts (SIL OFL 1.1; each family's licence is beside its files in public/fonts/).
+ * Only the "latin" subset ships; characters outside it (✓ ★ → ☠ …) fall back to the next family in
+ * the stack, as before. Every face is scaled (size-adjust) and given Palatino's line metrics
+ * (ascent/descent overrides, divided by its size-adjust) so text keeps the sizes and the line boxes
+ * the HUD was laid out with.
+ *
+ *   UI titles   Cinzel (Natanael Gama)                   --title
+ *   UI body     Alegreya (Juan Pablo del Peral, HT)      --serif
+ *   Road boards Old Standard TT (Steam), Courier Prime and Cutive (Electric, Signal: the panel
+ *               and the board's words), VT323 (Electronic, Automated), Exo 2 (Space) — the earlier
+ *               ages stay in the UI pair.  --face-*
+ */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/cinzel/cinzel-latin-wght.woff2') format('woff2');
+  size-adjust: 93%;
+  ascent-override: 88.5%;
+  descent-override: 29.8%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/alegreya/alegreya-latin-wght.woff2') format('woff2');
+  size-adjust: 106%;
+  ascent-override: 77.6%;
+  descent-override: 26.1%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Alegreya';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/alegreya/alegreya-italic-latin-wght.woff2') format('woff2');
+  size-adjust: 106%;
+  ascent-override: 77.6%;
+  descent-override: 26.1%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Old Standard TT';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/old-standard-tt/old-standard-tt-latin-400.woff2') format('woff2');
+  size-adjust: 100%;
+  ascent-override: 82.3%;
+  descent-override: 27.7%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Old Standard TT';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/old-standard-tt/old-standard-tt-latin-700.woff2') format('woff2');
+  size-adjust: 100%;
+  ascent-override: 82.3%;
+  descent-override: 27.7%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/courier-prime/courier-prime-latin-400.woff2') format('woff2');
+  size-adjust: 90%;
+  ascent-override: 91.4%;
+  descent-override: 30.8%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/courier-prime/courier-prime-latin-700.woff2') format('woff2');
+  size-adjust: 90%;
+  ascent-override: 91.4%;
+  descent-override: 30.8%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* The typewriter boards' own words: Cutive is a typewriter face too, but proportional — set as narrow as
+   the serif the boards were laid out in (Courier's fixed pitch runs a third wider). */
+@font-face {
+  font-family: 'Cutive';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/cutive/cutive-latin-400.woff2') format('woff2');
+  size-adjust: 76%;
+  ascent-override: 108.3%;
+  descent-override: 36.4%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/vt323/vt323-latin-400.woff2') format('woff2');
+  size-adjust: 108%;
+  ascent-override: 76.2%;
+  descent-override: 25.6%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/exo-2/exo-2-latin-wght.woff2') format('woff2');
+  size-adjust: 90%;
+  ascent-override: 91.4%;
+  descent-override: 30.8%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* The stacks (the same lists are in src/ui/fonts.ts for the canvases, which can't read CSS). */
+:root {
+  --serif: 'Alegreya', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif;
+  --title: 'Cinzel', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --face-steam: 'Old Standard TT', 'Palatino Linotype', Palatino, Georgia, serif;
+  --face-type: 'Courier Prime', 'Courier New', Courier, monospace;
+  --face-type-board: 'Cutive', 'Courier Prime', 'Courier New', Courier, monospace;
+  --face-term: 'VT323', 'Courier New', Courier, monospace;
+  --face-space: 'Exo 2', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  /* Alegreya's own figures are old-style; the HUD's numbers stand on the line, as Palatino's did. */
+  font-variant-numeric: lining-nums;
+}

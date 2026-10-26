@@ -1,0 +1,166 @@
+/* The Road of Invention's minigames: a panel above the action bar (and alone on the playground page). */
+.mg-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 110px;
+  transform: translateX(-50%);
+  width: 412px;
+  padding: 10px 16px 14px;
+  text-align: center;
+  z-index: 60;
+}
+
+/* Fully opaque (over the panels' see-through gradient): nothing of the HUD behind shows through
+   while you work the board. */
+.mg-panel.panel {
+  background: linear-gradient(180deg, rgb(38, 31, 24), rgb(17, 14, 11));
+}
+
+.mg-title {
+  font-size: 15px;
+}
+
+.mg-kind {
+  font-size: 11px;
+  color: var(--ink-dim);
+  margin: 2px 0 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mg-root {
+  position: relative;
+  min-height: 220px;
+}
+
+/* The verdict: what came of it, and why. */
+.mg-verdict {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 18px;
+  background: rgba(10, 8, 6, 0.78);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.mg-verdict b {
+  font-size: 22px;
+}
+
+.mg-verdict span {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.mg-verdict.q2 b {
+  color: #ffe08a;
+}
+
+.mg-verdict.q1 b {
+  color: #9ee6a8;
+}
+
+.mg-verdict.q0 b {
+  color: #ff8a7a;
+}
+
+/* ?minigame=<kind>: one minigame alone in the middle of the page. */
+body.mg-playground {
+  background: radial-gradient(ellipse at center, #2a2118 0%, #0c0a08 100%);
+}
+
+body.mg-playground #app,
+body.mg-playground #ui {
+  display: none;
+}
+
+.mg-stage .mg-panel {
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+
+/* ---- The boards' faces: each age's look (src/ui/fonts.ts). The early ages keep the UI pair; Steam is
+   set in a Victorian serif, Electric and Signal on a typewriter, Electronic and Automated on a
+   terminal, Space in a clean sci-fi face. The canvas follows (the kit's FONT). ---- */
+.mg-panel {
+  font-family: var(--serif);
+}
+
+.mg-panel.mg-face-steam {
+  font-family: var(--face-steam);
+}
+
+.mg-panel.mg-face-type {
+  font-family: var(--face-type);
+}
+
+.mg-panel.mg-face-term {
+  font-family: var(--face-term);
+}
+
+.mg-panel.mg-face-space {
+  font-family: var(--face-space);
+}
+
+/* The title is gold like the HUD's titles, but in the board's face (only the UI pair's name is Cinzel). */
+.mg-panel .mg-title {
+  font-family: inherit;
+}
+
+.mg-face-serif .mg-name,
+.mg-face-serif .mg-verdict b {
+  font-family: var(--title);
+}
+
+.mg-face-steam .mg-name {
+  font-weight: bold;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+
+.mg-face-type .mg-name,
+.mg-face-type .mg-verdict b {
+  font-weight: bold;
+}
+
+.mg-face-term .mg-name,
+.mg-face-term .mg-kind,
+.mg-face-term .mg-verdict b,
+.mg-face-space .mg-name,
+.mg-face-space .mg-verdict b {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mg-face-space .mg-name,
+.mg-face-space .mg-verdict b {
+  font-weight: 600;
+}
+
+/* The terminal's prompt blinks. */
+.mg-face-term .mg-kind::after {
+  content: '_';
+  animation: mg-caret 1.1s steps(1) infinite;
+}
+
+@keyframes mg-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* The kind's glyph before its name. */
+.mg-kind .gi {
+  width: 1.3em;
+  height: 1.3em;
+  margin-right: 5px;
+  vertical-align: -0.32em;
+  fill: currentColor;
+}

@@ -1,0 +1,1596 @@
+{
+  "date": "2026-10-26",
+  "candidate": "TD01 source-only publication candidate",
+  "binary_file_count": 87,
+  "binary_groups": {
+    "gameplay-capture": 3,
+    "platform-shelf-capture": 1,
+    "model-or-animation": 70,
+    "font": 10,
+    "vendor-package": 3
+  },
+  "scope": "Every non-text source candidate file; node_modules, .git and generated dist excluded. Also inventories embedded game-icons paths.",
+  "excluded_media": "No audio, video, original source purchase archives, old Git history, .backup or DungeonCrawler01 bytes in candidate source.",
+  "official_sources": [
+    "https://kaylousberg.itch.io/kaykit-complete",
+    "https://github.com/KayKit-Game-Assets",
+    "https://game-icons.net/faq.html",
+    "https://openfontlicense.org/ofl-faq/"
+  ],
+  "limitations": [
+    "Files were matched to local license/provenance/pin evidence; original paid collection archive was not freshly accessed or rebuilt.",
+    "Font files lack an upstream hash pin in the source repository.",
+    "MIT applies to original code/docs, not a relicensing of CC0/OFL/CC-BY dependencies."
+  ],
+  "files": [
+    {
+      "path": "docs/cartridge.png",
+      "bytes": 86004,
+      "sha256": "9bbd50a6da53aba333d76a6ebf889413a70ac6d5b42a52850c4637a36f67013a",
+      "kind": "platform-shelf-capture",
+      "license": "Zirbel layout MIT; TD01 gameplay artwork retains original asset licenses",
+      "source": "https://zirbel.app/ actual TD01 cartridge; badge aligned to Alpha",
+      "notices": ["docs/ZIRBEL_CARTRIDGE_LICENSE.txt", "docs/CREDITS.md"],
+      "evidence": "Existing live front-face markup/styles and painted key art exported; visually verified at README display size"
+    },
+    {
+      "path": "docs/site/td01/back-1.jpg",
+      "bytes": 74414,
+      "sha256": "3af239c40143e40426589e1cfe8dfbb04c6bc80c536ff112cfc0b71fad672568",
+      "kind": "gameplay-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "TD01 gameplay",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected"
+    },
+    {
+      "path": "docs/site/td01/back-2.jpg",
+      "bytes": 63829,
+      "sha256": "662fce14b679cc2b66b2d4b6a3019019e717ab4413425f04297945486f838071",
+      "kind": "gameplay-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "TD01 gameplay",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected"
+    },
+    {
+      "path": "docs/site/td01/front.jpg",
+      "bytes": 151654,
+      "sha256": "4df4327b1d4d66de26c37777b391a2f4b4fa867335b354e720b72f794bbd803d",
+      "kind": "gameplay-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "TD01 gameplay",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected"
+    },
+    {
+      "path": "public/assets/characters/Barbarian.glb",
+      "bytes": 330928,
+      "sha256": "041efb7715350159a2f46f2f497da1a5659a28502ac83973852873c948e5caf2",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Knight.glb",
+      "bytes": 376480,
+      "sha256": "24396c51d4cfea258198b924b1246d7349c82418fa8875fdef56ac670fb95a3f",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Mage.glb",
+      "bytes": 307520,
+      "sha256": "91ba33a64317a3e851f965d2df0d9cb45449945782610b7db62fd66b91cf4f7d",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Rogue_Hooded.glb",
+      "bytes": 315672,
+      "sha256": "a4109396f8842ab3af56d5ee7215b56a800da4ee96c3bd296ca77ad2013f0928",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Skeleton_Mage.glb",
+      "bytes": 266924,
+      "sha256": "2f91032b8937d184d0b3e00e289d19f3a6158d6488fa72097ee0ff0e0e95130e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Skeleton_Minion.glb",
+      "bytes": 319776,
+      "sha256": "b17110d981412b83fdb3cdd058801072543e7c2e964eee153726b0d4825f8554",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Skeleton_Rogue.glb",
+      "bytes": 332316,
+      "sha256": "c4d3bc2b1edf84b668507ce01b41bc39b7ac2aa029f4f0e1dba232e6f9378a11",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/Skeleton_Warrior.glb",
+      "bytes": 368608,
+      "sha256": "f97736b79abace5a84e0b1e5594e9973ec9eeebb7ec7545bde3d196c79e6ca6e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters/anims.glb",
+      "bytes": 2539304,
+      "sha256": "1af8cba069c86cf8aacdb25a985b091500bc48dda0e444389509c140ba27140e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub source; shared animation library extracted by build-assets.mjs"
+    },
+    {
+      "path": "public/assets/characters2/4GTN.glb",
+      "bytes": 894080,
+      "sha256": "73319696c434d72d26860d9d722c24149aae93bf18b78746b6175b4d9b2e9d15",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/7 - January 2026 - 4GTN/characters/4GTN.glb"]
+    },
+    {
+      "path": "public/assets/characters2/4GTN_Forgotten.glb",
+      "bytes": 1202400,
+      "sha256": "0a6463bb3e2d8b1b07645ccfe0d3e0e82d9f85f9eecc7b0c801f3ac4f6561586",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 6 (1.1)/7 - January 2026 - 4GTN/characters/4GTN_Forgotten.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/AvianSwordsman.glb",
+      "bytes": 367784,
+      "sha256": "228f041095bf36bb9ffa8dde021f3b0f629f8669197a59650b667ac80866310c",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 6 (1.1)/9 - March 2026 - Avian Swordsman/characters/AvianSwordsman.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Barbarian.glb",
+      "bytes": 384456,
+      "sha256": "3941c1438f812a1dfb781409f7dfe424546265e5b63634c35587c6489e1ae108",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Barbarian.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Barbarian_Large.glb",
+      "bytes": 684636,
+      "sha256": "a4d7d91667be9d11d401cbff7fe61be5be996c94cdc89c8d5b8c376e51756edc",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Barbarian_Large.glb"]
+    },
+    {
+      "path": "public/assets/characters2/BlackKnight.glb",
+      "bytes": 492672,
+      "sha256": "cca5f29da447a17f74e4fb03a43de65bfc886eb288267fd96dc1e7fe86f10592",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 5 (1.1)/3 - September 2024 - Black Knight/characters/BlackKnight.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Caveman.glb",
+      "bytes": 237820,
+      "sha256": "cfb775c2d42f62fa9f7ef9a4e496fbc55dba02885ec4cc3ffe47ed99fd4505c3",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 5 (1.1)/8 - February 2025 - Caveman/characters/Caveman.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Clanker.glb",
+      "bytes": 1573052,
+      "sha256": "1e6931fae7ea19dc1ce55efb8b9a25a371860cc1434b2385a54ed5f9a8b4cb6e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 5 (1.1)/9 - March 2025 - Clanker/characters/Clanker.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Cleric.glb",
+      "bytes": 481320,
+      "sha256": "beda10ca8ba598c8ddbf51f3e54bed1760e8073479bb3f6def22d91980267857",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/3 - September 2025 - Cleric/characters/Cleric.glb"]
+    },
+    {
+      "path": "public/assets/characters2/CombatMech.glb",
+      "bytes": 658424,
+      "sha256": "3bb582c5bafd2bf7e5056941b14ffa37a46d91912c535695340d89e6925fa437",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 5 (1.1)/1 - July 2024 - Combat Mech/characters/CombatMech.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Druid.glb",
+      "bytes": 463608,
+      "sha256": "e8a8b86c28eaa4b9a9bae39476b4da3a998bbcb9f2a662f057a1f8a53361c615",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Druid.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Engineer.glb",
+      "bytes": 453148,
+      "sha256": "508c989abd55f260e4f59a3bd49a78848d34e51541374497ced0e09fdc27b99d",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Engineer.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Farmer_A.glb",
+      "bytes": 332508,
+      "sha256": "fae5b072631839f18848bd0ff1c25c4d17035bf68a3c7d0913cca2a20c7e8f8e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/12 - June 2026 - Farmers/characters/Farmer_A.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Farmer_B.glb",
+      "bytes": 388652,
+      "sha256": "e162c743e0926c454722e94ab2d174be6b9e7bfd5eecc5cf3064c9a99d8f8582",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/12 - June 2026 - Farmers/characters/Farmer_B.glb"]
+    },
+    {
+      "path": "public/assets/characters2/FrostGolem.glb",
+      "bytes": 927776,
+      "sha256": "575a33a5b1778e1e82511cdf3df604b1ad3e640361af29329a82998f22e8c32b",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 5 (1.1)/7 - January 2025 - FrostGolem/characters/FrostGolem.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Hoarder.glb",
+      "bytes": 1211244,
+      "sha256": "1366bad9160e424dbe4f3f0d0518b614f62f18ef0ed0231b4f4f12b5438586c5",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/8 - February 2026 - Hoarder/characters/Hoarder.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Knight.glb",
+      "bytes": 339272,
+      "sha256": "63ddeea66586f9aa0704ebf6b05fe3547172830982685b3e71b88e925d9c0dbb",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Knight.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Lorekeeper.glb",
+      "bytes": 581480,
+      "sha256": "fbf90e0245f1341dbbb437be6d8ad09d2b4fbc3c2fb56732e48dc24f2eee04a5",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/1 - July 2025 - Lorekeeper/characters/Lorekeeper.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Mage.glb",
+      "bytes": 350164,
+      "sha256": "9528b2e60cb80f546fe873fbb60701235b069dd5a542e3150c5aba687e3a6567",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Mage.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Monstrosity.glb",
+      "bytes": 652660,
+      "sha256": "369c14dd40809243dd1b605e314d215f5383c411fb980534d3e581a5b4fb2601",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 6 (1.1)/4 - October 2025 - Monstrosity/characters/Monstrosity.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Necromancer.glb",
+      "bytes": 406136,
+      "sha256": "ae1a3ba8303e2c4ccb1e4849ef58e8bdf5547457bcfe1149d88a288c98c8b11e",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Necromancer.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Ninja.glb",
+      "bytes": 275496,
+      "sha256": "c2c45a37d9830c4b43ea20efbc8e0cb1da7d89477491c96633427a788548d25b",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 4 (1.1)/8 - February 2024 - Ninja/character/Ninja.glb"]
+    },
+    {
+      "path": "public/assets/characters2/OrcBrute.glb",
+      "bytes": 752444,
+      "sha256": "e54b438539ac7e774291e825e1a192b8de8fd50d9e3b496d11963d910fba6e66",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 6 (1.1)/2 - August 2025 - Orc Brute/characters/OrcBrute.glb"]
+    },
+    {
+      "path": "public/assets/characters2/OrcRaider.glb",
+      "bytes": 351188,
+      "sha256": "7eae8f794219a974e45b667bdf0773b5278315de2746e039dc71d737a8361138",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 4 (1.1)/1 - July 2023 - Orc Raider/character/OrcRaider.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Paladin.glb",
+      "bytes": 303604,
+      "sha256": "4daa372988a903e76a37f11897bad2a60e03ea0d1566608b32b0f719686022ca",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/10 - April 2024 - Paladin/characters/gltf/Paladin.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Paladin_with_Helmet.glb",
+      "bytes": 351948,
+      "sha256": "5757d0b2069e15fb10fc7ff35bdfd57ddc108e839698c592438c178945bc5b55",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/10 - April 2024 - Paladin/characters/gltf/Paladin_with_Helmet.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/PlantWarrior.glb",
+      "bytes": 372252,
+      "sha256": "fa9fa2e169040e90c28a6d3b091cab32ab77af43bfc934c6c23069b9567c23b0",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 6 (1.1)/5 - November 2025 - Plant Warrior/characters/PlantWarrior.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Ranger.glb",
+      "bytes": 482404,
+      "sha256": "d4de3097aba390bd06ee274b326f3f061849d5c2b728fb30e0df5ec0b10f8e4d",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Ranger.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Robot_One.glb",
+      "bytes": 367260,
+      "sha256": "37ca974d13e43e52f31ed0df3658bf335b62fce0e40b46f3d3969d9a21fd84a5",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 4 (1.1)/12 - June 2024 - Robot/characters/Robot_One.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Robot_Two.glb",
+      "bytes": 355596,
+      "sha256": "d1922167b9ba8c59ab6066e4fe049af3d8db7dbb7a39dfc0122792c2511d51e4",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 4 (1.1)/12 - June 2024 - Robot/characters/Robot_Two.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Rogue.glb",
+      "bytes": 406992,
+      "sha256": "decbb5fcb5f3251fba105d32bc4ae4d50a672a53fc7ff9d663ef34aad61dbdba",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Rogue.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Rogue_Hooded.glb",
+      "bytes": 379060,
+      "sha256": "7c2311bce77baf175047c691987b76bc5d0d00f6682ad3e68daf52e2d39b4341",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Adventurers 2.0/Characters/gltf/Rogue_Hooded.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Skeleton_Golem.glb",
+      "bytes": 395096,
+      "sha256": "2805432bf02f42893dcd8cf2ab2a95a64e8543b849c19eed038fa2fa8526575c",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Skeleton_Golem.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Skeleton_Mage.glb",
+      "bytes": 266756,
+      "sha256": "785d7433c96350c7471a42f9c2a46c32ae1b7ca3734f68b3fd686a8ff4029ce5",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Skeleton_Mage.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Skeleton_Minion.glb",
+      "bytes": 319612,
+      "sha256": "e5b8f071a3cbec02f617174223aa70b3afc6f2dc11142802c3f76b7fcccdf524",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Skeleton_Minion.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Skeleton_Rogue.glb",
+      "bytes": 332152,
+      "sha256": "52bc6f2f3d741140096520374b6591f666442788239e92b334ec68b4f6226b79",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Skeleton_Rogue.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Skeleton_Warrior.glb",
+      "bytes": 368444,
+      "sha256": "3f72df3b4807a19dda5995b2bee1d4bf8243c97fdafe0fafe2154d8d10f42157",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Skeletons 1.1/characters/gltf/Skeleton_Warrior.glb"]
+    },
+    {
+      "path": "public/assets/characters2/SpaceRanger.glb",
+      "bytes": 304532,
+      "sha256": "a69865a10ec74f73b9bb2e85da56a1fd51a72f93b491d8a2572494255c503f45",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/7 - January 2024 - Space Ranger/character/SpaceRanger.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/SpaceRanger_FlightMode.glb",
+      "bytes": 407740,
+      "sha256": "a9eba9862788a81f384154aea47bfe1b3bda826b3593a7c63d6b490ab6bfceb8",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/7 - January 2024 - Space Ranger/character/SpaceRanger_FlightMode.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Tiefling.glb",
+      "bytes": 522928,
+      "sha256": "f3b16cc544aaecafd1ce1abf596c88ce040ab4f1379989fe791ce876b9cb44f6",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 5 (1.1)/12 - June 2025 - Tiefling/characters/Tiefling.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Vampire.glb",
+      "bytes": 345856,
+      "sha256": "6bf645e0bf17e35dbf098249c7c24309125fa4d287536fd052741de41eca4715",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 5 (1.1)/4 - October 2024 - Vampire/characters/Vampire.glb"]
+    },
+    {
+      "path": "public/assets/characters2/Werewolf_Man.glb",
+      "bytes": 206828,
+      "sha256": "3dd914ced9245702b55d7f71c80aef5567a4458ef0b31eec98f3e2aeb7714cac",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/4 - October 2023 - Werewolf/characters/gltf/Werewolf_Man.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Werewolf_Wolf.glb",
+      "bytes": 227992,
+      "sha256": "65249c1e995080ba4aa8698a3a208df1feb5ff4a1cd1785f352647b4a298bf2b",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": [
+        "KayKit Mystery Monthly Series 4 (1.1)/4 - October 2023 - Werewolf/characters/gltf/Werewolf_Wolf.glb"
+      ]
+    },
+    {
+      "path": "public/assets/characters2/Witch.glb",
+      "bytes": 317596,
+      "sha256": "6719a773aaa5015a12c928ee15a54817a92c7114ff7ce6c98eaf4ac6310f57b7",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": ["KayKit Mystery Monthly Series 5 (1.1)/5 - November 2024 - Witch/characters/Witch.glb"]
+    },
+    {
+      "path": "public/assets/characters2/anims_large.glb",
+      "bytes": 718580,
+      "sha256": "cda0d498b0df4ea631c1debb3ccfe6e685a0f36877c2df90b056c6b68303bbc8",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Character Animations 1.1 large rig source clip sets"
+    },
+    {
+      "path": "public/assets/characters2/anims_medium.glb",
+      "bytes": 3337664,
+      "sha256": "ef69a98bc7d326eab886113356121c06e3b7f8d09eba106052e8c2ec41d2b096",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Character Animations 1.1 medium rig source clip sets"
+    },
+    {
+      "path": "public/assets/kits/bits.glb",
+      "bytes": 713944,
+      "sha256": "adcfb5c82b3b923591f28b2ba698992aeadb93ad4ac582cad5979f2bc8f5ad83",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Holiday Bits 1.0 and Mixed Bag 1"
+    },
+    {
+      "path": "public/assets/kits/cards.glb",
+      "bytes": 1598580,
+      "sha256": "30bb1a5070a8b1cac3a349fe9ea686f91368d6a573d3fa239e3ae7fb41a759ed",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Board Game Bits 1.0"
+    },
+    {
+      "path": "public/assets/kits/dungeon.glb",
+      "bytes": 4629812,
+      "sha256": "420013c1f5a4d5372f3f68b2b8d4cc3fb7487087aa03b02e8b7d05cecf8c91c0",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Dungeon Remastered 1.0 (GitHub b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07)"
+    },
+    {
+      "path": "public/assets/kits/gear.glb",
+      "bytes": 344268,
+      "sha256": "21996f98921ccc8b97f0efed54888cc017b62db02c4a337c45aeebdd88bd092d",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Adventurers/Skeletons 1.0 pinned GitHub packs"
+    },
+    {
+      "path": "public/assets/kits/halloween.glb",
+      "bytes": 1043632,
+      "sha256": "73278758511e4fac63da7ff79ab1365abccd126f2d6da04ffd5c7b1c31d40249",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Halloween Bits 1.0 pinned GitHub source"
+    },
+    {
+      "path": "public/assets/kits/medieval.glb",
+      "bytes": 4371852,
+      "sha256": "7552b158a37d57f1f45f9be05acf89fd2847a319d308bd363d759853e80f3675",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Medieval Hexagon Pack 1.0 pinned GitHub source"
+    },
+    {
+      "path": "public/assets/kits/mine.glb",
+      "bytes": 364484,
+      "sha256": "48fe3bf05c854fdf75a35d7d78dcb9abb75f0b84cd268296076358775b07bcc2",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit props2 subset (Dungeon 1.1 and Mystery Monthly camp/raider props)"
+    },
+    {
+      "path": "public/assets/kits/nature.glb",
+      "bytes": 2314608,
+      "sha256": "d8202f8324080355bde40f85d9174973a0caf7935f16ce5c739817cab26a4115",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Forest Nature Pack 1.0"
+    },
+    {
+      "path": "public/assets/kits/props2.glb",
+      "bytes": 13626828,
+      "sha256": "096ed8ec7cca5beaef654764b8c3b74a4852487f7daae0ebd7c17c77dd2caa74",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Resource/RPG Tools/Furniture/Dungeon/Halloween/Mystery Monthly props"
+    },
+    {
+      "path": "public/assets/kits/resources.glb",
+      "bytes": 305804,
+      "sha256": "e229939b126c4d2a0690e0ffa4f441aa847a513f3237fe5169c3c4353ce68193",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Resource Bits 1.0 (SHA-pinned itch.io archive)"
+    },
+    {
+      "path": "public/assets/kits/robots.glb",
+      "bytes": 747544,
+      "sha256": "64b3040658db7b27a22aabf9e8317b447f68960e35839b14aee0069915864105",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Mystery Monthly robot/mech/space-ranger props"
+    },
+    {
+      "path": "public/assets/kits/space.glb",
+      "bytes": 2673044,
+      "sha256": "3e2555cd30b840f42132d9cf1c696a7fb40d8a3653a1c608e0d819ae6d2280b1",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Space Base Bits 1.0, Platformer Pack 1.0, Prototype Bits 1.1 floor models"
+    },
+    {
+      "path": "public/assets/kits/tools.glb",
+      "bytes": 689100,
+      "sha256": "84e0326de88de4f515a850d4325c64e0d8e00d51c0f59b781394cb6b8d7b7590",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit RPG Tools Bits 1.0 (SHA-pinned itch.io archive)"
+    },
+    {
+      "path": "public/assets/kits/town.glb",
+      "bytes": 3252656,
+      "sha256": "dfcbefce72310e8ea78d7a21f73275e55c7b1463030afb19df23925f793b8baf",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Medieval Hexagon 1.0.1 plus props2 subset; town-manifest.json pins"
+    },
+    {
+      "path": "public/assets/kits/weapons.glb",
+      "bytes": 3440488,
+      "sha256": "622c0dea0fac3a2e0b3320857aa641c40fc5b41fd4967f99fae1ac8aca38c686",
+      "kind": "model-or-animation",
+      "license": "CC0-1.0",
+      "creator": "Kay Lousberg",
+      "notices": ["public/assets/licenses/", "docs/CREDITS.md", "docs/KAYKIT_COLLECTION.md"],
+      "evidence": "Local license texts, source pin manifests and owning import/build scripts; original source archives were not freshly downloaded or rebuilt for this audit",
+      "source": "KayKit Fantasy Weapons Bits 1.0, Adventurers 2.0 and Skeletons 1.1"
+    },
+    {
+      "path": "public/fonts/alegreya/alegreya-italic-latin-wght.woff2",
+      "bytes": 44460,
+      "sha256": "2636ab630804ac5fd9ef3aca9a64f02b297fc0189cef7f9819a4ccf57db3e829",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family alegreya",
+      "notices": ["public/fonts/alegreya/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/alegreya/alegreya-latin-wght.woff2",
+      "bytes": 43420,
+      "sha256": "34d902fd33b23ea3205daf8dd7696e6c49b50165e70165655e361f243dd3e083",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family alegreya",
+      "notices": ["public/fonts/alegreya/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/cinzel/cinzel-latin-wght.woff2",
+      "bytes": 25888,
+      "sha256": "ef95296c778719c3d658a8284d65078100450948851b9114485ada01d9d3d3f8",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family cinzel",
+      "notices": ["public/fonts/cinzel/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/courier-prime/courier-prime-latin-400.woff2",
+      "bytes": 11192,
+      "sha256": "21bf7ff8d9e067443a3fe0832ee8e4364faee9ace1fb0ec3e625cd09d231802f",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family courier-prime",
+      "notices": ["public/fonts/courier-prime/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/courier-prime/courier-prime-latin-700.woff2",
+      "bytes": 11588,
+      "sha256": "06622415713b4150c18f4489db7c8850300d9f3e55051fc78ed33dca88c5ff08",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family courier-prime",
+      "notices": ["public/fonts/courier-prime/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/cutive/cutive-latin-400.woff2",
+      "bytes": 15332,
+      "sha256": "aa770391fdae18866b3189acf978c6af8737d581ff8fcb1e26c70080d6b918ef",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family cutive",
+      "notices": ["public/fonts/cutive/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/exo-2/exo-2-latin-wght.woff2",
+      "bytes": 40932,
+      "sha256": "3dad6838887f694f0dbdaf521bf6241e4b1e4dabfd859eda6af27a77e4ba871a",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family exo-2",
+      "notices": ["public/fonts/exo-2/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/old-standard-tt/old-standard-tt-latin-400.woff2",
+      "bytes": 13932,
+      "sha256": "48f9f02f3deb51cb7e21f7941a7082af78784d3bef2b5e607a717e5a6b6a6d68",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family old-standard-tt",
+      "notices": ["public/fonts/old-standard-tt/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/old-standard-tt/old-standard-tt-latin-700.woff2",
+      "bytes": 13820,
+      "sha256": "b57915f2b753b4dc8d5b5be206b160d75bf9f911dbadc3f0c779b9ee8b78566d",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family old-standard-tt",
+      "notices": ["public/fonts/old-standard-tt/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "public/fonts/vt323/vt323-latin-400.woff2",
+      "bytes": 7192,
+      "sha256": "043a60145af2ddbcd0a6452625cb0bfc4e18b222c76dcd1d4a0106715472faba",
+      "kind": "font",
+      "license": "OFL-1.1",
+      "source": "Google Fonts Latin subset, family vt323",
+      "notices": ["public/fonts/vt323/OFL.txt", "docs/CREDITS.md"],
+      "evidence": "Matching local OFL notice and documented family/designer mapping; binary source URLs/hashes were not pinned upstream"
+    },
+    {
+      "path": "vendor/zirbel-core-2.0.0.tgz",
+      "bytes": 51854,
+      "sha256": "36bd5977e9645267f95b518436fc918131e11336bd5aecbc007312df21b01701",
+      "kind": "vendor-package",
+      "license": "MIT",
+      "source": "matapao/zirbel @zirbel/core 2.0.0",
+      "notices": ["vendor/NOTICE.md", "vendor/zirbel-LICENSE.txt"],
+      "archive_license_present": true
+    },
+    {
+      "path": "vendor/zirbel-engineering-1.0.0.tgz",
+      "bytes": 7762,
+      "sha256": "0507ff463ced66220e62f93132ebe46603b9489a7be4a2fe4d9965eee3a4c465",
+      "kind": "vendor-package",
+      "license": "MIT",
+      "source": "matapao/zirbel @zirbel/engineering 1.0.0",
+      "notices": ["vendor/NOTICE.md", "vendor/zirbel-LICENSE.txt"],
+      "archive_license_present": false
+    },
+    {
+      "path": "vendor/zirbel-statistics-2.0.0.tgz",
+      "bytes": 12180,
+      "sha256": "5a49230bdd8feb4972822f1453305e65e4fcf4deefaedb76a603f68a76982219",
+      "kind": "vendor-package",
+      "license": "MIT",
+      "source": "matapao/zirbel @zirbel/statistics 2.0.0",
+      "notices": ["vendor/NOTICE.md", "vendor/zirbel-LICENSE.txt"],
+      "archive_license_present": true
+    }
+  ],
+  "embedded_icons": [
+    {
+      "icon": "carl-olsen/flame",
+      "license": "CC-BY-3.0",
+      "creator_group": "carl-olsen",
+      "source": "https://game-icons.net/1x1/carl-olsen/flame.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/axe-sword",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/axe-sword.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/camping-tent",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/camping-tent.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/castle",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/castle.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/chest",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/chest.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/chest-armor",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/chest-armor.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/choice",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/choice.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/delivery-drone",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/delivery-drone.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/dig-hole",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/dig-hole.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/encrypted-channel",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/encrypted-channel.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/enrage",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/enrage.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/eye-target",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/eye-target.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/funnel",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/funnel.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/healing",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/healing.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/human-target",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/human-target.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/metronome",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/metronome.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/mine-wagon",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/mine-wagon.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/path-distance",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/path-distance.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/radio-tower",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/radio-tower.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/rock-golem",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/rock-golem.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/round-knob",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/round-knob.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/shambling-zombie",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/shambling-zombie.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/shield-bash",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/shield-bash.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/shop",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/shop.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/speedometer",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/speedometer.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/stack",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/stack.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/steam-locomotive",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/steam-locomotive.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "delapouite/windmill",
+      "license": "CC-BY-3.0",
+      "creator_group": "delapouite",
+      "source": "https://game-icons.net/1x1/delapouite/windmill.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/anvil",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/anvil.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/arrowhead",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/arrowhead.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/bat-wing",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/bat-wing.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/brain",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/brain.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/burning-dot",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/burning-dot.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/campfire",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/campfire.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/cartwheel",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/cartwheel.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/cog",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/cog.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/cracked-glass",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/cracked-glass.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/crossed-bones",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/crossed-bones.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/envelope",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/envelope.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/fire-ray",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/fire-ray.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/frozen-block",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/frozen-block.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/frozen-orb",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/frozen-orb.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/gear-hammer",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/gear-hammer.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/gears",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/gears.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/ghost",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/ghost.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/grab",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/grab.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/hammer-drop",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/hammer-drop.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/light-bulb",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/light-bulb.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/magic-shield",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/magic-shield.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/magic-swirl",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/magic-swirl.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/magnifying-glass",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/magnifying-glass.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/mechanical-arm",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/mechanical-arm.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/metal-bar",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/metal-bar.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/meteor-impact",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/meteor-impact.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/muscle-up",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/muscle-up.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/pointing",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/pointing.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/power-lightning",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/power-lightning.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/processor",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/processor.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/quake-stomp",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/quake-stomp.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/rally-the-troops",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/rally-the-troops.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/ringed-planet",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/ringed-planet.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/rocket",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/rocket.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/scales",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/scales.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/sharped-teeth-skull",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/sharped-teeth-skull.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/shield-echoes",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/shield-echoes.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/shouting",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/shouting.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/skull-shield",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/skull-shield.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/snail",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/snail.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/snowflake-2",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/snowflake-2.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/sprint",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/sprint.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/tombstone",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/tombstone.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "lorc/white-tower",
+      "license": "CC-BY-3.0",
+      "creator_group": "lorc",
+      "source": "https://game-icons.net/1x1/lorc/white-tower.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "sbed/electric",
+      "license": "CC-BY-3.0",
+      "creator_group": "sbed",
+      "source": "https://game-icons.net/1x1/sbed/electric.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "skoll/knockout",
+      "license": "CC-BY-3.0",
+      "creator_group": "skoll",
+      "source": "https://game-icons.net/1x1/skoll/knockout.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    },
+    {
+      "icon": "zeromancer/heart-plus",
+      "license": "CC0-1.0",
+      "creator_group": "zeromancer",
+      "source": "https://game-icons.net/1x1/zeromancer/heart-plus.html",
+      "notices": ["src/ui/glyph-data.ts", "docs/CREDITS.md"]
+    }
+  ],
+  "embedded_icon_counts": {
+    "CC-BY-3.0": 74,
+    "CC0-1.0": 1
+  },
+  "removed_optional_captures": [
+    {
+      "path": "docs/site/td01/cover-preview.png",
+      "bytes": 520753,
+      "sha256": "da42cf12869574b162d667221ef957ff9ace5cf1f4d289ce0ad6a32e10ebc424",
+      "kind": "platform-shelf-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "Zirbel shelf including FPS01, Derby01 and TD01 covers",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected",
+      "provenance_gap": "Cross-repository FPS01/Derby01 cover artwork and platform UI/font provenance require platform audit; not exclusively MIT artwork"
+    },
+    {
+      "path": "docs/site/td01/mobile-preview.png",
+      "bytes": 156658,
+      "sha256": "b61a98040445b600f55cd9d5018cf7dfa303907e8c99b8ab7de637380fa4d103",
+      "kind": "platform-shelf-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "Zirbel shelf including FPS01, Derby01 and TD01 covers",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected",
+      "provenance_gap": "Cross-repository FPS01/Derby01 cover artwork and platform UI/font provenance require platform audit; not exclusively MIT artwork"
+    },
+    {
+      "path": "docs/site/td01/shelf-preview.png",
+      "bytes": 613769,
+      "sha256": "449fbba9fe418ead0149a92e147eca1f657ff1fb79f477b7ba1e58392a89ccbe",
+      "kind": "platform-shelf-capture",
+      "license": "Original capture plus third-party artwork license terms",
+      "source": "Zirbel shelf including FPS01, Derby01 and TD01 covers",
+      "notices": ["docs/CREDITS.md"],
+      "evidence": "All six files visually inspected",
+      "provenance_gap": "Cross-repository FPS01/Derby01 cover artwork and platform UI/font provenance require platform audit; not exclusively MIT artwork"
+    }
+  ],
+  "excluded_prototype_source": [
+    "three.js/acceleration-check.ts",
+    "three.js/car-research.ts",
+    "three.js/coordinates.ts",
+    "three.js/drift-assist.ts",
+    "three.js/drift-check.ts",
+    "three.js/drive-replay.ts",
+    "three.js/index.html",
+    "three.js/main.ts",
+    "three.js/physics-check.ts",
+    "three.js/physics-design.ts",
+    "three.js/physics.ts",
+    "three.js/style.css",
+    "three.js/track.ts",
+    "codex-one/one.py"
+  ],
+  "policy_status": "Approved: keep redistributable third-party assets with required notices. Original code/docs remain MIT; models CC0, fonts OFL and icons CC-BY/CC0 retain their own licenses.",
+  "inline_visuals": [
+    {
+      "path": "src/ui/dom.ts",
+      "description": "Simple authored inline UI shapes and tool icons; game-icons ability paths already inventoried separately"
+    },
+    {
+      "path": "src/ui/icons.ts",
+      "description": "One-pixel blank fallback PNG and procedurally generated model/tool previews"
+    }
+  ],
+  "reference_only_documents": [
+    {
+      "path": "docs/research/mine-reference-index.json",
+      "description": "External photograph URLs and alt labels; no photograph bytes; not used by game"
+    },
+    {
+      "paths": ["docs/ASSET_PACKS.md", "docs/ASSET_PACKS.html"],
+      "description": "Historical catalog/research; external links and HTML Google Fonts stylesheet request (Cinzel, Alegreya Sans, IBM Plex Mono), not bundled additional fonts. Marked historical; Sonniss source-redistribution assertions corrected."
+    }
+  ]
+}

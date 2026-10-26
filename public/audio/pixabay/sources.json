@@ -1,0 +1,49 @@
+[
+  {
+    "file": "pickaxe.wav",
+    "title": "Pickaxe Blow",
+    "artist": "CreatorsHome",
+    "url": "https://pixabay.com/sound-effects/film-special-effects-pickaxe-blow-333695/",
+    "license": "Pixabay Content License",
+    "license_url": "https://pixabay.com/service/license-summary/",
+    "downloaded": "2026-10-23",
+    "start": 0.0369,
+    "duration": 0.42,
+    "source_sha256": "6c6eb41d126d640d87d28c46990c93d0f7d8a514c06428af181e2280b984e1e2",
+    "sha256": "f97d53081fde85e1909576ddd0736344876da16a469cc79adfe9a373283cf0d3",
+    "processing": "Mono 44.1 kHz, peak levelled; short fades for impact, periodic 8-second crossfade loop plus 0.25-second rolls for fire.",
+    "status": "removed; source redistribution permission unconfirmed"
+  },
+  {
+    "file": "torch.wav",
+    "title": "Crackling Fire",
+    "artist": "DRAGON-STUDIO",
+    "url": "https://pixabay.com/sound-effects/film-special-effects-crackling-fire-584730/",
+    "license": "Pixabay Content License",
+    "license_url": "https://pixabay.com/service/license-summary/",
+    "downloaded": "2026-10-23",
+    "start": 4.0,
+    "duration": 8.5,
+    "source_sha256": "2cec041030bf7e783e531a921f51be7a7bd9900a2b8783511e58d76ee8bc7e22",
+    "sha256": "07364d83cd0f1b813cb1518d0e8eec5a1e189f074beb5e79d17087025c384388",
+    "processing": "Mono 44.1 kHz, peak levelled; short fades for impact, periodic 8-second crossfade loop plus 0.25-second rolls for fire.",
+    "status": "removed; source redistribution permission unconfirmed"
+  },
+  {
+    "file": "explosion.wav",
+    "source": "explosion.mp3",
+    "start": 0.012,
+    "duration": 1.3,
+    "peak": 0.75,
+    "source_sha256": "0ef0ad9ea8deb68a20e215edb02e66750929b7a714fcc38b65780467bd2407c9",
+    "sha256": "d538f67aa85f9f2ae3f5a10f6e0bdaddd9cc4a6e0e8f8c5cce9b258639904219",
+    "title": "Grenade Explosion 14",
+    "artist": "DavidDumaisAudio",
+    "url": "https://pixabay.com/sound-effects/film-special-effects-grenade-explosion-14-190266/",
+    "role": "Explosion",
+    "license": "Pixabay Content License",
+    "license_url": "https://pixabay.com/service/license-summary/",
+    "downloaded": "2026-10-23",
+    "status": "removed; source redistribution permission unconfirmed"
+  }
+]

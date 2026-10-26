@@ -1,0 +1,185 @@
+{
+  "id": "td01",
+  "version": "0.2.0",
+  "title": "TD01",
+  "tagline": "Gather, build, ship and defend a mountain village.",
+  "players": {
+    "min": 1,
+    "max": 16
+  },
+  "runsOn": "Desktop browser",
+  "madeBy": {
+    "name": "bestrand",
+    "url": "https://github.com/bestrand"
+  },
+  "credits": [
+    {
+      "slot": "Models",
+      "artist": "Kay Lousberg",
+      "work": "KayKit",
+      "url": "https://kaylousberg.com",
+      "license": "CC0-1.0"
+    },
+    {
+      "slot": "Credits and licences",
+      "work": "Engine, icons, fonts and sound \u00b7 all creators",
+      "url": "https://zirbel.app/media/td01/credits.html"
+    }
+  ],
+  "metrics": [
+    {
+      "name": "enemies_defeated_total",
+      "type": "counter",
+      "help": "Enemies defeated",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "resources_gathered_total",
+      "type": "counter",
+      "help": "Resources gathered",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "items_crafted_total",
+      "type": "counter",
+      "help": "Items crafted",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "buildings_completed_total",
+      "type": "counter",
+      "help": "Buildings completed",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "leaks_total",
+      "type": "counter",
+      "help": "Enemies that reached the keep",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "waves_cleared_total",
+      "type": "counter",
+      "help": "Waves cleared",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "wave",
+      "type": "gauge",
+      "help": "Current wave",
+      "labels": {}
+    },
+    {
+      "name": "gold",
+      "type": "gauge",
+      "help": "Shared gold",
+      "labels": {}
+    },
+    {
+      "name": "keep_lives",
+      "type": "gauge",
+      "help": "Remaining keep lives",
+      "labels": {}
+    },
+    {
+      "name": "buildings",
+      "type": "gauge",
+      "help": "Current buildings",
+      "labels": {}
+    },
+    {
+      "name": "stored_resources",
+      "type": "gauge",
+      "help": "Resources in shared storage",
+      "labels": {}
+    },
+    {
+      "name": "runs_total",
+      "type": "counter",
+      "help": "Completed runs",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"],
+        "outcome": ["won", "lost"]
+      }
+    },
+    {
+      "name": "run_seconds",
+      "type": "histogram",
+      "help": "Completed run duration",
+      "unit": "seconds",
+      "buckets": [60, 300, 600, 1200, 1800, 3600, 7200, 14400],
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"],
+        "outcome": ["won", "lost"]
+      }
+    },
+    {
+      "name": "run_waves",
+      "type": "gauge",
+      "help": "Waves cleared in a completed run",
+      "record": "high",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "run_kills",
+      "type": "gauge",
+      "help": "Enemies defeated in a completed run",
+      "record": "high",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "run_resources",
+      "type": "gauge",
+      "help": "Resources gathered in a completed run",
+      "record": "high",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "victory_seconds",
+      "type": "gauge",
+      "help": "Time to complete a victorious run",
+      "unit": "seconds",
+      "record": "low",
+      "labels": {
+        "sigil": ["0", "1", "2", "3", "4", "5", "6", "7"],
+        "party": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      }
+    },
+    {
+      "name": "towers",
+      "type": "gauge",
+      "help": "Current deployed towers",
+      "labels": {}
+    }
+  ],
+  "stage": "alpha"
+}

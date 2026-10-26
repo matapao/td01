@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
+    "allowJs": true,
+    "checkJs": true,
+    "paths": {
+      "/src/*": ["./src/*"]
+    },
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": false
+  },
+  "include": ["scripts/**/*.mjs", "scripts/**/*.js", "scripts/browser-context.d.ts"],
+  "exclude": ["scripts/**/*.legacy.*", "scripts/out/**"]
+}

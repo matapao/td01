@@ -1,0 +1,29 @@
+node_modules
+dist
+*.log
+.DS_Store
+scripts/out
+.env.local
+.env*.local
+.lan/
+saves/
+.e2e-dist/
+
+# Local credentials and private tool output.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+.codex-one-report.json
+.backup/
+
+# Exclude unrelated prototypes, private task tooling and old mixed-site captures.
+/three.js/
+/codex-one/
+/docs/site/td01/cover-preview.png
+/docs/site/td01/mobile-preview.png
+/docs/site/td01/shelf-preview.png

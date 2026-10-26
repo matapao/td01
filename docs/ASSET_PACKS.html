@@ -1,0 +1,5334 @@
+<title>BrowserDefense Asset Stacks</title>
+<meta name="claude:viewport-fit-sides" content="cover" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+/>
+<style>
+  /* Layout: one reading column for the argument, full-width bands for the tables that need room.
+   The look borrows the game's own HUD: gold on deep slate, a carved display face for headings. */
+  :root {
+    --bg: #eef1f5;
+    --panel: #ffffff;
+    --ink: #1c2330;
+    --muted: #5b6577;
+    --line: #d6dbe4;
+    --gold: #8f6410;
+    --gold-soft: #f4e6c4;
+    --ok: #2f7d4f;
+    --part: #b8820f;
+    --no: #b5534a;
+    --no-soft: #c9ced8;
+    --chip: #e3e8ef;
+    --display: 'Cinzel', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    --body: 'Alegreya Sans', 'Gill Sans', 'Segoe UI', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --bg: #11151d;
+      --panel: #18202b;
+      --ink: #e9e3d3;
+      --muted: #9ca5b4;
+      --line: #2b3444;
+      --gold: #e2b450;
+      --gold-soft: #3a2f18;
+      --ok: #62c08a;
+      --part: #e3aa3e;
+      --no: #e07c70;
+      --no-soft: #3a4352;
+      --chip: #222b38;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme='dark'] {
+    --bg: #11151d;
+    --panel: #18202b;
+    --ink: #e9e3d3;
+    --muted: #9ca5b4;
+    --line: #2b3444;
+    --gold: #e2b450;
+    --gold-soft: #3a2f18;
+    --ok: #62c08a;
+    --part: #e3aa3e;
+    --no: #e07c70;
+    --no-soft: #3a4352;
+    --chip: #222b38;
+    color-scheme: dark;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.55;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0 64px;
+  }
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .prose {
+    max-width: 70ch;
+  }
+  a {
+    color: var(--gold);
+    text-underline-offset: 2px;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: var(--chip);
+    padding: 0 4px;
+    border-radius: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  h2 {
+    font-size: 1.55rem;
+    color: var(--ink);
+  }
+  h2 .k {
+    color: var(--gold);
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  p {
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  li + li {
+    margin-top: 0.25em;
+  }
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Header */
+  header.top {
+    padding-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 28px;
+  }
+  header.top h1 {
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.1;
+  }
+  header.top h1 span {
+    color: var(--gold);
+  }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--ink);
+    max-width: 62ch;
+  }
+
+  /* The buy order */
+  .buy {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .buy article {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  .buy article.hold {
+    background: transparent;
+    border-style: dashed;
+  }
+  .buy .rank {
+    font-family: var(--display);
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+  }
+  .buy h3 {
+    font-size: 1.25rem;
+  }
+  .buy .price {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .buy ul {
+    font-size: 0.97rem;
+  }
+
+  /* Headline table */
+  .head-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 760px;
+    font-size: 1rem;
+  }
+  .head-table th,
+  .head-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .head-table td.num,
+  .head-table th.num {
+    text-align: right;
+  }
+  .head-table tr.rec td {
+    background: var(--gold-soft);
+    font-weight: 700;
+  }
+  .foot {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  /* Coverage chart */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .legend i {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    vertical-align: -1px;
+    margin-right: 6px;
+  }
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 36px;
+  }
+  .area {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .area h4 {
+    font-family: var(--display);
+    font-size: 0.98rem;
+    letter-spacing: 0.03em;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .area .n {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 11.5em minmax(0, 1fr) 3.2em;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+  .bar-label {
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar {
+    display: flex;
+    height: 12px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--no-soft);
+  }
+  .seg {
+    display: block;
+    height: 100%;
+  }
+  .seg.y,
+  .legend .y {
+    background: var(--ok);
+  }
+  .seg.p,
+  .legend .p {
+    background: var(--part);
+  }
+  .seg.n,
+  .legend .n {
+    background: var(--no-soft);
+  }
+  .bar-num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .bar-num small {
+    color: var(--muted);
+  }
+
+  /* Ours list */
+  .ours {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 32px;
+    padding: 0;
+    list-style: none;
+  }
+  .ours li {
+    margin: 0;
+    padding-left: 14px;
+    border-left: 3px solid var(--gold);
+    min-width: 0;
+  }
+  .ours b {
+    display: block;
+    font-family: var(--display);
+    font-size: 0.98rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Stacks */
+  .stacks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .stacks article {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .stacks .tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .stacks h4 {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--body);
+    font-weight: 700;
+  }
+
+  /* Tables */
+  .scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--panel);
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--line);
+  }
+  tbody tr:last-child td,
+  tbody tr:last-child th {
+    border-bottom: 0;
+  }
+  table.road {
+    min-width: 980px;
+  }
+  table.road td.age {
+    font-family: var(--display);
+    white-space: nowrap;
+    color: var(--gold);
+  }
+  table.road td.ms {
+    min-width: 12em;
+  }
+  table.lic-table {
+    min-width: 1240px;
+  }
+  table.lic-table tbody th {
+    font-weight: 700;
+    min-width: 11em;
+  }
+  table.others,
+  table.looks {
+    min-width: 760px;
+  }
+  .lic {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--chip);
+  }
+  .lic.ok {
+    background: color-mix(in srgb, var(--ok) 18%, transparent);
+  }
+  .lic.part {
+    background: color-mix(in srgb, var(--part) 20%, transparent);
+  }
+  .lic.no {
+    background: color-mix(in srgb, var(--no) 20%, transparent);
+  }
+
+  /* Matrix */
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    font: inherit;
+    font-size: 0.9rem;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
+  }
+  .row2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+  }
+  .seg-ctl {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .seg-ctl label {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background: var(--panel);
+  }
+  .seg-ctl input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .seg-ctl input:checked + span {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .seg-ctl label + label {
+    border-left: 1px solid var(--line);
+  }
+  .seg-ctl label:has(input:focus-visible) {
+    outline: 2px solid var(--gold);
+    outline-offset: -2px;
+  }
+  #q {
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--ink);
+    min-width: 0;
+    width: 16em;
+    max-width: 100%;
+  }
+  #count {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  table.matrix {
+    min-width: 1160px;
+  }
+  table.matrix td.id {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  table.matrix td.need {
+    min-width: 15em;
+    font-weight: 500;
+  }
+  table.matrix td.today {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  table.matrix td.m {
+    min-width: 10em;
+  }
+  table.matrix td.m b {
+    display: inline-block;
+    width: 1.4em;
+    font-family: var(--mono);
+  }
+  td.m-Y b {
+    color: var(--ok);
+  }
+  td.m-P b {
+    color: var(--part);
+  }
+  td.m-N b {
+    color: var(--no);
+  }
+  td.m-N {
+    color: var(--muted);
+  }
+  table.matrix td.note {
+    color: var(--muted);
+    font-size: 0.88rem;
+    min-width: 10em;
+  }
+  tr.area-row td {
+    background: var(--chip);
+    font-family: var(--display);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+  }
+  .codes {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .codes b {
+    font-family: var(--mono);
+    color: var(--ink);
+  }
+
+  /* Walk-through + sources */
+  details.walk {
+    border-top: 1px solid var(--line);
+  }
+  details.walk:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+  details summary {
+    cursor: pointer;
+    padding: 12px 2px;
+    font-family: var(--display);
+    font-size: 1.02rem;
+    letter-spacing: 0.02em;
+  }
+  .walk-body {
+    padding: 0 2px 16px;
+    max-width: 80ch;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.97rem;
+  }
+  .sources {
+    font-size: 0.92rem;
+    max-width: 90ch;
+  }
+  .sources ul ul {
+    margin-top: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .buy,
+    .stacks {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .areas,
+    .ours {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    body {
+      font-size: 16px;
+    }
+    .bar-row {
+      grid-template-columns: 8.5em minmax(0, 1fr) 2.8em;
+    }
+    .head-table th,
+    .head-table td {
+      padding: 8px 6px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .seg {
+      transition: width 300ms ease;
+    }
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">BrowserDefense · asset research · 18 October 2026</div>
+    <h1>What to buy <span>around KayKit</span></h1>
+    <p class="lede">
+      KayKit Complete stays the game's base. This page weighs three ways to buy out the rest, and checks each
+      against 172 needs, from the first frame through every age to Space.
+    </p>
+  </header>
+
+  <section id="answer">
+    <h2>The answer</h2>
+    <div class="buy">
+      <article>
+        <div class="rank">Buy first</div>
+        <h3>Kenney All-in-1</h3>
+        <div class="price">$19.95 once · CC0 · every future pack included</div>
+        <ul>
+          <li>
+            UI skins for every window: UI Pack, RPG Expansion, Fantasy UI Borders, and UI Pack – Sci-Fi for
+            the later ages.
+          </li>
+          <li>180 cursors, input prompts and fonts.</li>
+          <li>Particle, smoke and light-mask textures for the effects.</li>
+          <li>About 1,200 sounds and music loops: interface, impacts, RPG, sci-fi, jingles, voice.</li>
+          <li>
+            Train, Factory and Industrial kits for Steam → Automated; the Space, Station and Modular Space
+            kits as parts for the Port and base; the Modular Cave Kit for the mines.
+          </li>
+        </ul>
+      </article>
+      <article>
+        <div class="rank">Then</div>
+        <h3>Quaternius</h3>
+        <div class="price">
+          Standard parts free · Source via Patreon (35–545 NOK a month) or per pack, e.g. $14.99
+        </div>
+        <ul>
+          <li>Ultimate Monsters and the Bestiary for the creatures in the mine lairs.</li>
+          <li>Animated robots, mechs and aliens for the Robots milestone and Space.</li>
+          <li>
+            Ultimate Space Kit and Ultimate Spaceships; Sci-Fi Essentials' animated screens; the Modular
+            Sci-Fi MegaKit for a habitat interior.
+          </li>
+          <li>Modular Train and Steampunk Turret for the Steam age.</li>
+          <li>
+            Licence: the Quaternius Asset License v1.0 (28 Aug 2026). It allows shipping assets inside a
+            finished game; recolour anything red.
+          </li>
+        </ul>
+      </article>
+      <article class="hold">
+        <div class="rank">Hold</div>
+        <h3>Synty</h3>
+        <div class="price">$0 now · $99.99–$199.98 if it ever happens</div>
+        <ul>
+          <li>
+            Its INTERFACE HUD packs are the richest ready-made HUD art there is: Fantasy Warrior HUD has the
+            WoW-style frames, bars and minimaps.
+          </li>
+          <li>
+            But the prefabs and animations only work in Unity and Unreal; the art clashes with KayKit's
+            characters; and neither Synty licence says anything about browser games.
+          </li>
+          <li>Ask Synty in writing first. Then, if at all, buy Fantasy Warrior HUD outright.</li>
+          <li>
+            Never SyntyPass: once it lapses you may not use the assets in new work (§6.2), and a game still
+            being developed needs an active subscription (§12.3). That means paying for ever.
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="scroll" style="max-width: 760px">
+      <table class="head-table">
+        <thead>
+          <tr>
+            <th scope="col">What we use</th>
+            <th scope="col" class="num">Fully off the shelf</th>
+            <th scope="col" class="num">At least partly</th>
+            <th scope="col" class="num">Nothing usable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>KayKit + free sources</td>
+            <td class="num">21%</td>
+            <td class="num">66%</td>
+            <td class="num">59 needs</td>
+          </tr>
+          <tr>
+            <td>+ Kenney</td>
+            <td class="num">35%</td>
+            <td class="num">94%</td>
+            <td class="num">10 needs</td>
+          </tr>
+          <tr class="rec">
+            <td>+ Kenney + Quaternius (recommended)</td>
+            <td class="num">37%*</td>
+            <td class="num">94%</td>
+            <td class="num">10 needs</td>
+          </tr>
+          <tr>
+            <td>+ all three, Synty too</td>
+            <td class="num">41%</td>
+            <td class="num">96%</td>
+            <td class="num">7 needs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">
+      * 38% if Layer Lab's UI kits are added as well, but their licence forbids any form that lets others
+      extract the files, which a browser game can't prevent.
+    </p>
+
+    <div class="prose" style="display: flex; flex-direction: column; gap: 12px">
+      <p>
+        <strong>How far that gets us.</strong> Even with everything bought, about 6 in 10 needs still take
+        some of our work: laying out the HUD in HTML and CSS (packs only supply the art), recolouring and
+        kit-bashing models, and composing scenes. About 6% can't be bought at all.
+      </p>
+      <p>
+        <strong>The minigame boards are the clearest case.</strong> Whatever we buy, only 1 of 21 boards is
+        covered off the shelf. Packs give the parts: gauges, bars, frames, particles, 3D props. The boards
+        themselves are ours.
+      </p>
+      <p>
+        <strong>What decides most of it is the browser.</strong> A browser game sends its model, image and
+        sound files to every player, where anyone can save them. CC0 (KayKit, Kenney), CC BY with credits, the
+        Quaternius licence were considered in this historical research. Sonniss recordings have since been
+        withdrawn pending source redistribution review. The Unity Asset Store and Layer Lab forbid letting
+        others extract their assets, and Synty doesn't say.
+      </p>
+      <p>
+        <strong>Free, right away:</strong> Google Fonts for three or four era faces; game-icons.net for
+        ability, Road, status and map glyphs (credits required); the Sonniss GDC archive for ambiences,
+        machines, steam, electricity and launches; CC0 music loops from Abstraction; three.quarks for
+        authoring particle emitters.
+      </p>
+    </div>
+  </section>
+
+  <section id="areas">
+    <h2>Coverage, area by area</h2>
+    <p class="prose">
+      Each bar is one area's needs, as each purchase adds to what we already have. Green is fully off the
+      shelf, amber is usable with work (a recolour, a kit-bash, our own layout), grey is nothing usable. The
+      figure on the right is the green share.
+    </p>
+    <div class="legend">
+      <span><i class="y"></i>Fully off the shelf</span><span><i class="p"></i>Partly, with our work</span
+      ><span><i class="n"></i>Nothing usable: we make it</span>
+    </div>
+    <div class="areas">
+      <div class="area">
+        <h4>UI shell <span class="n">26 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 1 of 26 fully covered, 6 partly, 19 not at all"
+            ><i class="seg y" style="width: 3.8462%"></i><i class="seg p" style="width: 23.0769%"></i
+            ><i class="seg n" style="width: 73.0769%"></i></span
+          ><span class="bar-num">4<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 13 of 26 fully covered, 12 partly, 1 not at all"
+            ><i class="seg y" style="width: 50%"></i><i class="seg p" style="width: 46.1538%"></i
+            ><i class="seg n" style="width: 3.8462%"></i></span
+          ><span class="bar-num">50<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 14 of 26 fully covered, 11 partly, 1 not at all"
+            ><i class="seg y" style="width: 53.8462%"></i><i class="seg p" style="width: 42.3077%"></i
+            ><i class="seg n" style="width: 3.8462%"></i></span
+          ><span class="bar-num">54<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 19 of 26 fully covered, 6 partly, 1 not at all"
+            ><i class="seg y" style="width: 73.0769%"></i><i class="seg p" style="width: 23.0769%"></i
+            ><i class="seg n" style="width: 3.8462%"></i></span
+          ><span class="bar-num">73<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Icons <span class="n">9 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 2 of 9 fully covered, 7 partly, 0 not at all"
+            ><i class="seg y" style="width: 22.2222%"></i><i class="seg p" style="width: 77.7778%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">22<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 3 of 9 fully covered, 6 partly, 0 not at all"
+            ><i class="seg y" style="width: 33.3333%"></i><i class="seg p" style="width: 66.6667%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">33<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 3 of 9 fully covered, 6 partly, 0 not at all"
+            ><i class="seg y" style="width: 33.3333%"></i><i class="seg p" style="width: 66.6667%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">33<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span class="bar" role="img" aria-label="+ all three: 4 of 9 fully covered, 5 partly, 0 not at all"
+            ><i class="seg y" style="width: 44.4444%"></i><i class="seg p" style="width: 55.5556%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">44<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>World <span class="n">31 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 11 of 31 fully covered, 14 partly, 6 not at all"
+            ><i class="seg y" style="width: 35.4839%"></i><i class="seg p" style="width: 45.1613%"></i
+            ><i class="seg n" style="width: 19.3548%"></i></span
+          ><span class="bar-num">35<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 12 of 31 fully covered, 15 partly, 4 not at all"
+            ><i class="seg y" style="width: 38.7097%"></i><i class="seg p" style="width: 48.3871%"></i
+            ><i class="seg n" style="width: 12.9032%"></i></span
+          ><span class="bar-num">39<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 12 of 31 fully covered, 15 partly, 4 not at all"
+            ><i class="seg y" style="width: 38.7097%"></i><i class="seg p" style="width: 48.3871%"></i
+            ><i class="seg n" style="width: 12.9032%"></i></span
+          ><span class="bar-num">39<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 12 of 31 fully covered, 16 partly, 3 not at all"
+            ><i class="seg y" style="width: 38.7097%"></i><i class="seg p" style="width: 51.6129%"></i
+            ><i class="seg n" style="width: 9.6774%"></i></span
+          ><span class="bar-num">39<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Characters <span class="n">13 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 7 of 13 fully covered, 5 partly, 1 not at all"
+            ><i class="seg y" style="width: 53.8462%"></i><i class="seg p" style="width: 38.4615%"></i
+            ><i class="seg n" style="width: 7.6923%"></i></span
+          ><span class="bar-num">54<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 7 of 13 fully covered, 6 partly, 0 not at all"
+            ><i class="seg y" style="width: 53.8462%"></i><i class="seg p" style="width: 46.1538%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">54<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 7 of 13 fully covered, 6 partly, 0 not at all"
+            ><i class="seg y" style="width: 53.8462%"></i><i class="seg p" style="width: 46.1538%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">54<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 7 of 13 fully covered, 6 partly, 0 not at all"
+            ><i class="seg y" style="width: 53.8462%"></i><i class="seg p" style="width: 46.1538%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">54<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Enemies <span class="n">9 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 5 of 9 fully covered, 4 partly, 0 not at all"
+            ><i class="seg y" style="width: 55.5556%"></i><i class="seg p" style="width: 44.4444%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">56<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 5 of 9 fully covered, 4 partly, 0 not at all"
+            ><i class="seg y" style="width: 55.5556%"></i><i class="seg p" style="width: 44.4444%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">56<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 7 of 9 fully covered, 2 partly, 0 not at all"
+            ><i class="seg y" style="width: 77.7778%"></i><i class="seg p" style="width: 22.2222%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">78<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span class="bar" role="img" aria-label="+ all three: 7 of 9 fully covered, 2 partly, 0 not at all"
+            ><i class="seg y" style="width: 77.7778%"></i><i class="seg p" style="width: 22.2222%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">78<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>VFX <span class="n">15 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 0 of 15 fully covered, 1 partly, 14 not at all"
+            ><i class="seg y" style="width: 0%"></i><i class="seg p" style="width: 6.6667%"></i
+            ><i class="seg n" style="width: 93.3333%"></i></span
+          ><span class="bar-num">0<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 6 of 15 fully covered, 9 partly, 0 not at all"
+            ><i class="seg y" style="width: 40%"></i><i class="seg p" style="width: 60%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">40<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 6 of 15 fully covered, 9 partly, 0 not at all"
+            ><i class="seg y" style="width: 40%"></i><i class="seg p" style="width: 60%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">40<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 6 of 15 fully covered, 9 partly, 0 not at all"
+            ><i class="seg y" style="width: 40%"></i><i class="seg p" style="width: 60%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">40<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Sound & music <span class="n">10 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 3 of 10 fully covered, 6 partly, 1 not at all"
+            ><i class="seg y" style="width: 30%"></i><i class="seg p" style="width: 60%"></i
+            ><i class="seg n" style="width: 10%"></i></span
+          ><span class="bar-num">30<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 5 of 10 fully covered, 5 partly, 0 not at all"
+            ><i class="seg y" style="width: 50%"></i><i class="seg p" style="width: 50%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">50<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 5 of 10 fully covered, 5 partly, 0 not at all"
+            ><i class="seg y" style="width: 50%"></i><i class="seg p" style="width: 50%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">50<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 5 of 10 fully covered, 5 partly, 0 not at all"
+            ><i class="seg y" style="width: 50%"></i><i class="seg p" style="width: 50%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">50<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Minigame boards <span class="n">21 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 0 of 21 fully covered, 11 partly, 10 not at all"
+            ><i class="seg y" style="width: 0%"></i><i class="seg p" style="width: 52.381%"></i
+            ><i class="seg n" style="width: 47.619%"></i></span
+          ><span class="bar-num">0<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 1 of 21 fully covered, 17 partly, 3 not at all"
+            ><i class="seg y" style="width: 4.7619%"></i><i class="seg p" style="width: 80.9524%"></i
+            ><i class="seg n" style="width: 14.2857%"></i></span
+          ><span class="bar-num">5<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 1 of 21 fully covered, 17 partly, 3 not at all"
+            ><i class="seg y" style="width: 4.7619%"></i><i class="seg p" style="width: 80.9524%"></i
+            ><i class="seg n" style="width: 14.2857%"></i></span
+          ><span class="bar-num">5<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 1 of 21 fully covered, 17 partly, 3 not at all"
+            ><i class="seg y" style="width: 4.7619%"></i><i class="seg p" style="width: 80.9524%"></i
+            ><i class="seg n" style="width: 14.2857%"></i></span
+          ><span class="bar-num">5<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Road unlocks <span class="n">21 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 3 of 21 fully covered, 12 partly, 6 not at all"
+            ><i class="seg y" style="width: 14.2857%"></i><i class="seg p" style="width: 57.1429%"></i
+            ><i class="seg n" style="width: 28.5714%"></i></span
+          ><span class="bar-num">14<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 4 of 21 fully covered, 16 partly, 1 not at all"
+            ><i class="seg y" style="width: 19.0476%"></i><i class="seg p" style="width: 76.1905%"></i
+            ><i class="seg n" style="width: 4.7619%"></i></span
+          ><span class="bar-num">19<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 4 of 21 fully covered, 16 partly, 1 not at all"
+            ><i class="seg y" style="width: 19.0476%"></i><i class="seg p" style="width: 76.1905%"></i
+            ><i class="seg n" style="width: 4.7619%"></i></span
+          ><span class="bar-num">19<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 4 of 21 fully covered, 17 partly, 0 not at all"
+            ><i class="seg y" style="width: 19.0476%"></i><i class="seg p" style="width: 80.9524%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">19<small>%</small></span>
+        </div>
+      </div>
+      <div class="area">
+        <h4>Space <span class="n">17 needs</span></h4>
+        <div class="bar-row">
+          <span class="bar-label">KayKit + free</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="KayKit + free: 4 of 17 fully covered, 11 partly, 2 not at all"
+            ><i class="seg y" style="width: 23.5294%"></i><i class="seg p" style="width: 64.7059%"></i
+            ><i class="seg n" style="width: 11.7647%"></i></span
+          ><span class="bar-num">24<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney</span
+          ><span class="bar" role="img" aria-label="+ Kenney: 5 of 17 fully covered, 11 partly, 1 not at all"
+            ><i class="seg y" style="width: 29.4118%"></i><i class="seg p" style="width: 64.7059%"></i
+            ><i class="seg n" style="width: 5.8824%"></i></span
+          ><span class="bar-num">29<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ Kenney + Quaternius</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ Kenney + Quaternius: 6 of 17 fully covered, 10 partly, 1 not at all"
+            ><i class="seg y" style="width: 35.2941%"></i><i class="seg p" style="width: 58.8235%"></i
+            ><i class="seg n" style="width: 5.8824%"></i></span
+          ><span class="bar-num">35<small>%</small></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">+ all three</span
+          ><span
+            class="bar"
+            role="img"
+            aria-label="+ all three: 6 of 17 fully covered, 11 partly, 0 not at all"
+            ><i class="seg y" style="width: 35.2941%"></i><i class="seg p" style="width: 64.7059%"></i
+            ><i class="seg n" style="width: 0%"></i></span
+          ><span class="bar-num">35<small>%</small></span>
+        </div>
+      </div>
+    </div>
+    <p class="foot">
+      Computed from the 172-row matrix below; a combination counts the best mark any of its stacks gives a
+      need. "+ Kenney + Quaternius" here includes Layer Lab's UI kits, which only changes the UI shell.
+    </p>
+  </section>
+
+  <section id="ours">
+    <h2>What stays ours, whatever we buy</h2>
+    <p class="prose">
+      By rough estimate, 60–70% of the remaining art and UI effort sits in the middle four groups.
+    </p>
+    <ul class="ours">
+      <li><b>Brand</b>The logo, wordmark and title card.</li>
+      <li>
+        <b>HUD and window composition</b>Every widget's layout, behaviour and animation; packs only skin them.
+        Above all the Road of Invention window, Field Notes, plan cards and the tower panel.
+      </li>
+      <li>
+        <b>All 21 minigame boards</b>Hardest: the live circuit board with its water view, the transformer and
+        zone-refining boards, the Morse tape, radar scope, relay ladder and punched cards.
+      </li>
+      <li>
+        <b>The rocket and the flight</b>Core stage, boosters, upper stage and fairing, the descent and ascent
+        stages, the return capsule with heat shield and parachute, the Port's pad and tower. KayKit has no
+        rocket and no antenna.
+      </li>
+      <li>
+        <b>The tower's own parts</b>Gem windows, 14 gem variants in three grades with their effects, element
+        emblems, and devices sized to the windows.
+      </li>
+      <li>
+        <b>World systems kept in code</b>Terrain, roads, river, the day and night sky, fog of war, light
+        pools, the stone bridges, the endless mines, Space's ground and sky. They beat any pack here.
+      </li>
+      <li>
+        <b>Era props no pack has</b>Telegraph key and sounder, relay boxes, battery cells, transformer,
+        bellows, gold pan, sieve and still, lathe, welding torch, punched-card machine, governor, bells.
+      </li>
+      <li>
+        <b>Recolours</b>KayKit Space Base's warm swatches, any red Quaternius planets or rocks, Kenney's
+        saturation.
+      </li>
+      <li>
+        <b>Audio direction</b>Picking and editing from Sonniss and Kenney; a soundtrack per age (no pack has
+        one); voice barks.
+      </li>
+      <li><b>A crew suit on the KayKit rig</b>If KayKit's own "space ranger" doesn't suit.</li>
+    </ul>
+  </section>
+
+  <section id="stacks">
+    <h2>The three stacks</h2>
+    <p class="prose">
+      Each stack is what we'd add around KayKit Complete and the free sources. They are the three ways to buy
+      out a whole library: one cheap CC0 generalist, the stylised-3D specialist closest to KayKit with a
+      painted UI kit, and the big commercial ecosystem with era-themed HUD kits. On itch.io's 3D best-seller
+      list, KayKit holds 14 of the first 36 places, Quaternius 10, and the Kenney All-in-1 is third.
+    </p>
+    <div class="stacks">
+      <article>
+        <div class="tag">A · $19.95 · CC0</div>
+        <h3>Kenney All-in-1</h3>
+        <h4>What's in it</h4>
+        <p>
+          More than 60,000 assets, 1,200+ sounds and loops, UI, icons, cursors and fonts, in PNG, SVG, OBJ,
+          FBX, glTF and OGG. New packs are free for owners; 2026 added a Modular Space Kit, a Modular Cave Kit
+          and Light Masks.
+        </p>
+        <h4>Why</h4>
+        <p>
+          It fills every category KayKit lacks (UI, cursors, particles, sound, fonts) under a licence the
+          browser can't break.
+        </p>
+        <h4>Weak spots</h4>
+        <p>
+          A flat, saturated, toy-like look; generic cartoon UI; a pixel-art minimap pack; no skill icons; no
+          real-world rocket confirmed.
+        </p>
+      </article>
+      <article>
+        <div class="tag">B · free tier + Patreon · QAL; Layer Lab from $15.99</div>
+        <h3>Quaternius + Layer Lab</h3>
+        <h4>What's in it</h4>
+        <p>
+          84 Quaternius packs: monsters, robots, mechs, aliens, space and sci-fi kits, trains, nature, and an
+          animation library that retargets to Mixamo-style rigs. Layer Lab sells painted UI as plain PNG kits
+          (GUI Pro – Fantasy RPG, $39.99: 1,200+ PNGs, 46 screens).
+        </p>
+        <h4>Why</h4>
+        <p>
+          The stylised 3D closest to KayKit for the later ages, Space and animated creatures; the best-looking
+          painted UI that ships as files.
+        </p>
+        <h4>Weak spots</h4>
+        <p>
+          No effects or sound; Quaternius humans use another rig and adult proportions; Layer Lab's licence
+          bans any form that lets others extract the files.
+        </p>
+      </article>
+      <article>
+        <div class="tag">C · per pack $9.99–$499.99, or SyntyPass</div>
+        <h3>Synty</h3>
+        <h4>What's in it</h4>
+        <p>
+          POLYGON packs for every era (Fantasy Kingdom, Western, Town, Military, Office, Sci-Fi Worlds with a
+          rocket, Sci-Fi Space with planets and asteroids), INTERFACE HUD kits, a 520-icon pack, a Particle FX
+          pack, animation packs. No audio.
+        </p>
+        <h4>Why</h4>
+        <p>
+          The only vendor with complete era-themed HUD kits, and a catalogue that spans medieval to sci-fi.
+        </p>
+        <h4>Weak spots</h4>
+        <p>
+          Unity and Unreal prefabs; FBX instead of glTF; realistic proportions that clash with KayKit's chibi
+          cast; roughly $1,000–1,500 for what we'd need; nothing on browser use.
+        </p>
+      </article>
+    </div>
+    <h3>Other popular vendors, and why none is a fourth stack</h3>
+    <div class="scroll">
+      <table class="others">
+        <thead>
+          <tr>
+            <th scope="col">Vendor</th>
+            <th scope="col">Why not</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Polyperfect</strong> (<a
+                href="https://marketplace.unity.com/packages/3d/props/low-poly-ultimate-pack-54733"
+                target="_blank"
+                rel="noopener"
+                >Low Poly Ultimate Pack</a
+              >, about 3,000 prefabs) and other Unity Asset Store specialists (e.g. Rexard icons, Cartoon FX)
+            </td>
+            <td>
+              The Asset Store bars letting others extract assets from the product (<a
+                href="https://support.unity.com/hc/en-us/articles/34387186019988-Can-I-use-assets-from-the-Asset-Store-with-other-engines"
+                target="_blank"
+                rel="noopener"
+                >Unity</a
+              >), and a browser game can't prevent that
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>ithappy</strong> (<a href="https://ithappystudios.com/" target="_blank" rel="noopener"
+                >own store</a
+              >, glTF available)
+            </td>
+            <td>
+              Cartoon-city style. Its space set is literally <em>Mars Colony</em>. Licence for web unverified
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Tiny Treats</strong> (<a
+                href="https://tinytreats.itch.io/"
+                target="_blank"
+                rel="noopener"
+                >itch</a
+              >)
+            </td>
+            <td>
+              CC0 and built "to match the scale and technical specs of KayKit". But its catalogue is cosy
+              modern homes, parks and a bakery, which the full-scale vale doesn't need
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Pizza Doggy</strong> (PSX), <strong>AssetQuest</strong> (Stylized Forest Kit),
+              <strong>RG Poly</strong> — all itch best-sellers
+            </td>
+            <td>Pixel-texture PSX style, or nature that duplicates KayKit Forest</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Ricimi</strong> (<a href="https://ricimi.itch.io/" target="_blank" rel="noopener"
+                >itch</a
+              >)
+            </td>
+            <td>Casual, candy and kawaii UI kits; no licence shown</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Craftpix</strong> (<a
+                href="https://craftpix.net/file-licenses/"
+                target="_blank"
+                rel="noopener"
+                >licence</a
+              >)
+            </td>
+            <td>
+              "You can sell and distribute games with our assets", but "Distribution of source files is NOT
+              permitted" and PNGs count as source files. Mostly 2D pixel or casual art
+            </td>
+          </tr>
+          <tr>
+            <td><strong>GameDev Market</strong> sellers</td>
+            <td>
+              Their Pro Licence reportedly bars end users extracting assets. Primary page returned 403, so
+              <strong>unverified</strong>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Fab</strong></td>
+            <td>
+              The Standard License has Personal and Professional tiers (<a
+                href="https://dev.epicgames.com/documentation/en-us/fab/licenses-and-pricing-in-fab"
+                target="_blank"
+                rel="noopener"
+                >docs</a
+              >); the EULA text wasn't retrievable (403), so web delivery is <strong>unverified</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>alkakrab</strong> music (<a
+                href="https://alkakrab.itch.io/270bundle"
+                target="_blank"
+                rel="noopener"
+                >610+ tracks, €14.99 on sale</a
+              >)
+            </td>
+            <td>Popular, but the licence sits in a PDF I couldn't read (<strong>unverified</strong>)</td>
+          </tr>
+          <tr>
+            <td><strong>gvesster</strong> icons, <strong>Bukkbeek</strong> VFX (itch best-sellers)</td>
+            <td>Licence per pack unverified, or Godot shaders that don't port</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="licences">
+    <h2>Licences and future releases</h2>
+    <p class="prose">
+      As of October 2026. The fifth column is the one that matters for us: what happens when every player's
+      browser holds the files.
+    </p>
+    <div class="scroll">
+      <table class="lic-table">
+        <thead>
+          <tr>
+            <th scope="col">Source</th>
+            <th scope="col">Price</th>
+            <th scope="col">Licence</th>
+            <th scope="col">Commercial games</th>
+            <th scope="col">Served from a browser (players can reach the files)</th>
+            <th scope="col">Future packs</th>
+            <th scope="col">Attribution</th>
+            <th scope="col">Traps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <strong>KayKit Complete</strong> (<a
+                href="https://kaylousberg.itch.io/kaykit-complete"
+                target="_blank"
+                rel="noopener"
+                >itch</a
+              >)
+            </th>
+            <td>$150 (owned)</td>
+            <td>CC0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>"every pack that will be released on itch in the future!" — "no extra purchase required"</td>
+            <td>Optional</td>
+            <td>"please don't resell unmodified copies"</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Kenney All-in-1</strong> (<a
+                href="https://kenney.itch.io/kenney-game-assets"
+                target="_blank"
+                rel="noopener"
+                >itch</a
+              >)
+            </th>
+            <td>$19.95</td>
+            <td>CC0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>"New packs added frequently, free for all existing owners"</td>
+            <td>"no attribution required"</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Quaternius</strong> (<a
+                href="https://quaternius.com/license.html"
+                target="_blank"
+                rel="noopener"
+                >licence</a
+              >,
+              <a href="https://www.patreon.com/quaternius/membership" target="_blank" rel="noopener"
+                >Patreon</a
+              >)
+            </th>
+            <td>
+              Standard free; Pro and Source via Patreon (35 / 110 / 220 / 545 NOK a month) or per pack (e.g.
+              <a
+                href="https://quaternius.itch.io/universal-animation-library-2"
+                target="_blank"
+                rel="noopener"
+                >UAL2 Source $14.99</a
+              >)
+            </td>
+            <td><strong>QAL v1.0, 28 Aug 2026</strong>; pack pages still say CC0</td>
+            <td>Yes: "personal, educational, and commercial games"</td>
+            <td>
+              <span class="lic part"
+                >Probably fine: "does not restrict distributing a completed Product that merely incorporates
+                the Assets"; no protection clause; the web isn't mentioned</span
+              >
+            </td>
+            <td>
+              Through Patreon (tier benefits not public, <strong>unverified</strong>); licence changes "will
+              not apply retroactively"
+            </td>
+            <td>"No attribution is required."</td>
+            <td>
+              "You may not extract, repackage, sublicense, sell, or otherwise redistribute the Assets"
+              (including as a template); termination on uncured breach
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Synty one-time purchase</strong> (<a
+                href="https://syntystore.com/pages/one-time-purchase-licence"
+                target="_blank"
+                rel="noopener"
+                >EULA</a
+              >)
+            </th>
+            <td>$9.99–$499.99 per pack</td>
+            <td>One-Time Purchase Licence (as at 9 July 2026)</td>
+            <td>Yes; "not limited by game engine, OS, platform or device"; 5 seats per licence</td>
+            <td>
+              <span class="lic part"
+                ><strong>Not addressed</strong>; no anti-extraction clause, but "You must not share the source
+                files of any Assets outside your team" — <strong>ask Synty in writing</strong></span
+              >
+            </td>
+            <td>Buy each new pack</td>
+            <td>None</td>
+            <td>Humble Bundle copies have 1 seat; no NFTs; no generative-AI use</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>SyntyPass</strong> (<a
+                href="https://syntystore.com/products/syntypass"
+                target="_blank"
+                rel="noopener"
+                >product</a
+              >,
+              <a
+                href="https://syntystore.com/pages/standard-subscription-licence"
+                target="_blank"
+                rel="noopener"
+                >EULA</a
+              >)
+            </th>
+            <td>$40/month (3-month minimum) or $30/month billed yearly</td>
+            <td>Standard Subscription Licence (9 July 2026)</td>
+            <td>Yes</td>
+            <td><span class="lic part">Not addressed</span></td>
+            <td>All new releases while subscribed</td>
+            <td>None</td>
+            <td>
+              §6.2 / §12.2: stop using the assets in any new IP after expiry. §12.3: substantial development
+              requires an active subscription; after that only minor bug fixes.
+              <strong>For a continuously updated LAN/web game this means subscribing forever</strong>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Layer Lab</strong> (<a
+                href="https://layerlab.io/pages/licences"
+                target="_blank"
+                rel="noopener"
+                >licence</a
+              >)
+            </th>
+            <td>$39.99 (GUI Pro – Fantasy RPG) etc.</td>
+            <td>Own licence</td>
+            <td>Yes</td>
+            <td>
+              <span class="lic no"
+                ><strong>Risky</strong>: no sharing "in any form that allows others to extract or reuse them";
+                names only "mobile, PC, and console"</span
+              >
+            </td>
+            <td>Per kit</td>
+            <td>None</td>
+            <td>
+              Up to 5 team members per project; no generative AI (<a
+                href="https://layerlab.itch.io/gui-pro-fantasy-rpg"
+                target="_blank"
+                rel="noopener"
+                >itch</a
+              >)
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Unity Asset Store</strong> (Polyperfect, Rexard, Cartoon FX…) (<a
+                href="https://support.unity.com/hc/en-us/articles/34387186019988-Can-I-use-assets-from-the-Asset-Store-with-other-engines"
+                target="_blank"
+                rel="noopener"
+                >support</a
+              >, <a href="https://unity.com/legal/as-terms" target="_blank" rel="noopener">EULA</a>)
+            </th>
+            <td>Per asset</td>
+            <td>Asset Store EULA (last updated 4 Dec 2024)</td>
+            <td>Yes, other engines allowed</td>
+            <td>
+              <span class="lic no"
+                ><strong>Risky</strong>: not "in a way that allows others to extract them from your final
+                product"</span
+              >
+            </td>
+            <td>Per asset</td>
+            <td>Per asset</td>
+            <td>Restricted assets; publisher-specific terms</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Craftpix</strong> (<a
+                href="https://craftpix.net/file-licenses/"
+                target="_blank"
+                rel="noopener"
+                >licence</a
+              >)
+            </th>
+            <td>Per pack or subscription</td>
+            <td>Own licence</td>
+            <td>"You can sell and distribute games with our assets"</td>
+            <td>
+              <span class="lic part"
+                >Unclear: "Distribution of source files is NOT permitted", and PNG counts as a source
+                file</span
+              >
+            </td>
+            <td>—</td>
+            <td>Not required (freebies)</td>
+            <td>No AI training</td>
+          </tr>
+          <tr>
+            <th scope="row"><strong>GameDev Market</strong></th>
+            <td>Per asset</td>
+            <td>Pro Licence</td>
+            <td>Yes</td>
+            <td>
+              <span class="lic part"
+                >Reportedly bars end-user extraction (<strong>unverified</strong>: page returned 403)</span
+              >
+            </td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Fab</strong> (<a
+                href="https://dev.epicgames.com/documentation/en-us/fab/licenses-and-pricing-in-fab"
+                target="_blank"
+                rel="noopener"
+                >docs</a
+              >)
+            </th>
+            <td>Per asset</td>
+            <td>Standard License (Personal / Professional above $100k revenue)</td>
+            <td>Yes</td>
+            <td>
+              <span class="lic part"><strong>Unverified</strong> (EULA returned 403)</span>
+            </td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>game-icons.net</strong> (<a
+                href="https://game-icons.net/about.html"
+                target="_blank"
+                rel="noopener"
+                >about</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>CC BY 3.0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>—</td>
+            <td><strong>Required</strong>: author + site</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Painterly Spell Icons</strong> (<a
+                href="https://opengameart.org/node/4413"
+                target="_blank"
+                rel="noopener"
+                >OGA</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>Multi-licensed, incl. CC BY 3.0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>—</td>
+            <td><strong>Required</strong>: J. W. Bjerk</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Sonniss GDC</strong> (<a
+                href="https://sonniss.com/gameaudiogdc"
+                target="_blank"
+                rel="noopener"
+                >page</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>Sonniss GDC licence</td>
+            <td>"completely royalty-free for any commercial work"</td>
+            <td><span class="lic">Inside a finished game: yes; never as loose SFX</span></td>
+            <td>
+              A new bundle most years (none in 2025;
+              <a
+                href="https://rekkerd.org/sonniss-releases-gdc-2026-game-audio-bundle/"
+                target="_blank"
+                rel="noopener"
+                >2026 is out</a
+              >)
+            </td>
+            <td>"No attribution is required"</td>
+            <td>No AI/ML training</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Abstraction / Tallbeard</strong> (<a
+                href="https://tallbeard.itch.io/music-loop-bundle"
+                target="_blank"
+                rel="noopener"
+                >itch</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>CC0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>—</td>
+            <td>Optional</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Kevin MacLeod</strong> (<a
+                href="https://app.cinevva.com/guides/free-sound-effects-music"
+                target="_blank"
+                rel="noopener"
+                >guide</a
+              >)
+            </th>
+            <td>Free, or paid without attribution</td>
+            <td>CC BY 4.0</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>—</td>
+            <td><strong>Required</strong></td>
+            <td>Check incompetech for the exact wording</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>Google Fonts</strong> (<a
+                href="https://developers.google.com/fonts/faq"
+                target="_blank"
+                rel="noopener"
+                >FAQ</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>Mostly OFL</td>
+            <td>Yes</td>
+            <td><span class="lic ok">Safe</span></td>
+            <td>—</td>
+            <td>Keep the licence file</td>
+            <td>Rename if you modify a reserved font name</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <strong>three.quarks</strong> (<a
+                href="https://npmjs.com/package/three.quarks"
+                target="_blank"
+                rel="noopener"
+                >npm</a
+              >)
+            </th>
+            <td>Free</td>
+            <td>MIT (per author)</td>
+            <td>Yes</td>
+            <td><span class="lic">Code</span></td>
+            <td>—</td>
+            <td>MIT notice</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="prose">
+      <li>
+        Only KayKit (owned) and Kenney sell "buy once, get every future pack". Quaternius is patronage;
+        Synty's whole-library deal is a subscription with an exit trap.
+      </li>
+      <li>
+        Anything whose licence forbids extractable use would need an obfuscated container, and even that only
+        slows a determined player down.
+      </li>
+      <li>
+        Credits needed: game-icons.net authors (per icon), and J. W. Bjerk and Kevin MacLeod if used. KayKit,
+        Kenney and Abstraction are optional.
+      </li>
+    </ul>
+  </section>
+
+  <section id="mixing">
+    <h2>Mixing the stacks</h2>
+    <ul class="prose">
+      <li>
+        <strong>Scale.</strong> KayKit is the reference (a person is 0.5 world units). Kenney props, machines
+        and space parts fit after one scale factor per kit; Quaternius props, ships and creatures fit, but its
+        humans look tall and thin next to KayKit; Synty props read as over-detailed, fine at a distance or in
+        their own scene.
+      </li>
+      <li>
+        <strong>Colour.</strong> KayKit uses one gradient atlas per pack, so it stays crisp at any size and
+        recolours by repainting swatches. What pulls everything together already exists: every material
+        becomes Lambert and gets the shared world patch (painted finish, rim light, colour grade, fog). Add a
+        grade per kit and a swatch remap that keeps every warm red out of Space.
+      </li>
+      <li>
+        <strong>Rigs.</strong> Heroes, NPCs and humanoid enemies stay KayKit (23-joint rig, one clip library).
+        Other packs add creatures that carry their own clips, played as they are. Other packs' humans appear
+        only in isolated scenes, if at all.
+      </li>
+      <li>
+        <strong>Formats.</strong> KayKit, Kenney and Quaternius ship glTF and fit the asset build as it is;
+        Synty needs Blender (centimetres to metres, axes, materials rebuilt).
+      </li>
+      <li>
+        <strong>The import pipeline</strong> normalises provenance (SHA-256 pins, licence files, generated
+        credits), scale and axes, materials, palette, geometry merging, names, animation maps, icons, 9-slice
+        UI, audio loudness and loop points, and particle atlas slots. Only what's used ships.
+      </li>
+    </ul>
+    <h3>Which minigame boards can wear a different pack</h3>
+    <p class="prose">
+      The minigame panel is already its own little scene, so a different look reads as "you are looking at the
+      machine", as long as the frame stays ours and every colour goes through the same grade.
+    </p>
+    <div class="scroll">
+      <table class="looks">
+        <thead>
+          <tr>
+            <th scope="col">Boards</th>
+            <th scope="col">Look to keep or allow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Metal &amp; Machine</strong> (bronze, steel, glass, gears, arch)</td>
+            <td>
+              Stay in our gold-on-dark. Better still, a small 3D close-up of KayKit props (anvil, cauldron,
+              mortar, bars, <code>Parts_Cog</code>, stones) with Kenney bars and frames for the gauges
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Steam</strong> (boiler, rails)</td>
+            <td>
+              A brass or rusted dial is fine in close-up: Synty Apocalypse HUD dials or Layer Lab "Matt Metal"
+              if their licences allow, otherwise our drawn dial. Rails can use Kenney Train Kit pieces in a 3D
+              board
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Electric &amp; Signal</strong> (grid, batteries, searchlight, telegraph, relays, radio,
+              radar)
+            </td>
+            <td>
+              These are instrument faces (meters, oscilloscope, radar scope), so a sci-fi screen skin fits
+              without breaking the vale: Kenney UI Pack – Sci-Fi, Layer Lab SciFi Blue / Neon, Synty Sci-Fi
+              Soldier HUD dials, Wenrexa's CC0 minimal sci-fi
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Electronic &amp; Automated</strong></td>
+            <td>
+              CRT-green, then monitor looks; Quaternius Sci-Fi Essentials "animated screens" for a 3D close-up
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Space</strong></td>
+            <td>
+              Holo sci-fi chrome; Quaternius or Kenney ships, landers and rovers, or KayKit landers, in a 3D
+              viewport
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose">
+      Never put POLYGON or Kenney characters next to a KayKit hero; never two UI skins in one panel; no red,
+      orange or rust in any Space board.
+    </p>
+  </section>
+
+  <section id="matrix">
+    <h2>Every need, row by row</h2>
+    <p class="prose">
+      172 needs, walked through the game in order. Each stack column is KayKit Complete plus the free sources
+      plus that vendor; "= KayKit" means the vendor adds nothing. The HUD is HTML and CSS in every stack, so
+      laying it out isn't counted against a ✓.
+    </p>
+    <p class="codes">
+      How it's made today: <b>K</b> KayKit model · <b>P</b> procedural geometry or shader · <b>C</b> CSS/HTML
+      · <b>D</b> drawn in code · <b>R</b> icon rendered from a 3D model · <b>S</b> synthesised sound ·
+      <b>—</b> not in the game yet
+    </p>
+    <div class="controls">
+      <div class="chips" id="areas-ctl" role="group" aria-label="Area"></div>
+      <div class="row2">
+        <div class="seg-ctl" role="radiogroup" aria-label="Show">
+          <label
+            ><input type="radio" name="mode" id="mode-all" value="all" checked /><span>All needs</span></label
+          >
+          <label
+            ><input type="radio" name="mode" id="mode-gaps" value="gaps" /><span
+              >Not fully covered by Kenney + Quaternius</span
+            ></label
+          >
+          <label
+            ><input type="radio" name="mode" id="mode-none" value="none" /><span
+              >Nothing usable anywhere</span
+            ></label
+          >
+        </div>
+        <input
+          id="q"
+          type="search"
+          placeholder="Search needs and packs"
+          aria-label="Search needs and packs"
+        />
+        <span id="count" aria-live="polite"></span>
+      </div>
+    </div>
+    <div class="scroll">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Need</th>
+            <th scope="col">Today</th>
+            <th scope="col">KayKit + free</th>
+            <th scope="col">A · Kenney</th>
+            <th scope="col">B · Quaternius + Layer Lab</th>
+            <th scope="col">C · Synty</th>
+            <th scope="col">Note</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="road">
+    <h2>The Road of Invention, age by age</h2>
+    <p class="prose">
+      The 25 milestones in the game, plus the planned ones from the roadmap (marked <em>planned</em>), with
+      what each minigame board needs and what it unlocks. M-, R-, S- and W- codes point to rows in the matrix.
+      When the survey was made, the band, ratio, sizes, path and decide boards were finished; the other kinds
+      are being built now.
+    </p>
+    <div class="scroll">
+      <table class="road">
+        <thead>
+          <tr>
+            <th scope="col">Age</th>
+            <th scope="col">Milestone</th>
+            <th scope="col">Invented at</th>
+            <th scope="col">Minigame: what the board needs</th>
+            <th scope="col">Unlocks in the world</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="age">Hand &amp; Fire</td>
+            <td class="ms">Fire, stone &amp; wood, the tower</td>
+            <td><em>existing beats</em></td>
+            <td>Hold the band (brazier), Keep the beat (saw, hammer), Steady hand (cut)</td>
+            <td>braziers, planks, blocks, the tower</td>
+          </tr>
+          <tr>
+            <td class="age">Metal</td>
+            <td class="ms">Bellows &amp; charcoal <em>(planned)</em></td>
+            <td>Forge</td>
+            <td>Hold the band: bellows, fire, heat bar</td>
+            <td>hotter smelting</td>
+          </tr>
+          <tr>
+            <td class="age">Metal</td>
+            <td class="ms">Gears by hand <em>(planned)</em></td>
+            <td>Anvil</td>
+            <td>Keep the beat: hammer on the anvil, teeth</td>
+            <td>gears</td>
+          </tr>
+          <tr>
+            <td class="age">Metal</td>
+            <td class="ms"><strong>Bronze</strong></td>
+            <td>Forge</td>
+            <td>
+              <strong>Mix the ratio</strong> (crucible, cast test): crucible over fire, copper and tin spouts,
+              share gauges (soft ↔ brittle), cast bar struck → cracks or bends (<strong>M05</strong>)
+            </td>
+            <td>bronze bars, fittings, bells, better tops (<strong>R02</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Metal</td>
+            <td class="ms"><strong>Steel</strong></td>
+            <td>Anvil</td>
+            <td>Mix the ratio with a carbon "pinch", crucible, strike test (<strong>M05</strong>)</td>
+            <td>steel tools, weapon tiers (<strong>R03</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Metal</td>
+            <td class="ms"><strong>Glass</strong></td>
+            <td>Forge</td>
+            <td>
+              <strong>Hold the band</strong> (fire style), with the band sliding down the annealing curve;
+              glass cooling; cracks on fail (<strong>M01</strong>)
+            </td>
+            <td>lenses (lookout range), bottles, bulbs (<strong>R04</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Machine</td>
+            <td class="ms">Water &amp; wind <em>(planned)</em></td>
+            <td>Watermill, windmill</td>
+            <td>Pick the sizes: wheel and gears</td>
+            <td>mill power</td>
+          </tr>
+          <tr>
+            <td class="age">Machine</td>
+            <td class="ms"><strong>Gear trains</strong></td>
+            <td>Anvil</td>
+            <td>
+              <strong>Pick the sizes</strong> (gears): driver and driven teeth, shaft at 30 rpm → millstone at
+              about 120 rpm, gears turning, rpm gauge (<strong>M06</strong>)
+            </td>
+            <td>gearbox, winch, millstone (<strong>R05</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Machine</td>
+            <td class="ms">Simple machines / crane <em>(planned)</em></td>
+            <td>Crane</td>
+            <td>Pick the sizes: lever, pulley</td>
+            <td>crane, weir</td>
+          </tr>
+          <tr>
+            <td class="age">Machine</td>
+            <td class="ms"><strong>The arch</strong></td>
+            <td>Stonecutter</td>
+            <td>
+              <strong>Build in order</strong> (placeholder): wedge stones, keystone last, centring taken away,
+              sag on fail (<strong>M15</strong>)
+            </td>
+            <td>arched bridges and shortcuts (<strong>R06</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Machine</td>
+            <td class="ms">Wheel &amp; cart <em>(planned)</em></td>
+            <td>Cartwright</td>
+            <td>Build in order</td>
+            <td>wheelbarrow, ore carts</td>
+          </tr>
+          <tr>
+            <td class="age">Steam</td>
+            <td class="ms"><strong>Steam power</strong></td>
+            <td>Forge</td>
+            <td>
+              Hold the band (gauge): boiler pressure needle, relief valve, plug pops on fail
+              (<strong>M02</strong>)
+            </td>
+            <td>
+              boiler house, steam pumps for deep mines, steam winch (<strong>R07</strong>,
+              <strong>W31</strong>)
+            </td>
+          </tr>
+          <tr>
+            <td class="age">Steam</td>
+            <td class="ms"><strong>Rails</strong></td>
+            <td>Anvil</td>
+            <td>
+              <strong>Lay the path</strong> (route, rail look): mine head → forge round obstacles, within a
+              piece budget (<strong>M11</strong>)
+            </td>
+            <td>rails and ore carts, railhead (<strong>R08</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Steam</td>
+            <td class="ms">Engines <em>(planned)</em> / Cement <em>(planned)</em></td>
+            <td>Kiln</td>
+            <td>Keep the beat / Mix the ratio (cement, vat, set test)</td>
+            <td>powered carts / stronger walls, the dam</td>
+          </tr>
+          <tr>
+            <td class="age">Electric</td>
+            <td class="ms"><strong>The grid</strong></td>
+            <td>Hydro</td>
+            <td>
+              <strong>Lay the path</strong> (circuit): intake, three wire gauges heating yellow → red, chains
+              and splits, fuses, switches, lamps, V/A/W meters, a "water view" (<strong>M10</strong>)
+            </td>
+            <td>Power Intake + switchboard, poles, lamps, motors, shock fence (<strong>R09</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electric</td>
+            <td class="ms"><strong>Batteries</strong></td>
+            <td>Arcanist</td>
+            <td>
+              Pick the sizes (cells): cells in a chain or side by side, lamp brightness, about 6 V
+              (<strong>M07</strong>)
+            </td>
+            <td>battery bench, drone batteries, lanterns (<strong>R10</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electric</td>
+            <td class="ms">Motors <em>(planned)</em>, AC &amp; transformers <em>(planned)</em></td>
+            <td>—</td>
+            <td>Keep the beat (winding); Pick the sizes (turns, <strong>M09</strong>)</td>
+            <td>faster workshops; far towers and mine heads</td>
+          </tr>
+          <tr>
+            <td class="age">Electric</td>
+            <td class="ms"><strong>The searchlight</strong></td>
+            <td>Arcanist</td>
+            <td>
+              <strong>Find the sweet spot</strong> (placeholder): lamp at the mirror's focus, beam spread
+              (<strong>M18</strong>)
+            </td>
+            <td><strong>Searchlight</strong> device (<strong>R11</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Signal</td>
+            <td class="ms">Bells &amp; alarms <em>(planned)</em></td>
+            <td>Bell tower</td>
+            <td>Keep the beat</td>
+            <td>wave alarm</td>
+          </tr>
+          <tr>
+            <td class="age">Signal</td>
+            <td class="ms"><strong>The telegraph</strong></td>
+            <td>Arcanist</td>
+            <td>
+              <strong>Encode</strong> (placeholder): Morse key, sounder, paper tape (<strong>M20</strong>)
+            </td>
+            <td>signal house, wave intel sooner (<strong>R12</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Signal</td>
+            <td class="ms"><strong>Relay logic</strong></td>
+            <td>Arcanist</td>
+            <td>
+              <strong>Decide</strong> (logic): ladder of switches and relays; conditions (night, lookout
+              sees); lamps, gate, bell; truth table (<strong>M16</strong>)
+            </td>
+            <td><strong>Relay Link</strong> device, control boxes (<strong>R13</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Signal</td>
+            <td class="ms"><strong>Radio</strong></td>
+            <td>Arcanist</td>
+            <td>Find the sweet spot: tuning dial, a station among static (<strong>M18</strong>)</td>
+            <td>radio mast, drone range, outposts (<strong>R14</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Signal</td>
+            <td class="ms"><strong>Radar</strong></td>
+            <td>Arcanist</td>
+            <td>
+              <strong>Test &amp; observe</strong> (placeholder): pulse and echo, delay → distance, scope
+              (<strong>M19</strong>)
+            </td>
+            <td><strong>Radar Dish</strong> device (<strong>R15</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electronic</td>
+            <td class="ms"><strong>Pure silicon</strong></td>
+            <td>Forge</td>
+            <td>
+              <strong>Separate</strong> (placeholder): zone refining, a molten zone swept along a rod
+              (<strong>M14</strong>)
+            </td>
+            <td>clean room, chips (<strong>R16</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electronic</td>
+            <td class="ms"><strong>Solar power</strong></td>
+            <td>Arcanist</td>
+            <td>Find the sweet spot: aim the panel along the sun's arc (<strong>M18</strong>)</td>
+            <td><strong>Solar Roof</strong> device, solar field (<strong>R17</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electronic</td>
+            <td class="ms"><strong>The computer</strong></td>
+            <td>Arcanist</td>
+            <td>
+              <strong>Decide</strong> (program): punched cards MOVE / TURN / IF ROCK / DRILL / REPEAT, a yard
+              grid, a rover/cart/cutter sprite (<strong>M17</strong>)
+            </td>
+            <td><strong>Targeting Computer</strong> device, computer bench (<strong>R18</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Electronic</td>
+            <td class="ms">Networks <em>(planned)</em></td>
+            <td>—</td>
+            <td>Lay the path (links, <strong>M11</strong>)</td>
+            <td>towers share targets</td>
+          </tr>
+          <tr>
+            <td class="age">Automated</td>
+            <td class="ms"><strong>Feedback control</strong></td>
+            <td>Forge</td>
+            <td>Hold the band, then the thermostat holds it</td>
+            <td>stations hold their own heat and speed (<strong>R19</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Automated</td>
+            <td class="ms">Conveyors <em>(planned)</em>, Programs <em>(planned)</em></td>
+            <td>—</td>
+            <td>Lay the path (belts) / Decide</td>
+            <td>belts mine head → forge (<strong>R21</strong>), stations that follow a recipe</td>
+          </tr>
+          <tr>
+            <td class="age">Automated</td>
+            <td class="ms"><strong>Robots</strong></td>
+            <td>Anvil</td>
+            <td>Build in order: senses + brain + muscles (<strong>M15</strong>)</td>
+            <td>gathering drones, assembly arm (<strong>R20</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>Rocketry</strong></td>
+            <td>Forge</td>
+            <td>
+              <strong>Pick the sizes</strong> (rocket): stages, fuel, payload to about 7.9 km/s, test flight
+              (<strong>M08</strong>)
+            </td>
+            <td><strong>the Port</strong> (<strong>S01</strong>, <strong>S02</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>The payload stack</strong></td>
+            <td>Port</td>
+            <td>
+              Build in order: payload on its descent stage, cruise stage under it, fairing
+              (<strong>M15</strong>)
+            </td>
+            <td>
+              Lander and Solar Farm payloads (<strong>S03</strong>, <strong>S13</strong>,
+              <strong>S09</strong>)
+            </td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms">Launch &amp; cruise <em>(planned)</em></td>
+            <td>Port</td>
+            <td>Find the sweet spot: trajectory corrections</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>Landing on rockets</strong></td>
+            <td>Port</td>
+            <td>
+              Hold the band (capsule style): sink-rate band, fuel, hover, soft drop (<strong>M03</strong>)
+            </td>
+            <td>Habitat and Crew Capsule (<strong>S08</strong>, <strong>S14</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>The rover</strong></td>
+            <td>Port</td>
+            <td>Lay the path (route, track look): round the rocks to the sample (<strong>M11</strong>)</td>
+            <td>Rover and Drill Rig (<strong>S12</strong>, <strong>S10</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms">Drill &amp; samples <em>(planned)</em></td>
+            <td>—</td>
+            <td>Steady hand (<strong>M13</strong>)</td>
+            <td>samples, then ore</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>Oxygen from ice</strong></td>
+            <td>Port</td>
+            <td>Hold the band (gauge): electrolysis current, bubbles (<strong>M02</strong>)</td>
+            <td>Oxygen Plant (<strong>S11</strong>)</td>
+          </tr>
+          <tr>
+            <td class="age">Space</td>
+            <td class="ms"><strong>Minerals home</strong></td>
+            <td>Port</td>
+            <td>
+              Build in order: ascent vehicle on its stage → return ship → entry capsule (<strong>M15</strong>,
+              <strong>M03</strong>)
+            </td>
+            <td>
+              Ascent Vehicle, Magnet Dynamo (<strong>S15</strong>, <strong>S14</strong>, <strong>W18</strong>)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="walk">
+    <h2>The walk-through</h2>
+    <p class="prose">
+      What a player meets, area by area, and how each part is made today. The codes in bold point to rows in
+      the matrix.
+    </p>
+    <div>
+      <details class="walk">
+        <summary>First load, the title and the HUD</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>First frame.</strong> There is no loading screen and no title screen. Terrain, water,
+              grass and sky are generated and on screen at once; models stream in (<code>src/main.ts</code>).
+              Asset need: none, but there is no logo or wordmark anywhere (<strong>U01</strong>; the favicon
+              is an inline SVG shield).
+            </li>
+            <li>
+              <strong>First start.</strong> The Class window opens with three cards: Knight (Tank), Warchief
+              (Support) and Mage (Magic). Each has a portrait rendered from its 3D model, a blurb and its
+              skills (<strong>U02</strong>, <strong>I05</strong>; C + R).
+            </li>
+            <li>
+              <strong>LAN.</strong>
+              <ul>
+                <li>A join card: your name and the address others use.</li>
+                <li>A slim bar: players, ping, Pause / Save / Load with a save code.</li>
+                <li>
+                  A "New version ready · Update (U)" banner and a paused overlay. (<strong>U22</strong>; C)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The HUD</strong> (<code>src/ui/hud.ts</code>, <code>hud.css</code>; all C, gold-on-dark
+              gradients, system Palatino serif):
+              <ul>
+                <li>
+                  <strong>Top bar:</strong> gold coin, lives heart, wave number and timer, Call wave, a 1×
+                  speed toggle, the age badge (opens the Road), ☰, and the DEV badge with its clock
+                  (<strong>U04</strong>, <strong>U26</strong>).
+                </li>
+                <li>
+                  <strong>Player frame:</strong> portrait, level, HP and XP bars, name. Also a target frame
+                  and a boss frame (<strong>U05</strong>, <strong>U06</strong>).
+                </li>
+                <li><strong>Tracker:</strong> wave intel and objectives (<strong>U11</strong>).</li>
+                <li>
+                  <strong>Action bar:</strong> skills 1–4 (inline-SVG ability icons), the interact slot, the
+                  plan bar on 5 … =, and the Plan Book and Buy buttons (<strong>U07</strong>,
+                  <strong>I04</strong>).
+                </li>
+                <li>
+                  <strong>Bags:</strong> the tool row and an item grid with stack counts
+                  (<strong>U08</strong>).
+                </li>
+                <li><strong>Details panel</strong> for whatever is selected (<strong>U09</strong>).</li>
+                <li>
+                  <strong>Messages:</strong> event log, toasts, the cursor hint and the placing banner
+                  (<strong>U12</strong>).
+                </li>
+                <li>
+                  <strong>Minimap</strong> with the vale and mine maps (M makes it big) (<strong>U13</strong>;
+                  D).
+                </li>
+                <li><strong>Tooltips</strong> (<strong>U10</strong>).</li>
+                <li>
+                  <strong>Panels for later systems:</strong> the drone box (battery, hull, range), the Space
+                  panel, flight rows (<strong>U23</strong>, <strong>U24</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>In the world:</strong>
+              <ul>
+                <li>nameplates, loot names (Alt) and site checklists (<code>labels.ts</code>);</li>
+                <li>floating damage and crit numbers (<code>fx.ts</code>);</li>
+                <li>
+                  health and progress bars, ground rings and the blueprint hologram
+                  (<code>overlays.ts</code>);
+                </li>
+                <li>
+                  the CSS vignette and hit flash. (<strong>U14</strong>, <strong>U15</strong>,
+                  <strong>V13</strong>)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Windows</strong> (<code>src/ui/windows.ts</code>):
+              <ul>
+                <li>Shop, with seven stores and tool and plan-scroll cards;</li>
+                <li>Storage;</li>
+                <li>Plan Book (P) and Buy a plan (G);</li>
+                <li>the Road of Invention with its Field Notes (O);</li>
+                <li>
+                  Menu (Esc) and Class (C). (<strong>U02</strong>, <strong>U03</strong>, <strong>U18</strong>,
+                  <strong>U19</strong>, <strong>U20</strong>)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Cursors</strong> are the OS cursor (<strong>U16</strong>). <strong>Fonts</strong> are
+              the system serif (<strong>U17</strong>).
+            </li>
+            <li><strong>Sound:</strong> synthesised UI tick, open and deny (<strong>A01</strong>).</li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>The vale</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Ground and water:</strong>
+              <ul>
+                <li>terrain with a painted splat texture drawn on a canvas (<strong>W01</strong>, P);</li>
+                <li>roads (<strong>W02</strong>, P);</li>
+                <li>the river, fords and swimming (<strong>W03</strong>, P);</li>
+                <li>mighty stone bridges, one deck between solid parapets (<strong>W04</strong>, P);</li>
+                <li>the mountain ring (<strong>W05</strong>, P);</li>
+                <li>haze and fog of war (P).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sky and light:</strong>
+              <ul>
+                <li>
+                  a shader sky dome with sun, clouds, moon and stars, and day and night on an 8-minute day
+                  (<strong>W06</strong>, P);
+                </li>
+                <li>lighting and colour grading baked into the materials (P).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Scenery:</strong>
+              <ul>
+                <li>
+                  Trees are generated in code (<code>treegen.ts</code>). KayKit Forest Nature is imported but
+                  not loaded yet (<strong>W07</strong>, <strong>W08</strong>).
+                </li>
+                <li>
+                  The keep, walls, gate, village, tavern, church, windmill and markets, including the hidden
+                  shops, are KayKit Medieval Hexagon (<strong>W09</strong>–<strong>W11</strong>, K).
+                </li>
+                <li>Crypts, graveyards and fences are KayKit Halloween (<strong>W12</strong>, K).</li>
+                <li>Camps, the Lumber Camp, chests, ruins and the shrine (<strong>W13</strong>, K).</li>
+                <li>
+                  Scrap heaps (<strong>W14</strong>, P), quarry rocks and crystal clusters
+                  (<strong>W15</strong>, P + K), mine heads and cave mouths (P).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Light sources and power:</strong>
+              <ul>
+                <li>braziers (<strong>W16</strong>, P);</li>
+                <li>painted light pools and blob shadows (<strong>V12</strong>, P);</li>
+                <li>power poles with wires and electric lamps (<strong>W17</strong>, P);</li>
+                <li>the watermill / hydro generator (<strong>W18</strong>, K, no broken state).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>People and siege:</strong> footmen, captains, porters and townsfolk
+              (<strong>W19</strong>, K). Catapults, carts and ships (<strong>W20</strong>, K).
+            </li>
+            <li>
+              <strong>Building:</strong> sites with the blueprint hologram, scaffolds and stacked parts
+              (<strong>W21</strong>). Damaged buildings smoke, become ruins and get repaired
+              (<strong>W22</strong>).
+            </li>
+            <li>
+              <strong>As the ages advance:</strong> street lamps, wires, carts becoming trains, signs
+              (<strong>W23</strong>, —).
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>The hero</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Classes</strong> (<code>content.ts</code> CLASSES):
+              <ul>
+                <li>Knight: 600 HP, sword and shield.</li>
+                <li>Warchief: 460 HP, fights with the tools he buys, and has the Scout Drone.</li>
+                <li>
+                  Mage: 320 HP, staff and bolts. Today these are the KayKit 1.0 Knight, Barbarian and Mage on
+                  the old 41-bone rig. The 23-bone Rig_Medium cast is imported and waiting
+                  (<strong>C01</strong>–<strong>C03</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Later classes:</strong> Druid, Engineer, Ranger, Rogue, Paladin, Cleric
+              (<strong>C04</strong>, K, imported).
+            </li>
+            <li>
+              <strong>Gear:</strong>
+              <ul>
+                <li>
+                  weapon tiers sword A–G, axe/hammer/staff A–D, bow A–C, shields A–D (<strong>C05</strong>);
+                </li>
+                <li>tools in hand: axe, pickaxe, hammer, shovel (<strong>C07</strong>);</li>
+                <li>visible armour tiers don't exist (<strong>C06</strong>).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Animations:</strong>
+              <ul>
+                <li>locomotion: walk, run, strafe, back-pedal, jump;</li>
+                <li>wading and swimming, climbing a tower;</li>
+                <li>combat swings, block, cast, throwing a hand axe from a tower top;</li>
+                <li>work: chop, pickaxe, dig, hammer, saw, carry;</li>
+                <li>
+                  emotes, death. (<strong>C08</strong>: the 139-clip KayKit library has everything except swim
+                  and climb.)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Skills and their effects:</strong> Shield Bash, Battle Cry, Shield Wall, Mend, Rally,
+              Repulse, Scout Drone, Fireball, Frost Nova, Meteor (<strong>V03</strong>; ability icons are
+              inline SVG, <strong>I04</strong>).
+            </li>
+            <li>
+              <strong>Kit:</strong> the Scout Drone and its controller (<strong>C09</strong>, P); the lantern
+              underground (<strong>C10</strong>).
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>Gathering, carrying, crafting, plans and building</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Tools</strong> come from the Market and are never free: axe, pickaxe, hammer, shovel
+              (<strong>I02</strong>, D icons).
+            </li>
+            <li>
+              <strong>Nodes:</strong>
+              <ul>
+                <li>trees, rocks, ore veins, crystal clusters, scrap heaps;</li>
+                <li>mine walls (coal, copper, iron, silver, gold, quartz, sulfur, five gems);</li>
+                <li>dynamite for hard rock;</li>
+                <li>in Space: nickel-iron, ice, rare earths.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Items</strong> — 26 of them (<code>ITEMS</code>), each needing a 3D model (drops, flying
+              pickups, trays) and an icon (<strong>I01</strong>, R):
+              <ul>
+                <li>
+                  wood, stone, iron ore, crystal, scrap, planks, stone block, iron ingot, gears, rune core;
+                </li>
+                <li>coal, copper, silver, gold nugget, quartz, sulfur;</li>
+                <li>five raw gems;</li>
+                <li>nickel-iron, water ice, rare earths, rare-earth magnet, dynamite;</li>
+                <li>
+                  plus gold coins, and enchanted parts with rarity colours and affixes. TECH_LINEAGE §6 plans
+                  15 more raw resources: clay, sand, limestone, potash, saltpetre, resin, tin, lead, borax,
+                  phosphorus, tungsten, bauxite, cobalt/nickel, rare earths, lithium.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Carrying:</strong> the bag (stacks of 20), storage, porters carrying parts, "Buy the
+              rest".
+            </li>
+            <li>
+              <strong>Stations:</strong> Sawmill, Stonecutter, Forge, Anvil and Arcanist's Bench, which reuse
+              KayKit Hexagon buildings, plus the walk-in Smithy room (K).
+            </li>
+            <li>
+              <strong>Hands-on beats</strong> (<code>src/ui/actions.ts</code>): hammer, saw, cut, smelt, weld,
+              wire and code, each a ring, mark or band drawn in code (D; now part of the minigame kinds,
+              <strong>M12</strong>).
+            </li>
+            <li>
+              <strong>Plans:</strong>
+              <ul>
+                <li>study timers in the Plan Book, place the hologram, turn it with R;</li>
+                <li>site checklists with sockets for enchanted parts; assembly steps;</li>
+                <li>
+                  disciplines: Carpentry, Masonry, Smithing and Arcana, with five more planned (Engineering,
+                  Materials, Mechanics, Signals, Computing). (<strong>U20</strong>, <strong>W21</strong>,
+                  <strong>I03</strong>)
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>The tower, its modules and power</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>The tower:</strong>
+              <ul>
+                <li>
+                  one stone tower (KayKit <code>building_tower_base</code>) with a KayKit archer on top, whose
+                  bow draw and release clips are ready;
+                </li>
+                <li>
+                  tops: open platform → Roofed Turret (<code>tower_A</code>) → Gallery Roof
+                  (<code>tower_B</code>) (K);
+                </li>
+                <li>
+                  the archer ducks when a wraith dives; heroes can climb up; the crew glows by class (P).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Gem windows:</strong>
+              <ul>
+                <li>five windows, one per colour;</li>
+                <li>
+                  14 variants: Ember, Blast, Fury, Warheart, Frost, Rime, Swift, Storm, Sun, Arcane, Twin,
+                  Scrying, Seer's, Far-sight;
+                </li>
+                <li>
+                  3 grades: rough, polished, and radiant with embers, frost, lightning, orbiting stones or a
+                  ring of light;
+                </li>
+                <li>
+                  all procedural crystal clusters with a gold rim (<code>gems.ts</code>)
+                  (<strong>I03</strong>, <strong>V09</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Element emblem</strong> drifting round the archer: a flame in a brass cup, a snowflake,
+              a lightning bolt, a rune ring, a bomb (<code>emblems.ts</code>, P; <strong>V09</strong>).
+            </li>
+            <li>
+              <strong>Devices</strong> in the four upper windows (<code>devices.ts</code>, P):
+              <ul>
+                <li>a brass Searchlight with its night beam (<strong>R11</strong>);</li>
+                <li>a turning Radar Dish (<strong>R15</strong>);</li>
+                <li>a Targeting Computer box with lens and blinking lamp (<strong>R18</strong>);</li>
+                <li>a Relay Link coil with a flickering lamp (<strong>R13</strong>);</li>
+                <li>a Solar Roof awning (<strong>R17</strong>).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Power:</strong>
+              <ul>
+                <li>
+                  the old watermill repaired into a generator, and the magnet-dynamo upgrade
+                  (<strong>W18</strong>);
+                </li>
+                <li>power poles with visible wires and electric lamps (<strong>W17</strong>);</li>
+                <li>brown-outs dim devices; workshops on the grid work ×1.5;</li>
+                <li>braziers and the Sun Topaz light.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>Enemies, combat, loot and markets</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Nine kinds of dead</strong> (KayKit skeletons, re-tinted where needed):
+              <ul>
+                <li>Skeleton Minion, Bone Runner, Skeleton Warrior, Necromancer (<strong>E01</strong>);</li>
+                <li>Wraith, a flyer (<strong>E02</strong>);</li>
+                <li>Bone Crusher (siege) and Bone Colossus (boss) (<strong>E03</strong>);</li>
+                <li>Grave Digger, a burrower (<strong>E04</strong>);</li>
+                <li>The Lich, a boss (<strong>E05</strong>).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Planned families:</strong> orcs, werewolves, black knight, vampire, frost golem,
+              monstrosity, witch on a broom (<strong>E06</strong>, KayKit Mystery Monthly, imported). Mine
+              lair creatures (<strong>E07</strong>, —).
+            </li>
+            <li>
+              <strong>Waves:</strong> a horn, routes, intel, five wave affixes, Sigil scaling. Combat uses
+              threat/aggro, a damage-type × armour matrix, and statuses (burn, chill → freeze → shatter).
+            </li>
+            <li>
+              <strong>Feedback:</strong>
+              <ul>
+                <li>
+                  floating damage numbers coloured by type, crits, health bars, the boss frame, the hit flash
+                  (<strong>U06</strong>, <strong>U14</strong>, <strong>U15</strong>);
+                </li>
+                <li>
+                  status markers (<strong>V15</strong>), hit sparks (<strong>V07</strong>), explosions
+                  (<strong>V05</strong>), frost (<strong>V06</strong>), lightning (<strong>V04</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Loot:</strong> physical gold coins, enchanted parts (Enchanted / Rare / Legendary, plus
+              named legendaries), plan scrolls, chests, the goblin's mystery crates, loot beams
+              (<strong>V08</strong>).
+            </li>
+            <li>
+              <strong>Markets:</strong> seven stores — Market, Smithy, Arcane Emporium and Builders' Guild,
+              plus the hidden Dwarven Trading Post, Witch's Hut and Goblin Scrapper — each with its keeper
+              (<strong>W11</strong>, <strong>C12</strong>).
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>Interiors and the Underground</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Interiors:</strong>
+              <ul>
+                <li>
+                  Seamless walk-in rooms built like KayKit dungeon dioramas: two storeys, a loft and stair,
+                  the walls between camera and room cut away (<strong>W24</strong>).
+                </li>
+                <li>Furnishing: forge fire, anvil, trays, benches, shelves (<strong>W25</strong>).</li>
+                <li>
+                  Only the Smithy exists so far. Planned: tavern, Arcanist's room, drafting room, and
+                  later-age workshops — boiler room, switchboard, signal house, computer room, clean room
+                  (<strong>W26</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Underground</strong> (<code>mines.ts</code>, <code>mineview.ts</code>, all P):
+              <ul>
+                <li>lift with headframe, cage and ropes (<strong>W27</strong>);</li>
+                <li>
+                  endless mines: rock walls in several rock types, glinting veins, cave-ins
+                  (<strong>W28</strong>);
+                </li>
+                <li>timber props, torches, old tunnels; rails and ore carts later (<strong>W29</strong>);</li>
+                <li>
+                  caverns with lairs: the Hollow Dark, the Ember Deeps, the Bone Halls (<strong>W30</strong>);
+                </li>
+                <li>flooding and steam pumps in the Steam age (<strong>W31</strong>);</li>
+                <li>darkness with the lantern's light pool, and depth shown on the minimap.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>Space</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>The Port in the vale</strong> (<code>rockets.ts</code>, all P):
+              <ul>
+                <li>
+                  launch pad and flame trench, lattice tower and swing arm, fuel tanks (<strong>S01</strong>);
+                </li>
+                <li>
+                  the rocket: a core stage with two boosters, an upper stage and the payload fairing
+                  (<strong>S02</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The flight:</strong>
+              <ul>
+                <li>launch and boosters and fairing falling away;</li>
+                <li>cruise, with the cruise stage carrying solar panels;</li>
+                <li>
+                  the braking burn and powered descent on the descent stage's engine and legs
+                  (<strong>S03</strong>);
+                </li>
+                <li>a vacuum plume — dust flies straight with no air to slow it (<strong>V10</strong>);</li>
+                <li>
+                  flight phases in the HUD (<strong>U23</strong>), and a launch window opening every few
+                  waves.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The Space region</strong> (<code>spaceview.ts</code>, all P):
+              <ul>
+                <li>
+                  The sky: dark space, stars all round, the galaxy's band, soft nebulae, a hard white sun
+                  (<strong>S04</strong>). A ringed giant, the small blue home world and drifting asteroids
+                  (<strong>S05</strong>).
+                </li>
+                <li>
+                  The ground: a small grey rocky body with craters and a rim that breaks off in cliffs over
+                  the stars, teal crystals in the cliffs (<strong>S06</strong>). Nothing Mars-like.
+                </li>
+                <li>
+                  Deposits: nickel-iron boulders with silver veins, ice in the shadowed crater breathing
+                  vapour, the rare-earth vein glowing teal (<strong>S07</strong>).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>The base, built from what lands</strong> (code says "KayKit's Space Base pieces once
+              they're in"):
+              <ul>
+                <li>the first lander: radio, solar, beacon (<strong>S13</strong>);</li>
+                <li>
+                  the solar farm (<strong>S09</strong>), the habitat (<strong>S08</strong>), the crew capsule
+                  (<strong>S14</strong>);
+                </li>
+                <li>the rover: six wheels, camera mast, arm, drill (<strong>S12</strong>);</li>
+                <li>the drill rig (<strong>S10</strong>), the oxygen plant (<strong>S11</strong>);</li>
+                <li>
+                  walkways and beacons (<strong>S08</strong>), cargo and the depot (<strong>S17</strong>);
+                </li>
+                <li>the ascent vehicle and return ship (<strong>S15</strong>);</li>
+                <li>a habitat interior if it becomes walkable (<strong>S16</strong>).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>The hero in Space:</strong> a crew suit (<strong>C11</strong>); possible robot or alien
+              hazards (<strong>E08</strong>).
+            </li>
+            <li>
+              <strong>Coming home:</strong> the return capsule burns in behind its heat shield and lands under
+              a parachute by the keep (<strong>S14</strong>, <strong>V10</strong>). The rare earths it brings
+              become magnets for the dynamo.
+            </li>
+            <li>
+              <strong>Sound:</strong> launch roar, the quiet of vacuum, radio chatter, suit breathing, habitat
+              hum (<strong>A07</strong>).
+            </li>
+          </ul>
+        </div>
+      </details>
+      <details class="walk">
+        <summary>Across the whole game</summary>
+        <div class="walk-body">
+          <ul>
+            <li>
+              <strong>Icons:</strong>
+              <ul>
+                <li>
+                  items, tools, plans, gems at three grades, devices, payloads
+                  (<strong>I01</strong>–<strong>I03</strong>; mostly R);
+                </li>
+                <li>abilities (<strong>I04</strong>, D);</li>
+                <li>portraits (<strong>I05</strong>, R);</li>
+                <li>damage, armour, status, affix and rarity glyphs (<strong>I06</strong>);</li>
+                <li>
+                  Road glyphs for ages, branches, milestones, minigame kinds and disciplines
+                  (<strong>I07</strong>, —);
+                </li>
+                <li>UI glyphs and key caps (<strong>I08</strong>);</li>
+                <li>map markers (<strong>I09</strong>).</li>
+              </ul>
+            </li>
+            <li><strong>Windows, fonts and cursors:</strong> <strong>U02</strong>–<strong>U26</strong>.</li>
+            <li>
+              <strong>VFX</strong> (<code>fx.ts</code>: one procedural 8-cell canvas atlas — dot, spark,
+              smoke, star, ring, chunk, leaf, rune — plus flame sprites and light pools):
+              <ul>
+                <li>fire, smoke and dust, magic, beams and lightning, explosions, frost;</li>
+                <li>hits and sparks, loot glows, radiant gems, rocket exhaust, water;</li>
+                <li>
+                  light pools, telegraph rings, weather, status markers.
+                  (<strong>V01</strong>–<strong>V15</strong>)
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sound</strong> (about 60 synthesised recipes; wind is the only ambience; no music):
+              <ul>
+                <li>UI, foley, combat, stingers;</li>
+                <li>ambience, age machines, Space;</li>
+                <li>minigame feedback, music, voice. (<strong>A01</strong>–<strong>A10</strong>)</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Notifications:</strong> toasts, the event log, wave intel, dusk and dawn notes, the
+              update banner.
+            </li>
+          </ul>
+          <p>---</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <details>
+      <summary>Every page the prices, catalogues and licences come from</summary>
+      <div class="sources">
+        <p><strong>Project files:</strong></p>
+        <ul>
+          <li><code>/Users/user/craftdef/README.md</code></li>
+          <li><code>/Users/user/craftdef/docs/ROADMAP.md</code></li>
+          <li><code>/Users/user/craftdef/docs/TECH_LINEAGE.md</code></li>
+          <li><code>/Users/user/craftdef/docs/KAYKIT_COLLECTION.md</code></li>
+          <li><code>/Users/user/craftdef/src/game/road.ts</code></li>
+          <li><code>/Users/user/craftdef/src/game/content.ts</code></li>
+          <li><code>/Users/user/craftdef/src/game/space.ts</code></li>
+          <li><code>/Users/user/craftdef/src/ui/hud.ts</code></li>
+          <li><code>/Users/user/craftdef/src/ui/windows.ts</code></li>
+          <li>
+            <code>/Users/user/craftdef/src/ui/minigames/</code> (index, types, kit, band, ratio, sizes, path,
+            decide and the placeholders)
+          </li>
+          <li>
+            <code>/Users/user/craftdef/src/view/</code> (assets, rockets, devices, gems, emblems, sky, fx,
+            spaceview, interiorview, procmodels, itemmodels, audio, characters, entities)
+          </li>
+        </ul>
+        <p><strong>KayKit:</strong></p>
+        <ul>
+          <li>
+            <a href="https://kaylousberg.itch.io/kaykit-complete" target="_blank" rel="noopener"
+              >Complete Collection</a
+            >
+            ·
+            <a href="https://kaylousberg.itch.io/kaykit-complete/devlog" target="_blank" rel="noopener"
+              >devlog</a
+            >
+            · <a href="https://kaylousberg.itch.io/" target="_blank" rel="noopener">store</a>
+          </li>
+          <li>
+            <a href="https://kaylousberg.itch.io/space-base-bits" target="_blank" rel="noopener"
+              >Space Base Bits</a
+            >
+            ·
+            <a href="https://kaylousberg.itch.io/board-game-bits" target="_blank" rel="noopener"
+              >Board Game Bits</a
+            >
+            ·
+            <a href="https://kaylousberg.itch.io/holiday-bits" target="_blank" rel="noopener">Holiday Bits</a>
+            · <a href="https://kaylousberg.itch.io/mixed-bag-1" target="_blank" rel="noopener">Mixed Bag 1</a>
+          </li>
+        </ul>
+        <p><strong>Kenney:</strong></p>
+        <ul>
+          <li>
+            <a href="https://kenney.itch.io/kenney-game-assets" target="_blank" rel="noopener">All-in-1</a> ·
+            <a href="https://kenney.nl/assets/category:Audio" target="_blank" rel="noopener"
+              >audio category</a
+            >
+            · <a href="https://kenney.nl/assets/category:3D" target="_blank" rel="noopener">3D category</a>
+          </li>
+          <li>
+            UI and icons:
+            <a href="https://kenney.nl/assets/ui-pack" target="_blank" rel="noopener">UI Pack</a> ·
+            <a href="https://kenney.nl/assets/ui-pack-sci-fi" target="_blank" rel="noopener"
+              >UI Pack – Sci-Fi</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/ui-pack-rpg-expansion" target="_blank" rel="noopener"
+              >RPG Expansion</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/fantasy-ui-borders" target="_blank" rel="noopener"
+              >Fantasy UI Borders</a
+            >
+            · <a href="https://kenney.nl/assets/game-icons" target="_blank" rel="noopener">Game Icons</a> ·
+            <a href="https://kenney.nl/assets/board-game-icons" target="_blank" rel="noopener"
+              >Board Game Icons</a
+            >
+            · <a href="https://kenney.nl/assets/cursor-pack" target="_blank" rel="noopener">Cursor Pack</a> ·
+            <a href="https://kenney.nl/assets/kenney-fonts" target="_blank" rel="noopener">Kenney Fonts</a> ·
+            <a href="https://kenney.nl/assets/minimap-pack" target="_blank" rel="noopener">Minimap Pack</a>
+          </li>
+          <li>
+            VFX:
+            <a href="https://kenney.nl/assets/particle-pack" target="_blank" rel="noopener">Particle Pack</a>
+            ·
+            <a href="https://opengameart.org/content/particle-pack-80-sprites" target="_blank" rel="noopener"
+              >OGA Particle Pack page</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/smoke-particles" target="_blank" rel="noopener"
+              >Smoke Particles</a
+            >
+            · <a href="https://kenney.nl/assets/light-masks" target="_blank" rel="noopener">Light Masks</a> ·
+            <a href="https://kenney.nl/assets/planets" target="_blank" rel="noopener">Planets</a>
+          </li>
+          <li>
+            Space: <a href="https://kenney.nl/assets/space-kit" target="_blank" rel="noopener">Space Kit</a> ·
+            <a href="https://kenney-assets.itch.io/space-kit" target="_blank" rel="noopener"
+              >Space Kit (itch)</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/space-station-kit" target="_blank" rel="noopener"
+              >Space Station Kit</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/modular-space-kit" target="_blank" rel="noopener"
+              >Modular Space Kit</a
+            >
+          </li>
+          <li>
+            Other 3D:
+            <a href="https://kenney.nl/assets/factory-kit" target="_blank" rel="noopener">Factory Kit</a> ·
+            <a href="https://kenney.nl/assets/train-kit" target="_blank" rel="noopener">Train Kit</a> ·
+            <a href="https://kenney.nl/assets/city-kit-industrial" target="_blank" rel="noopener"
+              >City Kit (Industrial)</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/tower-defense-kit" target="_blank" rel="noopener"
+              >Tower Defense Kit</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/graveyard-kit" target="_blank" rel="noopener">Graveyard Kit</a>
+            ·
+            <a href="https://kenney.nl/assets/modular-cave-kit" target="_blank" rel="noopener"
+              >Modular Cave Kit</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/survival-kit" target="_blank" rel="noopener">Survival Kit</a> ·
+            <a href="https://kenney.nl/assets/nature-kit" target="_blank" rel="noopener">Nature Kit</a> ·
+            <a href="https://kenney.nl/assets/mini-characters" target="_blank" rel="noopener"
+              >Mini Characters</a
+            >
+          </li>
+          <li>
+            Audio:
+            <a href="https://kenney.nl/assets/interface-sounds" target="_blank" rel="noopener"
+              >Interface Sounds</a
+            >
+            ·
+            <a href="https://kenney.nl/assets/impact-sounds" target="_blank" rel="noopener">Impact Sounds</a>
+            · <a href="https://kenney.nl/assets/rpg-audio" target="_blank" rel="noopener">RPG Audio</a> ·
+            <a href="https://kenney.nl/assets/sci-fi-sounds" target="_blank" rel="noopener">Sci-fi Sounds</a>
+            ·
+            <a href="https://kenney.nl/assets/music-jingles" target="_blank" rel="noopener">Music Jingles</a>
+            ·
+            <a href="https://kenney.nl/assets/voiceover-pack" target="_blank" rel="noopener"
+              >Voiceover Pack</a
+            >
+          </li>
+        </ul>
+        <p><strong>Quaternius:</strong></p>
+        <ul>
+          <li>
+            <a href="https://quaternius.com/" target="_blank" rel="noopener">Site</a> ·
+            <a href="https://quaternius.com/license.html" target="_blank" rel="noopener"
+              >Licence (QAL v1.0)</a
+            >
+            · <a href="https://www.patreon.com/quaternius" target="_blank" rel="noopener">Patreon</a> ·
+            <a href="https://www.patreon.com/quaternius/membership" target="_blank" rel="noopener"
+              >Membership tiers</a
+            >
+          </li>
+          <li>
+            <a href="https://quaternius.com/packs/ultimatespacekit.html" target="_blank" rel="noopener"
+              >Ultimate Space Kit</a
+            >
+            ·
+            <a
+              href="https://sketchfab.com/3d-models/ultimate-space-kit-84c108ff2bcf4d4cbf2adff74a942822"
+              target="_blank"
+              rel="noopener"
+              >Sketchfab page</a
+            >
+            ·
+            <a href="https://quaternius.com/packs/scifiessentialskit.html" target="_blank" rel="noopener"
+              >Sci-Fi Essentials</a
+            >
+            ·
+            <a href="https://quaternius.com/packs/modularscifimegakit.html" target="_blank" rel="noopener"
+              >Modular Sci-Fi MegaKit</a
+            >
+            ·
+            <a href="https://quaternius.com/packs/ultimatemonsters.html" target="_blank" rel="noopener"
+              >Ultimate Monsters</a
+            >
+            ·
+            <a href="https://quaternius.itch.io/universal-animation-library-2" target="_blank" rel="noopener"
+              >UAL2</a
+            >
+            · <a href="https://quaternius.itch.io/" target="_blank" rel="noopener">itch store</a>
+          </li>
+        </ul>
+        <p><strong>Synty:</strong></p>
+        <ul>
+          <li>
+            <a href="https://syntystore.com/" target="_blank" rel="noopener">Store</a> ·
+            <a href="https://syntystore.com/pages/licences-overview" target="_blank" rel="noopener"
+              >Licences overview</a
+            >
+            ·
+            <a href="https://syntystore.com/pages/one-time-purchase-licence" target="_blank" rel="noopener"
+              >One-time EULA</a
+            >
+            ·
+            <a
+              href="https://syntystore.com/pages/standard-subscription-licence"
+              target="_blank"
+              rel="noopener"
+              >Subscription EULA</a
+            >
+            ·
+            <a href="https://syntystore.com/pages/end-user-licence-agreement" target="_blank" rel="noopener"
+              >EULA summary</a
+            >
+            · <a href="https://syntystore.com/products/syntypass" target="_blank" rel="noopener">SyntyPass</a>
+          </li>
+          <li>
+            INTERFACE:
+            <a href="https://syntystore.com/collections/interface" target="_blank" rel="noopener"
+              >collection</a
+            >
+            ·
+            <a href="https://syntystore.com/products/interface-apocalypse-hud" target="_blank" rel="noopener"
+              >Apocalypse HUD</a
+            >
+            ·
+            <a
+              href="https://syntystore.com/products/interface-sci-fi-soldier-hud"
+              target="_blank"
+              rel="noopener"
+              >Sci-Fi Soldier HUD</a
+            >
+            ·
+            <a
+              href="https://syntystore.com/products/interface-fantasy-warrior-hud"
+              target="_blank"
+              rel="noopener"
+              >Fantasy Warrior HUD</a
+            >
+            ·
+            <a href="https://syntystore.com/products/interface-fantasy-screens" target="_blank" rel="noopener"
+              >Fantasy Screens</a
+            >
+            ·
+            <a href="https://syntystore.com/products/polygon-icons-pack" target="_blank" rel="noopener"
+              >Icons Pack</a
+            >
+          </li>
+          <li>
+            POLYGON:
+            <a href="https://syntystore.com/collections/polygon" target="_blank" rel="noopener">p1</a> ·
+            <a href="https://syntystore.com/collections/polygon?page=2" target="_blank" rel="noopener">p2</a>
+            ·
+            <a href="https://syntystore.com/collections/polygon?page=3" target="_blank" rel="noopener">p3</a>
+            ·
+            <a href="https://syntystore.com/collections/polygon?page=4" target="_blank" rel="noopener">p4</a>
+            ·
+            <a
+              href="https://syntystore.com/en-gb/products/polygon-sci-fi-worlds"
+              target="_blank"
+              rel="noopener"
+              >Sci-Fi Worlds</a
+            >
+            ·
+            <a href="https://syntystore.com/products/polygon-sci-fi-space-pack" target="_blank" rel="noopener"
+              >Sci-Fi Space</a
+            >
+            ·
+            <a href="https://syntystore.com/products/polygon-fantasy-kingdom" target="_blank" rel="noopener"
+              >Fantasy Kingdom</a
+            >
+            ·
+            <a href="https://syntystore.com/products/polygon-particle-fx-pack" target="_blank" rel="noopener"
+              >Particle FX</a
+            >
+            ·
+            <a href="https://syntystore.com/products/polygon-office-pack" target="_blank" rel="noopener"
+              >Office</a
+            >
+          </li>
+          <li>
+            Collections:
+            <a href="https://syntystore.com/collections/animation" target="_blank" rel="noopener"
+              >ANIMATION</a
+            >
+            ·
+            <a href="https://syntystore.com/collections/simple-series" target="_blank" rel="noopener"
+              >SIMPLE</a
+            >
+            ·
+            <a href="https://syntystore.com/collections/bundles" target="_blank" rel="noopener">Bundles</a> ·
+            <a href="https://syntystore.com/collections/godot-asset-packs" target="_blank" rel="noopener"
+              >Godot</a
+            >
+          </li>
+        </ul>
+        <p><strong>UI, icons, other vendors:</strong></p>
+        <ul>
+          <li>
+            <a href="https://layerlab.itch.io/" target="_blank" rel="noopener">Layer Lab itch</a> ·
+            <a href="https://layerlab.itch.io/gui-pro-fantasy-rpg" target="_blank" rel="noopener"
+              >GUI Pro – Fantasy RPG</a
+            >
+            ·
+            <a href="https://layerlab.io/pages/licences" target="_blank" rel="noopener">Layer Lab licence</a>
+            · <a href="https://ricimi.itch.io/" target="_blank" rel="noopener">Ricimi</a> ·
+            <a href="https://craftpix.net/file-licenses/" target="_blank" rel="noopener">Craftpix licence</a>
+            ·
+            <a href="https://wenrexa.itch.io/kit-nesia2" target="_blank" rel="noopener"
+              >Wenrexa free sci-fi UI</a
+            >
+          </li>
+          <li>
+            <a href="https://game-icons.net/about.html" target="_blank" rel="noopener">game-icons.net</a> ·
+            Painterly Spell Icons
+            <a href="https://opengameart.org/node/4413" target="_blank" rel="noopener">part 1</a> ·
+            <a
+              href="https://opengameart.org/content/painterly-spell-icons-part-2"
+              target="_blank"
+              rel="noopener"
+              >part 2</a
+            >
+            · <a href="https://opengameart.org/node/5045" target="_blank" rel="noopener">part 3</a>
+          </li>
+          <li>
+            <a
+              href="https://support.unity.com/hc/en-us/articles/34387186019988-Can-I-use-assets-from-the-Asset-Store-with-other-engines"
+              target="_blank"
+              rel="noopener"
+              >Unity: other engines</a
+            >
+            ·
+            <a href="https://unity.com/legal/as-terms" target="_blank" rel="noopener"
+              >Unity Asset Store terms</a
+            >
+            ·
+            <a
+              href="https://dev.epicgames.com/documentation/en-us/fab/licenses-and-pricing-in-fab"
+              target="_blank"
+              rel="noopener"
+              >Fab licences</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://marketplace.unity.com/packages/3d/props/low-poly-ultimate-pack-54733"
+              target="_blank"
+              rel="noopener"
+              >Polyperfect Low Poly Ultimate Pack</a
+            >
+            · <a href="https://ithappystudios.com/" target="_blank" rel="noopener">ithappy</a> ·
+            <a href="https://superhivemarket.com/products/location-kingdom" target="_blank" rel="noopener"
+              >ithappy on Superhive</a
+            >
+            · <a href="https://tinytreats.itch.io/" target="_blank" rel="noopener">Tiny Treats</a> ·
+            <a href="https://tinytreats.itch.io/collection-1" target="_blank" rel="noopener"
+              >Tiny Treats Collection 1</a
+            >
+          </li>
+          <li>
+            <a href="https://itch.io/game-assets/top-sellers/tag-3d" target="_blank" rel="noopener"
+              >itch top sellers 3D</a
+            >
+            ·
+            <a href="https://itch.io/game-assets/top-sellers/tag-gui" target="_blank" rel="noopener"
+              >itch top sellers GUI</a
+            >
+          </li>
+        </ul>
+        <p><strong>Sound, sky, VFX, fonts:</strong></p>
+        <ul>
+          <li>
+            <a href="https://sonniss.com/gameaudiogdc" target="_blank" rel="noopener">Sonniss GDC</a> ·
+            <a
+              href="https://rekkerd.org/sonniss-releases-gdc-2026-game-audio-bundle/"
+              target="_blank"
+              rel="noopener"
+              >GDC 2026 bundle news</a
+            >
+            ·
+            <a href="https://tallbeard.itch.io/music-loop-bundle" target="_blank" rel="noopener"
+              >Tallbeard/Abstraction loops</a
+            >
+            ·
+            <a href="https://alkakrab.itch.io/270bundle" target="_blank" rel="noopener">alkakrab bundle</a> ·
+            <a href="https://app.cinevva.com/guides/free-sound-effects-music" target="_blank" rel="noopener"
+              >MacLeod licence guide</a
+            >
+          </li>
+          <li>
+            <a href="https://opengameart.org/content/space-skyboxes-0" target="_blank" rel="noopener"
+              >OGA space skyboxes 0</a
+            >
+            ·
+            <a href="https://opengameart.org/content/space-skybox-1" target="_blank" rel="noopener"
+              >OGA space skybox 1</a
+            >
+            ·
+            <a
+              href="https://screamingbrainstudios.itch.io/planet-surface-skyboxes"
+              target="_blank"
+              rel="noopener"
+              >Screaming Brain planet skyboxes</a
+            >
+          </li>
+          <li>
+            <a href="https://npmjs.com/package/three.quarks" target="_blank" rel="noopener">three.quarks</a> ·
+            <a
+              href="https://discourse.threejs.org/t/trail-renderer-particle-system/10095"
+              target="_blank"
+              rel="noopener"
+              >three.quarks forum thread</a
+            >
+            ·
+            <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener"
+              >Google Fonts FAQ</a
+            >
+          </li>
+        </ul>
+        <p>
+          <strong>Unverified</strong> (named in the text): Quaternius Patreon tier benefits; whether Kenney's
+          Space Kit has a modular rocket, satellite dish or rover; Quaternius' rover, ghost and rail items;
+          Synty Military radar and searchlights; the KayKit "space ranger" look; GameDev Market and Fab web
+          terms; alkakrab's licence; per-kit Kenney texture approach.
+        </p>
+      </div>
+    </details>
+  </section>
+</div>
+
+<script>
+  (() => {
+    const ROWS = [
+      {
+        area: 'U',
+        id: 'U01',
+        need: 'Logo / wordmark / title card (and favicon)',
+        today: 'D',
+        base: ['N', '—'],
+        A: ['N', '—'],
+        B: ['N', '—'],
+        C: ['N', '—'],
+        note: 'No pack makes your brand.',
+      },
+      {
+        area: 'U',
+        id: 'U02',
+        need: 'Window & panel frames (Menu, Shop, Storage, Plan Book, Buy, Class, Road, LAN card, end screen)',
+        today: 'C',
+        base: ['N', 'CSS today'],
+        A: ['Y', 'UI Pack 2.0, RPG Expansion, Fantasy UI Borders'],
+        B: ['Y', 'GUI Pro – Fantasy RPG; GUI – Stone/DarkStone/Wooden'],
+        C: ['Y', 'INTERFACE Fantasy / Dark Fantasy Menus (sprite zip)'],
+        note: 'Layout stays our HTML/CSS in every stack.',
+      },
+      {
+        area: 'U',
+        id: 'U03',
+        need: 'Buttons, tabs, toggles, sliders, text inputs, scrollbars',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack 2.0'],
+        B: ['Y', 'GUI Pro – Fantasy RPG'],
+        C: ['Y', 'Fantasy Menus'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U04',
+        need: 'Resource counters: gold, lives, wave no. + timer, Call wave, speed, age badge',
+        today: 'D+C',
+        base: ['P', 'game-icons glyphs; coin render from Resource Bits'],
+        A: ['P', 'UI Pack / Board Game Icons (heart, coin unverified)'],
+        B: ['P', 'Fantasy Icon/Picto packs (unverified items)'],
+        C: ['P', 'Fantasy Warrior HUD status/stats icons'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U05',
+        need: 'Player & target unit frames (portrait ring, level badge, HP/XP bars)',
+        today: 'C+R',
+        base: ['P', 'portraits rendered from KayKit'],
+        A: ['P', 'bars + round frames, composed'],
+        B: ['P', 'GUI – Avatar Frame + bars'],
+        C: ['Y', 'Fantasy Warrior HUD Portraits + HealthBar/HealthStats'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U06',
+        need: 'Boss frame (wide bar, name, affix pips)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'UI bars, composed'],
+        B: ['P', 'bars, composed'],
+        C: ['Y', 'Fantasy Warrior HUD BossBar01/02'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U07',
+        need: 'Action bar & skill slots (cooldown sweep, keybinds, interact slot) + plan bar',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'UI Pack slot squares'],
+        B: ['P', 'slot frames'],
+        C: ['Y', 'Fantasy Warrior HUD ARPGBar / HotBar'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U08',
+        need: 'Bags: tool row, item grid, stack counts, rarity borders',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'UI Pack slots, recoloured borders'],
+        B: ['P', 'item frames + Tier Icon Pack'],
+        C: ['P', 'inventory icons only, no inventory prefab'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U09',
+        need: 'Selection/details panel (enemy, plan site checklist, building, station trays)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'panels + list rows'],
+        B: ['Y', 'panels'],
+        C: ['Y', 'panels'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U10',
+        need: 'Tooltips (gear with affixes, plan, enemy, milestone)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'small panels'],
+        B: ['Y', 'popups'],
+        C: ['Y', 'Fantasy Warrior HUD Tooltip01'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U11',
+        need: 'Tracker: wave intel, objectives',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'composed'],
+        B: ['P', 'composed'],
+        C: ['Y', 'Fantasy Warrior HUD Objectives01/02'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U12',
+        need: 'Event log, toasts, banners (wave, discovered, level-up), placing banner, cursor hint',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'panels, no ribbons'],
+        B: ['Y', 'Ribbon Pack + titles'],
+        C: ['Y', 'Menus popups; Apocalypse HUD event log'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U13',
+        need: 'Minimap / big map frame + markers (vale, mines, depth)',
+        today: 'D',
+        base: ['P', 'game-icons markers'],
+        A: ['P', 'Minimap Pack is pixel art'],
+        B: ['P', 'frames only'],
+        C: ['Y', 'Fantasy Warrior HUD minimaps + map icons'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U14',
+        need: 'World labels: nameplates, loot names, site checklists, damage/crit numbers',
+        today: 'C',
+        base: ['P', 'Google Fonts'],
+        A: ['P', 'fonts'],
+        B: ['P', 'fonts'],
+        C: ['P', 'damage/heal FX sprites (Apocalypse HUD)'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U15',
+        need: 'Health bars over units & buildings (one-draw-call overlay)',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'bar sprites'],
+        B: ['Y', 'bar sprites'],
+        C: ['Y', 'bar sprites'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U16',
+        need: 'Cursors (pointer, attack, interact, gather, talk, build, invalid)',
+        today: '— (OS cursor)',
+        base: ['N', '—'],
+        A: ['Y', 'Cursor Pack (180)'],
+        B: ['N', 'none'],
+        C: ['P', '10 cursors (Fantasy Warrior HUD)'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U17',
+        need: 'Fonts (UI serif, numerals, per-era faces)',
+        today: 'system serif',
+        base: ['Y', 'Google Fonts (OFL)'],
+        A: ['Y', '+ Kenney Fonts'],
+        B: ['Y', 'Alata + Google Fonts'],
+        C: ['Y', 'Grenze, Texturina, Exo 2, Orbitron (Google Fonts)'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U18',
+        need: 'Road of Invention window (ages × branches tree, cards, links, locks, stars)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'frames, arrows, stars'],
+        B: ['P', 'frames, stars, tier icons'],
+        C: ['P', 'Fantasy Screens panels'],
+        note: 'The tree layout is ours in every stack.',
+      },
+      {
+        area: 'U',
+        id: 'U19',
+        need: 'Field Notes & Chronicle (book pages)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['P', 'RPG Expansion parchment'],
+        B: ['P', 'panels'],
+        C: ['P', 'panels'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U20',
+        need: 'Plan Book & Buy-a-plan (plan cards, discipline colours, study timers)',
+        today: 'C+R',
+        base: ['P', '3D-rendered plan icons'],
+        A: ['Y', 'cards from panels'],
+        B: ['Y', 'cards'],
+        C: ['Y', 'cards'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U21',
+        need: 'Tower panel: 5 gem sockets × 3 grades, 4 device slots, top upgrade, crew',
+        today: 'C+R',
+        base: ['P', 'rendered gems'],
+        A: ['P', 'generic slots'],
+        B: ['P', 'generic slots'],
+        C: ['P', 'generic slots'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U22',
+        need: 'LAN UI: join card, player bar + ping, Pause/Save/Load, update banner',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack'],
+        B: ['Y', 'GUI Pro'],
+        C: ['Y', 'Menus'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U23',
+        need: 'Space & Port panels: launch window, flight phases, base modules, depot',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack – Sci-Fi'],
+        B: ['Y', 'GUI – SciFi Blue'],
+        C: ['Y', 'Sci-Fi Menus / Sci-Fi Soldier HUD'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U24',
+        need: 'Drone HUD (battery, hull, range)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack – Sci-Fi bars'],
+        B: ['Y', 'GUI – SciFi Blue'],
+        C: ['Y', 'Sci-Fi Soldier HUD'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U25',
+        need: 'Minigame panel chrome + verdict overlay (Perfect / Good / Failed)',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack'],
+        B: ['Y', 'GUI Pro'],
+        C: ['Y', 'Menus'],
+        note: '',
+      },
+      {
+        area: 'U',
+        id: 'U26',
+        need: 'Esc menu, options, controls sheet, end screen, DEV badge + clock',
+        today: 'C',
+        base: ['N', '—'],
+        A: ['Y', 'UI Pack + Input Prompts'],
+        B: ['Y', 'GUI Pro + Menu Icon Sets'],
+        C: ['Y', 'Menus + input icons'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I01',
+        need: 'Item icons: 26 items + gold + enchanted variants',
+        today: 'R',
+        base: ['P', 'render Resource/RPG Tools; 7 items have no model'],
+        A: ['P', 'Survival/Food 3D for a few'],
+        B: ['P', 'Fantasy Ore Item + item icons (2D)'],
+        C: ['P', 'Icons_Resources (165)'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I02',
+        need: 'Tool icons (axe, pickaxe, hammer, shovel)',
+        today: 'D',
+        base: ['Y', 'render RPG Tools Bits'],
+        A: ['Y', 'same'],
+        B: ['Y', 'same'],
+        C: ['Y', 'same'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I03',
+        need: 'Plan icons: buildings, tops, 14 gems × 3 grades, devices, payloads, upgrade',
+        today: 'R',
+        base: ['P', 'devices/payloads/gems are procedural'],
+        A: ['P', '—'],
+        B: ['P', '—'],
+        C: ['P', '—'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I04',
+        need: 'Ability icons (10 skills; more classes later)',
+        today: 'D',
+        base: ['P', 'game-icons.net or Painterly Spell Icons (CC BY)'],
+        A: ['P', 'no skill icons'],
+        B: ['P', 'Fantasy Picto Pack'],
+        C: ['P', 'no skill icons'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I05',
+        need: 'Portraits: 9 enemies, 3 classes, shopkeepers',
+        today: 'R',
+        base: ['Y', 'render KayKit characters'],
+        A: ['Y', 'same'],
+        B: ['Y', 'same'],
+        C: ['Y', 'same'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I06',
+        need: 'Glyphs: damage types, armour classes, statuses, wave affixes, rarities',
+        today: 'text',
+        base: ['P', 'game-icons.net'],
+        A: ['P', 'Board Game Icons'],
+        B: ['P', 'pictos'],
+        C: ['P', 'Status (37) / Stats icons'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I07',
+        need: 'Road glyphs: 9 ages, 8 branches, 25 milestones, 12 kinds, disciplines',
+        today: '—',
+        base: ['P', 'game-icons.net (anvil, gears, rail, radio, radar, chip, robot, rocket…)'],
+        A: ['P', '—'],
+        B: ['P', '—'],
+        C: ['P', 'POLYGON Icons Pack (network/crafting)'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I08',
+        need: 'UI glyphs & key caps (×, arrows, lock, ★, ✓, keys, mouse)',
+        today: 'C',
+        base: ['P', 'game-icons'],
+        A: ['Y', 'Game Icons (105) + Input Prompts'],
+        B: ['Y', 'Menu Icon Sets'],
+        C: ['Y', 'input icon sets'],
+        note: '',
+      },
+      {
+        area: 'I',
+        id: 'I09',
+        need: 'Map markers (crypts, shops, mine heads, camps, chests, towers, enemies)',
+        today: 'D',
+        base: ['P', 'game-icons'],
+        A: ['P', 'Minimap Pack (pixel)'],
+        B: ['P', '—'],
+        C: ['Y', 'Map icons (21)'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W01',
+        need: 'Terrain ground: painted grass/dirt/rock/sand splat',
+        today: 'P',
+        base: ['N', 'keep code'],
+        A: ['N', '—'],
+        B: ['N', '—'],
+        C: ['P', 'Nature Biomes ground textures'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W02',
+        need: 'Roads & paths',
+        today: 'P',
+        base: ['P', 'Hexagon road tiles (hex)'],
+        A: ['P', 'City Kit Roads (modern)'],
+        B: ['P', 'Modular Streets (modern)'],
+        C: ['P', 'Fantasy Kingdom paths'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W03',
+        need: 'River, water, fords, swimming surface',
+        today: 'P',
+        base: ['N', 'keep code'],
+        A: ['N', '—'],
+        B: ['N', '—'],
+        C: ['N', 'engine shaders do not port'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W04',
+        need: 'Stone bridges (one deck, solid parapets) at heroic scale',
+        today: 'P',
+        base: ['P', 'Hexagon bridges'],
+        A: ['P', 'Castle Kit pieces'],
+        B: ['P', 'Medieval Village MegaKit / Modular Ruins'],
+        C: ['P', 'Fantasy Kingdom'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W05',
+        need: 'Mountain ring, distant silhouettes',
+        today: 'P',
+        base: ['P', 'Forest Nature cliffs/hills'],
+        A: ['P', 'Nature Kit'],
+        B: ['P', 'Stylized Nature MegaKit'],
+        C: ['P', 'Nature Biomes'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W06',
+        need: 'Sky dome day/night: sun glow, clouds, moon, stars',
+        today: 'P',
+        base: ['N', 'keep shader'],
+        A: ['N', '—'],
+        B: ['N', '—'],
+        C: ['N', '—'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W07',
+        need: 'Trees (oak, pine, birch, dead), stumps; the Gatewood',
+        today: 'P+K',
+        base: ['Y', 'Forest Nature (32 trees × 8 palettes) + treegen'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W08',
+        need: 'Bushes, grass tufts, flowers, rocks, cliffs',
+        today: 'K',
+        base: ['Y', 'Forest Nature'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W09',
+        need: 'Keep, town walls, gate, keep towers',
+        today: 'K',
+        base: ['Y', 'Medieval Hexagon'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W10',
+        need: 'Village: houses, tavern, church, stables, well, windmill, watermill, market',
+        today: 'K',
+        base: ['Y', 'Medieval Hexagon'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W11',
+        need: "Seven shops incl. Dwarven Trading Post, Witch's Hut, Goblin Scrapper",
+        today: 'K',
+        base: ['Y', 'Hexagon + Witch cauldron/potion station'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W12',
+        need: 'Crypts, graveyards, iron fences, arch gates',
+        today: 'K',
+        base: ['Y', 'Halloween Bits'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W13',
+        need: 'Camps, Lumber Camp, chests, ruins, shrine, camp clutter',
+        today: 'K',
+        base: ['Y', 'Hexagon, Dungeon, Halloween'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W14',
+        need: 'Scrapyard / junk heaps',
+        today: 'P',
+        base: ['P', 'Parts_Pile, fuel barrels, Mixed Bag tool cart'],
+        A: ['P', 'Survival / Car Kit'],
+        B: ['P', 'Survival Pack / Zombie Apocalypse Kit'],
+        C: ['P', 'POLYGON Apocalypse (grittier)'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W15',
+        need: 'Quarry rocks, surface ore veins, crystal clusters',
+        today: 'P+K',
+        base: ['P', 'Forest Nature rocks + Resource nuggets/gems'],
+        A: ['P', 'Nature/Survival rocks'],
+        B: ['P', 'Stylized Nature MegaKit'],
+        C: ['P', 'Dungeon crystals'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W16',
+        need: 'Braziers & torches',
+        today: 'P+K',
+        base: ['P', 'Dungeon torches, Caveman campfire'],
+        A: ['P', 'Survival Kit campfire'],
+        B: ['P', 'Fantasy Props MegaKit'],
+        C: ['P', 'Fantasy Kingdom'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W17',
+        need: 'Power poles with visible wires; electric street lamps',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'City Kit Roads street lights (unverified)'],
+        B: ['P', 'Modular Streets lamps (unverified)'],
+        C: ['P', 'Town/City poles (unverified)'],
+        note: 'Wires are ours anyway.',
+      },
+      {
+        area: 'W',
+        id: 'W18',
+        need: 'Hydro generator (old watermill: broken → repaired), dynamo upgrade',
+        today: 'K',
+        base: ['P', 'Hexagon watermill (no broken state)'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W19',
+        need: 'NPCs: townsfolk, porters, footmen, captains',
+        today: 'K',
+        base: ['Y', 'Adventurers, Mystery Monthly townsfolk'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W20',
+        need: 'Siege/defence extras (catapults, cannons, carts, ships)',
+        today: 'K',
+        base: ['Y', 'Hexagon units'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W21',
+        need: 'Construction sites: blueprint hologram, scaffolds, stacked parts',
+        today: 'P+K',
+        base: ['P', 'Dungeon 1.1 scaffold_*, Resource stacks; hologram shader ours'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', 'Construction Pack'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W22',
+        need: 'Damage states: smoking/burning buildings, rubble, ruins',
+        today: 'P',
+        base: ['P', 'Dungeon rubble, Resource chunks'],
+        A: ['P', ''],
+        B: ['P', 'Ultimate Modular Ruins'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W23',
+        need: 'Vale dressing as ages advance (lamps, wires, carts → trains, signs)',
+        today: '—',
+        base: ['P', 'Holiday toy train, Platformer pipes'],
+        A: ['P', 'City Kits, Train Kit, Car Kit'],
+        B: ['P', 'Downtown City MegaKit, Modular Streets'],
+        C: ['P', 'Town / City / Western'],
+        note: 'Modern kits clash with the medieval vale unless palette-matched.',
+      },
+      {
+        area: 'W',
+        id: 'W24',
+        need: 'Walk-in rooms (diorama walls, floors, stairs, loft, cut-away)',
+        today: 'K',
+        base: ['Y', 'Dungeon Pack'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W25',
+        need: 'Room furnishing (forge, anvil, benches, bar, beds, shelves, books, drafting table)',
+        today: 'K',
+        base: ['Y', 'Dungeon 1.1, Furniture, RPG Tools, Restaurant'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W26',
+        need: 'Later-age interiors (boiler room, switchboard, signal house, computer room, clean room)',
+        today: '—',
+        base: ['P', 'monitor/keyboard, Platformer pipes'],
+        A: ['P', 'Factory Kit, Space Station Kit, Furniture Kit'],
+        B: ['P', 'Modular Sci-Fi MegaKit, Sci-Fi Essentials screens'],
+        C: ['P', 'Office, Sci-Fi Horror lab'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W27',
+        need: 'Mine lift (headframe, cage, ropes) + lift room',
+        today: 'P',
+        base: ['P', 'Dungeon scaffold, Hexagon mine'],
+        A: ['P', 'Modular Cave Kit'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W28',
+        need: 'Mine rock walls, rock types, glinting veins, cave-ins, endless shaft',
+        today: 'P',
+        base: ['N', 'keep code'],
+        A: ['N', ''],
+        B: ['N', ''],
+        C: ['N', ''],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W29',
+        need: 'Pit props, torches, old tunnels, rails & ore carts',
+        today: 'P+K',
+        base: ['P', 'scaffold, torches; no mine cart'],
+        A: ['Y', 'Train Kit tracks + trolleys'],
+        B: ['P', 'Modular Train Pack (unverified rails)'],
+        C: ['P', 'Dungeon Realms (unverified carts)'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W30',
+        need: 'Caverns & lairs (Hollow Dark, Ember Deeps, Bone Halls)',
+        today: 'P+K',
+        base: ['P', 'Dungeon + Halloween bones'],
+        A: ['P', 'Modular Cave Kit'],
+        B: ['P', 'Modular Dungeons'],
+        C: ['P', 'Dungeon Realms'],
+        note: '',
+      },
+      {
+        area: 'W',
+        id: 'W31',
+        need: 'Deep-mine flooding, steam pumps, air shafts (Steam age)',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', 'Factory Kit pipes'],
+        B: ['P', '—'],
+        C: ['P', '—'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C01',
+        need: 'Knight (Tank): sword & shield',
+        today: 'K',
+        base: ['Y', 'Adventurers 2.0 Knight'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C02',
+        need: 'Warchief (Support): fights with his tools',
+        today: 'K',
+        base: ['Y', 'Barbarian'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C03',
+        need: 'Mage (Magic): staff, bolts',
+        today: 'K',
+        base: ['Y', 'Mage'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C04',
+        need: 'Future classes: Druid, Engineer, Ranger, Rogue, Paladin, Cleric',
+        today: 'K',
+        base: ['Y', 'Adventurers 2.0 + Mystery Monthly'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C05',
+        need: 'Weapon tiers (sword A–G, axe, hammer, staff, bow, shields)',
+        today: 'K',
+        base: ['Y', 'Fantasy Weapons Bits'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C06',
+        need: 'Visible armour tiers',
+        today: '—',
+        base: ['P', 'helmet variants + tints only'],
+        A: ['N', '—'],
+        B: ['P', 'Modular Character Outfits (other rig)'],
+        C: ['P', 'Modular Fantasy Hero / Sidekick (other rig)'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C07',
+        need: 'Tools in hand (axe, pickaxe, hammer, shovel, saw, wrench)',
+        today: 'K',
+        base: ['Y', 'RPG Tools Bits'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C08',
+        need: 'Animations incl. swim & climb (run, combat, cast, chop/pick/dig/hammer/saw, carry, emotes)',
+        today: 'K',
+        base: ['P', '139 clips; no swim/climb'],
+        A: ['N', 'no compatible clips'],
+        B: ['P', 'UAL 1/2 (retarget)'],
+        C: ['P', 'ANIMATION packs (retarget)'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C09',
+        need: 'Scout drone + controller',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'Space Kit craft (unverified)'],
+        B: ['P', 'Sci-Fi Essentials robots'],
+        C: ['P', 'Sci-Fi Space drones'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C10',
+        need: 'Lantern, thrown hand axe, potions',
+        today: 'K',
+        base: ['Y', 'RPG Tools, Adventurers props'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C11',
+        need: 'Space crew suit for the hero',
+        today: '—',
+        base: ['P', 'Mystery Monthly space ranger (not imported; unverified look)'],
+        A: ['P', 'Space Kit characters'],
+        B: ['P', 'Ultimate Space Kit astronauts (own rig)'],
+        C: ['P', 'EVA suit (Mecanim rig)'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C12',
+        need: 'Shopkeepers: trader, smith, nun, guild master, dwarf, witch, goblin',
+        today: 'K',
+        base: ['P', 'Farmers, Lorekeeper, Witch, Cleric; no dwarf/goblin'],
+        A: ['P', 'Mini Characters'],
+        B: ['P', 'Universal Base Characters'],
+        C: ['P', 'Goblin War Camp, Fantasy Characters'],
+        note: '',
+      },
+      {
+        area: 'C',
+        id: 'C13',
+        need: 'Tech-age NPCs (engineers, signallers, scientists)',
+        today: '—',
+        base: ['P', 'Engineer, Mystery Monthly driver/survivalist'],
+        A: ['P', ''],
+        B: ['P', 'Universal Base Characters'],
+        C: ['P', 'City Characters, Office workers'],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E01',
+        need: 'Skeleton Minion, Bone Runner, Skeleton Warrior, Necromancer',
+        today: 'K',
+        base: ['Y', 'Skeletons 1.1'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E02',
+        need: 'Wraith (flying, spectral)',
+        today: 'K tint',
+        base: ['P', 'tinted Skeleton Mage / Witch on broom'],
+        A: ['P', 'Graveyard Kit monsters (unverified)'],
+        B: ['P', 'Ultimate Monsters / Bestiary (unverified ghost)'],
+        C: ['P', 'Dark Fantasy (unverified)'],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E03',
+        need: 'Bone Crusher (siege) & Bone Colossus (boss)',
+        today: 'K',
+        base: ['Y', 'Skeleton Golem (Rig_Large)'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E04',
+        need: 'Grave Digger (burrower, half-buried + earth mound)',
+        today: 'K+P',
+        base: ['Y', 'skeleton + shovel (mound ours)'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E05',
+        need: 'The Lich (boss)',
+        today: 'K tint',
+        base: ['P', 'Necromancer scaled + glow'],
+        A: ['N', ''],
+        B: ['P', 'Bestiary'],
+        C: ['P', 'Dark Fantasy'],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E06',
+        need: 'New families: orcs, werewolves, black knight, vampire, frost golem, monstrosity, witch flyer',
+        today: '—',
+        base: ['Y', 'Mystery Monthly 4–6'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E07',
+        need: 'Mine lair creatures (bats, spiders, slimes, cave beasts)',
+        today: '—',
+        base: ['P', 'skeletons, golems only'],
+        A: ['N', '—'],
+        B: ['Y', 'Ultimate Monsters (50 fully animated) + Bestiary – Dungeon Monsters'],
+        C: ['P', 'Dungeon Realms'],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E08',
+        need: 'Space robots / alien hazards (if any)',
+        today: '—',
+        base: ['P', 'Mystery Monthly robots/mechs'],
+        A: ['P', 'Space Kit'],
+        B: ['Y', 'Animated Robot / Mech / Alien, Sci-Fi Essentials enemies'],
+        C: ['P', 'Mech Pack; Sci-Fi Worlds aliens ship without animations'],
+        note: '',
+      },
+      {
+        area: 'E',
+        id: 'E09',
+        need: 'Spawn / awaken / resurrect, death, hit-react clips',
+        today: 'K',
+        base: ['Y', 'Skeletons special clips'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V01',
+        need: 'Fire: braziers, torches, forge, burn status, burning ground, ember gems',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'Particle Pack flames'],
+        B: ['N', '—'],
+        C: ['P', 'POLYGON Particle FX (engine-bound)'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V02',
+        need: 'Smoke & dust: chimneys, burning buildings, digging, landing dust',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'Smoke Particles + Particle Pack'],
+        B: ['N', '—'],
+        C: ['P', 'Particle FX'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V03',
+        need: 'Magic: arcane bolts, Fireball, Frost Nova, Meteor, Mend, Rally, Battle Cry, Repulse',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'Particle Pack magic/twirl/star/circle'],
+        B: ['N', '—'],
+        C: ['P', 'Magic FX ×26'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V04',
+        need: 'Lightning chains, searchlight beam, relay flicker, radar sweep',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'spark/trace textures'],
+        B: ['N', '—'],
+        C: ['P', 'Electricity / Lightning FX'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V05',
+        need: 'Explosions: Blast Ruby, dynamite, Meteor impact, building crash',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'Smoke Particles explosions'],
+        B: ['N', '—'],
+        C: ['P', 'Explosion FX ×4'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V06',
+        need: 'Frost: chill, freeze, shatter shards',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', ''],
+        B: ['N', '—'],
+        C: ['P', 'Shards, Snow'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V07',
+        need: 'Hits, sparks, slashes, crit pops (melee, arrows, hammer/weld sparks)',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'Particle Pack'],
+        B: ['N', '—'],
+        C: ['P', 'Impacts, Sparks, Slashes'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V08',
+        need: 'Loot beams & rarity glows, pick-ups, level-up, discovery',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['Y', 'flare/star textures'],
+        B: ['N', '—'],
+        C: ['P', 'Loot, Pickups FX'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V09',
+        need: 'Radiant gems (embers, frost sparkle, lightning, orbiting stones, light ring) + element emblems',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'textures only'],
+        B: ['N', '—'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V10',
+        need: 'Rocket exhaust, staging, fairing jettison, vacuum landing plume, capsule entry glow',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'flame/smoke textures; vacuum behaviour ours'],
+        B: ['N', '—'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V11',
+        need: 'Water splashes, wading ripples',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', ''],
+        B: ['N', '—'],
+        C: ['P', 'Water FX'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V12',
+        need: 'Painted light pools, halos, lamp glows (the cheap "light")',
+        today: 'P',
+        base: ['N', 'keep code'],
+        A: ['P', 'Light Masks (150 cookies, 2026)'],
+        B: ['N', '—'],
+        C: ['N', '—'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V13',
+        need: 'Selection rings, range circles, AoE telegraphs, blueprint hologram',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'circles + Crosshair Pack'],
+        B: ['N', '—'],
+        C: ['P', 'reticles'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V14',
+        need: 'Weather (rain, snow, fog banks) — future',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', ''],
+        B: ['N', '—'],
+        C: ['P', 'Rain/Snow/Fog FX'],
+        note: '',
+      },
+      {
+        area: 'V',
+        id: 'V15',
+        need: 'Status markers (stun, frozen, shielded, enraged)',
+        today: 'P',
+        base: ['P', 'game-icons'],
+        A: ['P', ''],
+        B: ['P', 'pictos'],
+        C: ['P', 'Status icons + FX'],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A01',
+        need: 'UI: click, open/close, deny, coin, purchase, learn, place, built',
+        today: 'S',
+        base: ['P', 'Sonniss (curate)'],
+        A: ['Y', 'Interface Sounds (100) + UI Audio (50)'],
+        B: ['P', 'Sonniss only'],
+        C: ['P', 'Synty sells no audio'],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A02',
+        need: 'Gathering & crafting foley: chop, pick, dig, saw, anvil, chisel, smelt, weld, wiring',
+        today: 'S',
+        base: ['Y', 'Sonniss GDC archive (categories; curate)'],
+        A: ['Y', '+ Impact Sounds, RPG Audio'],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A03',
+        need: 'Combat: swords, shields, bows, hand axes, spells, explosions, bones, groans, roars',
+        today: 'S',
+        base: ['Y', 'Sonniss GDC archive'],
+        A: ['Y', '+ Impact/RPG/Sci-fi'],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A04',
+        need: 'Stingers: wave horn, alarm bell, cleared, breach, victory/defeat, level-up, discovery',
+        today: 'S',
+        base: ['P', 'Sonniss + Abstraction loops'],
+        A: ['Y', 'Music Jingles (85)'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A05',
+        need: 'Ambience: vale day/night, river, village, forge, mines, crypts, interiors',
+        today: 'S (wind)',
+        base: ['Y', 'Sonniss ambiences'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A06',
+        need: 'Age machines: mill, steam, electric hum, telegraph, radio static, relays, computers, belts',
+        today: '—',
+        base: ['P', 'Sonniss (curate)'],
+        A: ['P', 'Sci-fi Sounds (70) + Digital Audio (60): hums, beeps; steam/telegraph from Sonniss'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A07',
+        need: 'Space: launch roar, vacuum quiet, radio chatter, suit breath, habitat hum, rover/drill',
+        today: '—',
+        base: ['P', 'Sonniss'],
+        A: ['P', 'Sci-fi + Digital + Voiceover (partial)'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A08',
+        need: 'Minigame feedback: ticks, pour, needle, lamp pop, hiss, crack, fuse, Morse beeps, verdicts',
+        today: 'S',
+        base: ['P', ''],
+        A: ['P', 'Interface + Digital + Impact (generic ticks/stingers)'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'A',
+        id: 'A09',
+        need: 'Music: theme, vale per age (medieval → space), wave, boss, mines, Space',
+        today: '—',
+        base: ['P', 'Abstraction loops (CC0) + MacLeod (CC BY)'],
+        A: ['P', 'Music Jingles + loops'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: 'No pack gives a coherent per-age score.',
+      },
+      {
+        area: 'A',
+        id: 'A10',
+        need: 'Voice barks & announcer',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', 'Voiceover Pack (90) + Fighter'],
+        B: ['N', '—'],
+        C: ['N', '—'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M01',
+        need: 'Hold the band · forge/glass: bellows, fire, crucible, heat bar, cooling glass',
+        today: 'D',
+        base: ['P', 'KayKit forge/anvil/cauldron for a 3D close-up'],
+        A: ['P', 'Particle fire + UI bars'],
+        B: ['P', 'bars'],
+        C: ['P', 'Particle FX + gauges'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M02',
+        need: 'Hold the band · needle gauge: boiler pressure + valve; electrolysis cell',
+        today: 'D',
+        base: ['N', '—'],
+        A: ['P', 'UI Pack – Sci-Fi meters'],
+        B: ['P', 'GUI – Matt Metal, sliders'],
+        C: ['P', 'Apocalypse HUD dials/gauges'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M03',
+        need: 'Hold the band · landing on rockets (sink-rate band, fuel) & capsule entry',
+        today: 'D',
+        base: ['P', 'KayKit landers in a 3D view'],
+        A: ['P', 'Sci-Fi UI + Space Kit'],
+        B: ['P', 'Ultimate Space Kit + SciFi Blue'],
+        C: ['P', 'Sci-Fi Soldier HUD dials'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M04',
+        need: 'Hold the band · boat load line',
+        today: 'D',
+        base: ['P', 'Hexagon ships + crates'],
+        A: ['P', 'Watercraft Kit'],
+        B: ['P', 'Ships Pack'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M05',
+        need: 'Mix the ratio: crucible/vat/bowl, spouts, pour, share gauges, test piece',
+        today: 'D',
+        base: ['P', 'Cauldron, mortar, bars, bricks, pots'],
+        A: ['P', 'Food Kit bowls + bars'],
+        B: ['P', 'bars'],
+        C: ['P', 'gauges'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M06',
+        need: 'Pick the sizes · gear train (teeth, millstone, rpm gauge)',
+        today: 'D',
+        base: ['P', 'Parts_Cog + procedural gears'],
+        A: ['P', ''],
+        B: ['P', 'Steampunk Turret Pack'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M07',
+        need: 'Pick the sizes · cells in chain/side by side, lamp glow, voltmeter',
+        today: 'D',
+        base: ['P', 'game-icons battery/bulb'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M08',
+        need: 'Pick the sizes · rocket stages, fuel, payload; flight test',
+        today: 'D',
+        base: ['N', 'no KayKit rocket'],
+        A: ['P', 'Space Kit (rocket parts unverified)'],
+        B: ['P', 'Ultimate Spaceships'],
+        C: ['P', 'Sci-Fi Worlds rocket'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M09',
+        need: 'Pick the sizes · transformer turns',
+        today: 'D',
+        base: ['N', '—'],
+        A: ['N', ''],
+        B: ['N', ''],
+        C: ['N', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M10',
+        need: 'Lay the path · circuit board (intake, 3 wire gauges heating, splits, fuses, switches, lamps, meters, water view)',
+        today: 'D',
+        base: ['N', '—'],
+        A: ['N', ''],
+        B: ['N', ''],
+        C: ['N', ''],
+        note: 'A live circuit view: nobody sells this.',
+      },
+      {
+        area: 'M',
+        id: 'M11',
+        need: 'Lay the path · route boards: rails, pipes, belts, links, rover track, obstacles',
+        today: 'D',
+        base: ['P', 'Platformer pipes/conveyors, hex tiles'],
+        A: ['P', 'Train Kit, Factory Kit'],
+        B: ['P', 'Modular Train Pack'],
+        C: ['P', 'SIMPLE Trains'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M12',
+        need: 'Keep the beat: hammer & anvil, saw, coil, bells, pistons; rhythm lane',
+        today: 'D',
+        base: ['P', 'anvil/hammer/saw + Hammering/Sawing clips'],
+        A: ['P', 'UI rings'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M13',
+        need: 'Steady hand: weld seam, lathe, glass shaping, sample drill, cutter',
+        today: 'D',
+        base: ['N', '—'],
+        A: ['P', 'spark textures'],
+        B: ['N', ''],
+        C: ['P', 'Sparks FX'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M14',
+        need: 'Separate: panning, sieving, distilling, zone refining',
+        today: 'placeholder',
+        base: ['N', '—'],
+        A: ['N', ''],
+        B: ['N', ''],
+        C: ['N', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M15',
+        need: 'Build in order: arch + keystone on centring; engine; payload stack; ascent vehicle',
+        today: 'placeholder',
+        base: ['P', 'Dungeon/Hexagon stones, landers'],
+        A: ['P', 'Space Kit, Castle Kit'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M16',
+        need: 'Decide · relay ladder: switches, relays, lamps/gates/bells, condition icons, truth table',
+        today: 'D',
+        base: ['P', 'game-icons glyphs'],
+        A: ['P', 'Board Game Icons'],
+        B: ['P', 'pictos'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M17',
+        need: 'Decide · punched-card program: cards, yard grid, rover/cart/cutter',
+        today: 'D',
+        base: ['P', 'Board Game Bits card sprites; spacetruck/cart'],
+        A: ['P', 'Board Game Pack cards'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M18',
+        need: 'Find the sweet spot: radio dial + waveform, searchlight focus, solar aim, pendulum, trajectory',
+        today: 'placeholder',
+        base: ['N', '—'],
+        A: ['P', 'UI Pack – Sci-Fi'],
+        B: ['P', 'GUI – Neon / SciFi Blue'],
+        C: ['P', 'Sci-Fi Soldier HUD dials'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M19',
+        need: 'Test & observe: radar scope (sweep & echo), conductivity / floating bench',
+        today: 'placeholder',
+        base: ['N', '—'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', 'minimap dial as a scope'],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M20',
+        need: 'Encode: Morse key, sounder, paper tape, code chart; binary/pixel grid',
+        today: 'placeholder',
+        base: ['N', '—'],
+        A: ['P', 'key caps'],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'M',
+        id: 'M21',
+        need: 'Era chrome for the boards (gold-on-dark → brass → enamel → CRT → sci-fi)',
+        today: 'C',
+        base: ['N', 'one CSS skin'],
+        A: ['Y', 'UI Pack / RPG / Sci-Fi variants'],
+        B: ['Y', 'Fantasy RPG, Stone, Matt Metal, Neon, SciFi Blue'],
+        C: ['Y', 'Fantasy / Apocalypse / Military / Sci-Fi lines'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R01',
+        need: 'Age workshops (Foundry, Glassworks, Mechanics, Crane, Boiler house, Railhead, Kiln, Power Intake, Signal house, Radio mast, Clean room, Computer bench, Rocket works…)',
+        today: 'reused stations',
+        base: ['P', 'Hexagon workshop/mine/blacksmith for Metal–Machine; nothing after Steam'],
+        A: ['P', 'City Kit Industrial/Commercial, Factory Kit'],
+        B: ['P', 'Medieval Village / Downtown City MegaKits'],
+        C: ['P', 'Western, Town, Construction, Military, Office'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R02',
+        need: 'Bronze: bars, fittings, bells',
+        today: '—',
+        base: ['P', 'Copper/Gold bars (tint); no bell'],
+        A: ['P', 'Holiday Kit (bell unverified)'],
+        B: ['P', 'Fantasy Props MegaKit'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R03',
+        need: 'Steel: steel tools & weapon tiers',
+        today: 'K',
+        base: ['Y', 'Fantasy Weapons A→G'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R04',
+        need: 'Glass: lenses, bottles, bulbs, window glass',
+        today: '—',
+        base: ['P', 'potions, magnifier, lantern'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R05',
+        need: 'Gear trains: gearbox, winch, millstone',
+        today: '—',
+        base: ['P', 'Parts_Cog, windmill, watermill'],
+        A: ['P', 'Factory Kit'],
+        B: ['P', 'Steampunk Turret Pack'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R06',
+        need: 'The arch: new arched bridges & shortcuts',
+        today: 'P',
+        base: ['P', 'Hexagon bridges + our bridges'],
+        A: ['P', 'Castle Kit'],
+        B: ['P', 'Modular Ruins arches'],
+        C: ['P', 'Fantasy Kingdom'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R07',
+        need: 'Steam: boiler house, steam pumps for deep mines, steam winch',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', 'Factory / City Industrial tanks & chimneys'],
+        B: ['P', 'Modular Train (steam loco)'],
+        C: ['P', 'Western Frontier (unverified)'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R08',
+        need: 'Rails: rails & ore carts mine head → forge, railhead',
+        today: '—',
+        base: ['P', 'Holiday Bits toy train + track'],
+        A: ['Y', 'Train Kit (tracks, trains, trolleys)'],
+        B: ['Y', 'Modular Train Pack'],
+        C: ['P', 'SIMPLE Trains (style)'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R09',
+        need: 'The grid: Power Intake + switchboard, poles, lamps, motors, shock fence',
+        today: 'P',
+        base: ['P', 'procedural poles/lamps'],
+        A: ['P', 'City Kit Industrial 2.0 energy'],
+        B: ['P', 'Modular Streets'],
+        C: ['P', 'Town / Construction'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R10',
+        need: 'Batteries: battery bench, drone batteries, lanterns',
+        today: '—',
+        base: ['P', 'lantern'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R11',
+        need: 'Searchlight device (brass mirror lamp + night beam)',
+        today: 'P',
+        base: ['P', 'Space Base lights, lamp_standing'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', 'Military (unverified)'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R12',
+        need: 'Telegraph: signal house, key & sounder, wire line',
+        today: '—',
+        base: ['N', '—'],
+        A: ['N', ''],
+        B: ['N', ''],
+        C: ['P', 'War Map WWI (unverified)'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R13',
+        need: 'Relay Link device & control boxes',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'Factory Kit machines'],
+        B: ['P', 'Sci-Fi Essentials props'],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R14',
+        need: 'Radio mast (drone range, outposts talk)',
+        today: '—',
+        base: ['P', 'structure_tall + lights; no antenna'],
+        A: ['P', 'Space/City Kit antennas (unverified)'],
+        B: ['P', ''],
+        C: ['P', 'Sci-Fi Outpost comms tower'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R15',
+        need: 'Radar Dish device (turning dish)',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['P', 'Space Kit dish (unverified)'],
+        B: ['P', ''],
+        C: ['P', 'Military (unverified)'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R16',
+        need: 'Pure silicon: clean room, crystal puller, chips',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', 'Space Station Kit interior'],
+        B: ['P', 'Modular Sci-Fi MegaKit'],
+        C: ['P', 'Sci-Fi Horror lab'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R17',
+        need: 'Solar: Solar Roof device, solar field',
+        today: 'P',
+        base: ['Y', 'solarpanel, roofmodule_solarpanels'],
+        A: ['Y', 'City Kit Industrial 2.0 solar'],
+        B: ['Y', ''],
+        C: ['Y', 'Sci-Fi Worlds solar panels'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R18',
+        need: 'Computer: Targeting Computer device, computer bench',
+        today: 'P',
+        base: ['P', 'monitor, keyboard, arcade machine'],
+        A: ['P', 'Furniture Kit computer'],
+        B: ['P', 'Sci-Fi Essentials animated screens'],
+        C: ['P', 'Office PC gear'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R19',
+        need: 'Feedback control: thermostat / governor on stations',
+        today: '—',
+        base: ['N', '—'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R20',
+        need: 'Robots: gathering drones, assembly arm',
+        today: '—',
+        base: ['P', 'Mystery Monthly robots/mechs (not imported)'],
+        A: ['P', 'Factory Kit'],
+        B: ['P', 'Animated Robot / Mech (characters, not drones/arm)'],
+        C: ['P', 'Mech Pack'],
+        note: '',
+      },
+      {
+        area: 'R',
+        id: 'R21',
+        need: 'Conveyors: belts mine head → forge',
+        today: '—',
+        base: ['Y', 'Platformer conveyors (imported)'],
+        A: ['Y', 'Factory Kit conveyors'],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S01',
+        need: 'Port: launch pad + flame trench, lattice tower + swing arm, fuel tanks',
+        today: 'P',
+        base: ['P', 'landingpad, water_storage, structure_tall'],
+        A: ['P', 'Space Kit spaceport parts'],
+        B: ['P', 'Sci-Fi Essentials / MegaKit'],
+        C: ['P', 'Sci-Fi Worlds'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S02',
+        need: 'Rocket: core stage, 2 boosters, upper stage, fairing; staging',
+        today: 'P',
+        base: ['N', 'no rocket in KayKit'],
+        A: ['P', 'Space Kit (unverified)'],
+        B: ['P', 'Ultimate Spaceships (sci-fi ships)'],
+        C: ['P', 'Sci-Fi Worlds rocket'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S03',
+        need: 'Payload stack: cruise stage (solar), descent stage (engine + legs), payload',
+        today: 'P',
+        base: ['P', 'lander_A/B, lander_base, solarpanel'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S04',
+        need: 'Space sky: stars all round, galaxy band, nebulae, hard white sun',
+        today: 'P',
+        base: ['P', 'OGA CC0 space skyboxes'],
+        A: ['P', 'Planets (2D)'],
+        B: ['P', ''],
+        C: ['P', 'Sky Dome FX'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S05',
+        need: 'Ringed giant, small blue home world, drifting asteroids',
+        today: 'P',
+        base: ['P', 'Screaming Brain 2D planets (CC0)'],
+        A: ['P', 'Planets (50, 2D)'],
+        B: ['Y', 'Ultimate Space Kit planets (3D)'],
+        C: ['Y', 'Sci-Fi Space planets, asteroids'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S06',
+        need: 'Ground: small grey rocky body, craters, rim cliffs over the stars, boulders',
+        today: 'P',
+        base: ['P', 'Forest Nature rocks, blue-grey palette'],
+        A: ['P', 'Space Kit terrain'],
+        B: ['P', 'Ultimate Space Kit rocks'],
+        C: ['P', 'Sci-Fi Worlds environment'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S07',
+        need: 'Deposits: nickel-iron, ice in the shadowed crater, rare-earth mound',
+        today: 'P',
+        base: ['P', 'gems/nuggets recoloured'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S08',
+        need: 'Base modules: habitat, garage, depot, farm dome, walkways, pads, lights',
+        today: 'P',
+        base: ['P', 'Space Base Bits (warm swatches need recolour)'],
+        A: ['P', 'Space Kit / Modular Space Kit'],
+        B: ['P', 'Modular Sci-Fi MegaKit'],
+        C: ['P', 'Sci-Fi Worlds buildings (realistic)'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S09',
+        need: 'Solar farm',
+        today: 'P',
+        base: ['Y', 'solarpanel'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S10',
+        need: 'Drill rig',
+        today: 'P',
+        base: ['Y', 'drill_structure'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S11',
+        need: 'Oxygen plant (ice melter, electrolysis stack, tanks)',
+        today: 'P',
+        base: ['P', 'water_storage, eco_module'],
+        A: ['P', ''],
+        B: ['P', ''],
+        C: ['P', 'generators, hydroponics'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S12',
+        need: 'Rover (6 wheels, camera mast, arm, drill)',
+        today: 'P',
+        base: ['P', 'spacetruck (a truck)'],
+        A: ['P', 'Space Kit / Car Kit'],
+        B: ['P', 'Ultimate Space Kit (rover tag)'],
+        C: ['P', 'Sci-Fi Worlds vehicles'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S13',
+        need: 'First lander (radio, solar, beacon)',
+        today: 'P',
+        base: ['Y', 'lander_A/B'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S14',
+        need: 'Crew capsule & return entry capsule (heat shield, parachute)',
+        today: 'P',
+        base: ['N', '—'],
+        A: ['N', '—'],
+        B: ['N', '—'],
+        C: ['P', 'Sci-Fi Space escape pods'],
+        note: 'Parachute: no pack.',
+      },
+      {
+        area: 'S',
+        id: 'S15',
+        need: 'Ascent vehicle (two stages) + return ship',
+        today: 'P',
+        base: ['P', 'dropship'],
+        A: ['P', ''],
+        B: ['P', 'Ultimate Spaceships'],
+        C: ['P', 'modular spaceship kit'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S16',
+        need: 'Habitat interior (if walkable)',
+        today: '—',
+        base: ['P', 'Furniture Bits'],
+        A: ['Y', 'Space Station Kit (90) + Modular Space Kit (40)'],
+        B: ['Y', 'Modular Sci-Fi MegaKit (277)'],
+        C: ['Y', 'Sci-Fi Space interiors'],
+        note: '',
+      },
+      {
+        area: 'S',
+        id: 'S17',
+        need: 'Cargo, crates, fuel barrels, minerals in the depot',
+        today: 'K',
+        base: ['Y', 'cargo_*, containers_*, fuel barrels'],
+        A: ['Y', ''],
+        B: ['Y', ''],
+        C: ['Y', ''],
+        note: '',
+      },
+    ];
+    const AREAS = {
+      U: 'UI shell',
+      I: 'Icons',
+      W: 'World',
+      C: 'Characters',
+      E: 'Enemies',
+      V: 'VFX',
+      A: 'Sound & music',
+      M: 'Minigame boards',
+      R: 'Road unlocks',
+      S: 'Space',
+    };
+    const MARK = { Y: '✓', P: '~', N: '✗' };
+    const ORD = { N: 0, P: 1, Y: 2 };
+    const esc = (s) =>
+      String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const best = (r, keys) => keys.reduce((m, k) => (ORD[r[k][0]] > ORD[m] ? r[k][0] : m), 'N');
+    const store = {
+      get(k, d) {
+        try {
+          return localStorage.getItem(k) ?? d;
+        } catch {
+          return d;
+        }
+      },
+      set(k, v) {
+        try {
+          localStorage.setItem(k, v);
+        } catch {
+          /* storage blocked: the choice just isn't remembered */
+        }
+      },
+    };
+    let area = store.get('area', 'all');
+    let mode = store.get('mode', 'all');
+    let q = '';
+    const ctl = document.getElementById('areas-ctl');
+    const chip = (id, label) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.textContent = label;
+      b.dataset.area = id;
+      b.addEventListener('click', () => {
+        area = id;
+        store.set('area', id);
+        render();
+      });
+      ctl.append(b);
+    };
+    chip('all', `All (${ROWS.length})`);
+    for (const [k, v] of Object.entries(AREAS)) chip(k, `${v} (${ROWS.filter((r) => r.area === k).length})`);
+    for (const r of document.querySelectorAll('input[name="mode"]')) {
+      if (r.value === mode) r.checked = true;
+      r.addEventListener('change', () => {
+        mode = r.value;
+        store.set('mode', mode);
+        render();
+      });
+    }
+    document.getElementById('q').addEventListener('input', (e) => {
+      q = e.target.value.trim().toLowerCase();
+      render();
+    });
+    const cell = (m) =>
+      `<td class="m m-${m[0]}"><b aria-label="${{ Y: 'fully', P: 'partly', N: 'nothing usable' }[m[0]]}">${MARK[m[0]]}</b>${esc(m[1] === '—' ? '' : m[1])}</td>`;
+    function render() {
+      for (const b of ctl.children) b.setAttribute('aria-pressed', String(b.dataset.area === area));
+      const shown = ROWS.filter((r) => {
+        if (area !== 'all' && r.area !== area) return false;
+        if (mode === 'gaps' && best(r, ['base', 'A', 'B']) === 'Y') return false;
+        if (mode === 'none' && best(r, ['base', 'A', 'B', 'C']) !== 'N') return false;
+        if (q) {
+          const text = [r.id, r.need, r.note, r.base[1], r.A[1], r.B[1], r.C[1]].join(' ').toLowerCase();
+          if (!text.includes(q)) return false;
+        }
+        return true;
+      });
+      let html = '';
+      let last = '';
+      for (const r of shown) {
+        if (area === 'all' && r.area !== last) {
+          html += `<tr class="area-row"><td colspan="8">${esc(AREAS[r.area])}</td></tr>`;
+          last = r.area;
+        }
+        html += `<tr><td class="id">${esc(r.id)}</td><td class="need">${esc(r.need)}</td><td class="today">${esc(r.today)}</td>${cell(r.base)}${cell(r.A)}${cell(r.B)}${cell(r.C)}<td class="note">${esc(r.note || '')}</td></tr>`;
+      }
+      if (!shown.length)
+        html = '<tr><td colspan="8">No needs match. Clear the search or pick another area.</td></tr>';
+      document.getElementById('rows').innerHTML = html;
+      document.getElementById('count').textContent = `Showing ${shown.length} of ${ROWS.length} needs`;
+    }
+    render();
+  })();
+</script>

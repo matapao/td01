@@ -1,0 +1,13 @@
+node_modules
+dist
+.lan
+.backup
+.e2e-dist
+codex-one
+three.js
+scripts/out
+**/*.legacy.*
+src/ui/glyph-data.ts
+
+# Separate application with its own formatter and check command.
+DungeonCrawler01

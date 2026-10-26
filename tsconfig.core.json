@@ -1,0 +1,5 @@
+{
+  "extends": "./docs/engineering/tsconfig.portable.json",
+  "include": ["src/core", "src/game"],
+  "exclude": ["src/game/save.ts"]
+}
